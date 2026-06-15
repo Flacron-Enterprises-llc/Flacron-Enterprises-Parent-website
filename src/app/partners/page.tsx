@@ -11,7 +11,8 @@ export const metadata: Metadata = {
 const partners = [
   {
     name: "Microsoft",
-    logo: "🔷",
+    logoInitial: "M",
+    logoBg: "bg-[#0078D4]",
     type: "Technology Partner",
     description: "Flacron Enterprises is a Microsoft Partner, building on Azure's world-class cloud infrastructure, AI services, and security frameworks. Our products leverage Microsoft Copilot integrations, Azure OpenAI, and enterprise compliance tools.",
     benefits: ["Azure cloud infrastructure", "Microsoft 365 integrations", "Azure AI & Copilot capabilities", "Enterprise security compliance", "Microsoft Teams connectivity"],
@@ -20,7 +21,8 @@ const partners = [
   },
   {
     name: "IBM",
-    logo: "🔵",
+    logoInitial: "IBM",
+    logoBg: "bg-[#1F70C1]",
     type: "Innovation Partner",
     description: "Through our IBM partnership, Flacron Enterprises accesses industry-leading AI research, enterprise consulting frameworks, and IBM's global network of technology innovation. Our platforms benefit from IBM Watson AI capabilities and enterprise integration tools.",
     benefits: ["IBM Watson AI integration", "Enterprise consulting frameworks", "Global technology network", "Industry-specific AI models", "Hybrid cloud deployment"],
@@ -38,7 +40,7 @@ const certifications = [
 
 export default function PartnersPage() {
   return (
-    <div className="min-h-screen pt-28 pb-24 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen pt-6 pb-24 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           eyebrow="Partners & Credentials"
@@ -50,9 +52,11 @@ export default function PartnersPage() {
         {/* Partners */}
         <div className="grid gap-6 lg:grid-cols-2 mb-16">
           {partners.map((p) => (
-            <div key={p.name} className={`rounded-2xl border p-8 ${p.color}`}>
+            <div key={p.name} className={`rounded-2xl border p-5 sm:p-8 ${p.color}`}>
               <div className="flex items-center gap-4 mb-5">
-                <span className="text-4xl">{p.logo}</span>
+                <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${p.logoBg}`}>
+                  <span className="text-sm font-black text-white tracking-tight">{p.logoInitial}</span>
+                </div>
                 <div>
                   <h2 className="text-2xl font-black text-flacron-navy">{p.name}</h2>
                   <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${p.badge}`}>{p.type}</span>
@@ -74,7 +78,7 @@ export default function PartnersPage() {
         </div>
 
         {/* Certifications */}
-        <div className="rounded-2xl bg-flacron-navy p-10">
+        <div className="rounded-2xl bg-flacron-navy p-6 sm:p-10">
           <p className="text-center text-sm font-semibold uppercase tracking-widest text-[#F97316] mb-8">Security & Compliance</p>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {certifications.map((c) => (

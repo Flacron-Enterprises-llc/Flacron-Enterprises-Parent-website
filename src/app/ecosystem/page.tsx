@@ -1,19 +1,22 @@
 import type { Metadata } from "next";
-import { apps } from "@/data/apps";
+import { getApps } from "@/lib/apps-data";
 import AppGrid from "@/components/AppGrid";
 import SectionHeader from "@/components/SectionHeader";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Ecosystem — Flacron Enterprises",
   description: "Explore the full Flacron Enterprises ecosystem of AI-powered products. Filter by industry, category, and status.",
 };
 
-export default function EcosystemPage() {
+export default async function EcosystemPage() {
+  const apps = await getApps();
   return (
-    <div className="min-h-screen pt-28 pb-24 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen pt-6 pb-24 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Hero */}
-        <div className="mb-16 text-center">
+        <div className="mb-8 sm:mb-16 text-center">
           <SectionHeader
             eyebrow="Full Ecosystem"
             title="Every product. One mission."
@@ -23,16 +26,16 @@ export default function EcosystemPage() {
         </div>
 
         {/* Stats */}
-        <div className="mb-12 flex flex-wrap justify-center gap-8">
+        <div className="mb-6 sm:mb-12 grid grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-4">
           {[
             { value: `${apps.length}`, label: "Products" },
             { value: `${apps.filter(a => a.status === "live").length}`, label: "Live Now" },
-            { value: `${apps.filter(a => a.status === "coming-soon" || a.status === "beta").length}`, label: "In Development" },
+            { value: `${apps.filter(a => a.status === "coming-soon" || a.status === "beta").length}`, label: "In Dev" },
             { value: "6+", label: "Industries" },
           ].map((s) => (
-            <div key={s.label} className="text-center">
-              <p className="text-3xl font-black text-[#F97316]" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>{s.value}</p>
-              <p className="text-sm font-medium text-slate-500">{s.label}</p>
+            <div key={s.label} className="rounded-2xl border border-slate-100 bg-slate-50 px-3 py-4 text-center">
+              <p className="text-2xl font-black text-[#F97316] sm:text-3xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>{s.value}</p>
+              <p className="mt-0.5 text-xs font-medium text-slate-500 sm:text-sm">{s.label}</p>
             </div>
           ))}
         </div>
@@ -40,7 +43,7 @@ export default function EcosystemPage() {
         <AppGrid apps={apps} mode="full" />
 
         {/* More coming */}
-        <div className="mt-20 rounded-2xl bg-orange-50 border border-orange-100 p-10 text-center">
+        <div className="mt-10 sm:mt-20 rounded-2xl bg-orange-50 border border-orange-100 p-6 sm:p-10 text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-[#F97316] mb-2">Growing Ecosystem</p>
           <h3 className="text-2xl font-black text-flacron-navy" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
             More solutions are on the way.

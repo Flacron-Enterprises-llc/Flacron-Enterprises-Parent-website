@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
-import { apps } from "@/data/apps";
+import { getApps } from "@/lib/apps-data";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "About — Flacron Enterprises",
@@ -16,25 +18,26 @@ const values = [
   { title: "Long-Term Partnership", desc: "We build for the long run. Our clients grow their businesses with us, not just our software." },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const apps = await getApps();
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="pt-8 pb-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="mx-auto max-w-4xl text-center">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#F97316]">About Us</p>
-          <h1 className="text-5xl font-black leading-tight text-flacron-navy sm:text-6xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
-            One company. One ecosystem.<br />
+          <h1 className="text-3xl font-black leading-tight text-flacron-navy sm:text-4xl md:text-5xl lg:text-6xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
+            One company. One ecosystem.{" "}
             <span className="text-[#F97316]">Many solutions.</span>
           </h1>
-          <p className="mt-6 text-xl text-slate-500 leading-relaxed max-w-2xl mx-auto">
+          <p className="mt-4 text-base text-slate-500 leading-relaxed max-w-2xl mx-auto sm:mt-6 sm:text-xl">
             Flacron Enterprises is an AI-powered technology company building intelligent solutions for business growth, automation, industry operations, and digital transformation.
           </p>
         </div>
       </section>
 
       {/* Mission */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
+      <section className="py-14 px-4 sm:px-6 lg:px-8 sm:py-20 bg-slate-50">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-12 lg:grid-cols-2 items-center">
             <div>
@@ -64,7 +67,7 @@ export default function AboutPage() {
       </section>
 
       {/* Vision */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-flacron-navy">
+      <section className="py-14 px-4 sm:px-6 lg:px-8 sm:py-20 bg-flacron-navy">
         <div className="mx-auto max-w-7xl">
           <SectionHeader eyebrow="Our Vision" title="The ecosystem of the future." light centered />
           <p className="text-center text-slate-300 max-w-2xl mx-auto -mt-6 mb-12">
@@ -82,14 +85,14 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-14 px-4 sm:px-6 lg:px-8 sm:py-20">
         <div className="mx-auto max-w-3xl text-center">
           <SectionHeader eyebrow="Join Us" title="Be part of the ecosystem." centered />
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/ecosystem" className="rounded-xl bg-[#F97316] px-8 py-4 text-base font-semibold text-white hover:bg-[#EA580C] transition-colors shadow-sm">
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
+            <Link href="/ecosystem" className="rounded-xl bg-[#F97316] px-6 py-3 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors shadow-sm text-center sm:px-8 sm:py-4 sm:text-base">
               Explore Products
             </Link>
-            <Link href="/contact" className="inline-flex items-center gap-2 rounded-xl border-2 border-slate-200 px-8 py-4 text-base font-semibold text-flacron-navy hover:border-[#F97316] hover:text-[#F97316] transition-colors">
+            <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-slate-200 px-6 py-3 text-sm font-semibold text-flacron-navy hover:border-[#F97316] hover:text-[#F97316] transition-colors sm:px-8 sm:py-4 sm:text-base">
               Get In Touch <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

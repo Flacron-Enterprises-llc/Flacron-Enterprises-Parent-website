@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { apps } from "@/data/apps";
+import { ArrowRight, Building2, Shield, Briefcase, Lock, Trophy, Leaf } from "lucide-react";
+import { getApps } from "@/lib/apps-data";
+
+export const revalidate = 60;
 import SectionHeader from "@/components/SectionHeader";
 import AppLogo from "@/components/AppLogo";
 import StatusBadge from "@/components/StatusBadge";
@@ -14,51 +16,52 @@ export const metadata: Metadata = {
 const industries = [
   {
     name: "Construction & Property",
-    icon: "🏗️",
+    icon: Building2,
     description: "The construction industry loses billions annually to inaccurate estimates, poor communication, and compliance failures. Our AI platforms bring precision, automation, and real-time visibility to every project.",
     challenges: ["Manual and inaccurate cost estimation", "Disconnected stakeholder communication", "Compliance and permit management overhead", "Slow insurance claim resolution"],
     apps: ["flacronbuild", "rapidclaimpro"],
   },
   {
     name: "Insurance",
-    icon: "🛡️",
+    icon: Shield,
     description: "Insurance operations are burdened by paper-heavy processes, rising fraud, and policyholder expectations for instant digital experiences. We digitise and automate the full claims lifecycle.",
     challenges: ["Slow and manual claims processing", "Rising fraudulent claim rates", "High cost per claim", "Poor policyholder experience"],
     apps: ["rapidclaimpro", "flacronbuild"],
   },
   {
     name: "Business & Sales",
-    icon: "💼",
+    icon: Briefcase,
     description: "Growing businesses struggle with inconsistent follow-up, underused CRM tools, and sales teams spending too much time on admin. Our AI growth platform automates the journey from lead to close.",
     challenges: ["Inconsistent lead follow-up", "Low CRM adoption", "Sales admin overhead", "Unpredictable revenue forecasting"],
     apps: ["flacronconnect-ai"],
   },
   {
     name: "Cybersecurity",
-    icon: "🔐",
+    icon: Lock,
     description: "Cyber threats evolve faster than most security teams can respond. We give organisations the AI intelligence and automation to detect, respond, and stay compliant — without burning out their team.",
     challenges: ["Alert fatigue from too many signals", "Manual compliance reporting", "Slow incident detection and response", "Dark web exposure monitoring"],
     apps: ["flacronsecure-ai"],
   },
   {
     name: "Sports & Media",
-    icon: "⚽",
+    icon: Trophy,
     description: "Sports organisations struggle to keep fans engaged beyond matchdays while athletes lack tools for direct-to-fan relationships. We build the infrastructure for modern sports engagement.",
     challenges: ["Low fan engagement between events", "Manual content production costs", "Limited athlete monetisation tools", "Fragmented fan community management"],
     apps: ["flacronsport"],
   },
   {
     name: "Personal Development",
-    icon: "🌱",
+    icon: Leaf,
     description: "The personal development industry is full of content but short on structured, accountable transformation. We combine AI, coaching frameworks, and community to drive real change.",
     challenges: ["Lack of structure and accountability", "Fragmented tools and coaches", "Low habit formation success rates", "Missing peer community support"],
     apps: ["beingtchitaka"],
   },
 ];
 
-export default function IndustriesPage() {
+export default async function IndustriesPage() {
+  const apps = await getApps();
   return (
-    <div className="min-h-screen pt-28 pb-24 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen pt-6 pb-24 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           eyebrow="Industries"
@@ -67,16 +70,19 @@ export default function IndustriesPage() {
           centered
         />
 
-        <div className="space-y-6">
+        <div className="space-y-5">
           {industries.map((ind) => {
             const relatedApps = apps.filter((a) => ind.apps.includes(a.slug));
+            const Icon = ind.icon;
             return (
               <div key={ind.name} className="rounded-2xl border border-slate-200 bg-white overflow-hidden">
                 <div className="grid lg:grid-cols-3">
                   {/* Left info */}
-                  <div className="p-8 lg:col-span-2 border-b border-slate-100 lg:border-b-0 lg:border-r">
+                  <div className="p-5 sm:p-8 lg:col-span-2 border-b border-slate-100 lg:border-b-0 lg:border-r">
                     <div className="flex items-center gap-3 mb-4">
-                      <span className="text-3xl">{ind.icon}</span>
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F97316]/10">
+                        <Icon className="h-5 w-5 text-[#F97316]" />
+                      </div>
                       <h2 className="text-xl font-bold text-flacron-navy">{ind.name}</h2>
                     </div>
                     <p className="text-slate-500 leading-relaxed mb-6">{ind.description}</p>
@@ -92,7 +98,7 @@ export default function IndustriesPage() {
                     </div>
                   </div>
                   {/* Right apps */}
-                  <div className="p-8">
+                  <div className="p-5 sm:p-8">
                     <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4">Relevant Products</p>
                     <div className="space-y-3">
                       {relatedApps.map((app) => (

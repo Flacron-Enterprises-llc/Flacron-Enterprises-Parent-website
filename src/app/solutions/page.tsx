@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { apps } from "@/data/apps";
+import { ArrowRight, Building2, TrendingUp, Shield, Lock, Trophy, Leaf } from "lucide-react";
+import { getApps } from "@/lib/apps-data";
+
+export const revalidate = 60;
 import SectionHeader from "@/components/SectionHeader";
 import AppLogo from "@/components/AppLogo";
 import StatusBadge from "@/components/StatusBadge";
@@ -17,49 +19,62 @@ const solutionCategories = [
     title: "Construction & Property",
     description: "AI estimation, project management, compliance tracking, and insurance integration for the built environment.",
     apps: ["flacronbuild"],
-    icon: "🏗️",
+    icon: Building2,
+    iconBg: "bg-amber-100",
+    iconColor: "text-amber-700",
     color: "bg-amber-50 border-amber-200",
   },
   {
     title: "Business Growth & Sales",
     description: "Intelligent lead generation, automated outreach, and CRM to help businesses grow faster.",
     apps: ["flacronconnect-ai"],
-    icon: "📈",
+    icon: TrendingUp,
+    iconBg: "bg-blue-100",
+    iconColor: "text-blue-700",
     color: "bg-blue-50 border-blue-200",
   },
   {
     title: "Insurance & Claims",
     description: "End-to-end claims automation, fraud detection, and policyholder self-service for modern insurers.",
     apps: ["rapidclaimpro"],
-    icon: "🛡️",
+    icon: Shield,
+    iconBg: "bg-green-100",
+    iconColor: "text-green-700",
     color: "bg-green-50 border-green-200",
   },
   {
     title: "Cybersecurity & Compliance",
     description: "AI-powered threat detection, vulnerability scanning, and compliance automation for enterprise teams.",
     apps: ["flacronsecure-ai"],
-    icon: "🔐",
+    icon: Lock,
+    iconBg: "bg-slate-100",
+    iconColor: "text-slate-700",
     color: "bg-slate-50 border-slate-200",
   },
   {
     title: "Sports & Fan Engagement",
     description: "AI content creation, fan community management, and athlete brand tools for sports organisations.",
     apps: ["flacronsport"],
-    icon: "⚽",
+    icon: Trophy,
+    iconBg: "bg-orange-100",
+    iconColor: "text-orange-700",
     color: "bg-orange-50 border-orange-200",
   },
   {
     title: "Personal Growth & Coaching",
     description: "Guided development programmes, habit intelligence, and community mentorship for modern professionals.",
     apps: ["beingtchitaka"],
-    icon: "🌱",
+    icon: Leaf,
+    iconBg: "bg-purple-100",
+    iconColor: "text-purple-700",
     color: "bg-purple-50 border-purple-200",
   },
 ];
 
-export default function SolutionsPage() {
+export default async function SolutionsPage() {
+  const apps = await getApps();
   return (
-    <div className="min-h-screen pt-28 pb-24 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen pt-6 pb-24 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           eyebrow="Solutions"
@@ -68,12 +83,15 @@ export default function SolutionsPage() {
           centered
         />
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {solutionCategories.map((cat) => {
             const catApps = apps.filter((a) => cat.apps.includes(a.slug));
+            const Icon = cat.icon;
             return (
-              <div key={cat.title} className={`rounded-2xl border p-6 ${cat.color}`}>
-                <span className="text-3xl">{cat.icon}</span>
+              <div key={cat.title} className={`rounded-2xl border p-5 sm:p-6 ${cat.color}`}>
+                <div className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${cat.iconBg}`}>
+                  <Icon className={`h-5 w-5 ${cat.iconColor}`} />
+                </div>
                 <h3 className="mt-4 text-lg font-bold text-flacron-navy">{cat.title}</h3>
                 <p className="mt-2 text-sm text-slate-500 leading-relaxed">{cat.description}</p>
                 <div className="mt-5 space-y-3">

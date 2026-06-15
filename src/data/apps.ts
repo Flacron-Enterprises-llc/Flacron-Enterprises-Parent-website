@@ -328,12 +328,12 @@ export const apps: AppDefinition[] = [
   {
     id: "being-tchitaka",
     slug: "beingtchitaka",
-    name: "Being Tchitaka",
+    name: "Tchitaka Growth",
     tagline: "Personal growth and transformation for the modern professional.",
     shortDescription:
       "A coaching, motivation, and personal development platform blending mindfulness, AI habits, and community mentorship.",
     longDescription:
-      "Being Tchitaka is a personal development ecosystem rooted in authentic human transformation. It combines guided coaching programmes, AI-driven habit intelligence, peer accountability, and community mentorship to help users align their daily actions with their biggest ambitions. More than an app — it is a movement for purposeful growth.",
+      "Tchitaka Growth is a personal development ecosystem rooted in authentic human transformation. It combines guided coaching programmes, AI-driven habit intelligence, peer accountability, and community mentorship to help users align their daily actions with their biggest ambitions. More than an app — it is a movement for purposeful growth.",
     category: "Growth",
     status: "coming-soon",
     targetAudience: ["Young Professionals", "Entrepreneurs", "Students & Graduates", "Life Coaches", "Anyone Seeking Growth"],
@@ -381,16 +381,16 @@ export const apps: AppDefinition[] = [
     problem:
       "Personal development content is abundant but fragmented. Most people consume motivational content without changing anything because they lack structure, accountability, and community.",
     solution:
-      "Being Tchitaka combines structured programmes, AI habit tracking, peer accountability, and expert coaching into one integrated platform that turns inspiration into consistent action.",
+      "Tchitaka Growth combines structured programmes, AI habit tracking, peer accountability, and expert coaching into one integrated platform that turns inspiration into consistent action.",
     techStack: ["React Native", "Supabase", "OpenAI", "Expo"],
     faqs: [
-      { question: "When does Being Tchitaka launch?", answer: "We are building our founding community now. Join the waitlist to get early access and shape the platform." },
+      { question: "When does Tchitaka Growth launch?", answer: "We are building our founding community now. Join the waitlist to get early access and shape the platform." },
       { question: "Do I need a coach to use it?", answer: "No. The platform is self-guided by default. Coaching is an optional add-on for users who want more personalised support." },
       { question: "Is it suitable for teams or organisations?", answer: "Yes. We plan to offer team and corporate editions for companies investing in employee growth." },
     ],
     primaryCTA: { label: "Join Waitlist", href: "/contact" },
     seo: {
-      title: "Being Tchitaka — Personal Growth & Coaching Platform | Flacron Enterprises",
+      title: "Tchitaka Growth — Personal Growth & Coaching Platform | Flacron Enterprises",
       description: "AI-powered personal development, habit intelligence, and coaching community for professionals and entrepreneurs. Coming soon.",
       keywords: ["personal development app", "coaching platform", "habit tracking", "growth mindset", "mentorship app"],
     },

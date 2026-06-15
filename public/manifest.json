@@ -1,0 +1,19 @@
+{
+  "name": "Flacron Enterprises",
+  "short_name": "Flacron",
+  "description": "AI-Powered Technology Ecosystem — intelligent solutions for business growth, automation, and digital transformation.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#F97316",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["business", "productivity", "utilities"],
+  "lang": "en"
+}

@@ -3,11 +3,11 @@ import type { LegalDocumentData } from "@/components/LegalDocument";
 export const privacyPolicy: LegalDocumentData = {
   title: "Privacy Policy",
   effectiveDate: "June 19, 2025",
-  lastUpdated: "June 21, 2026",
+  lastUpdated: "July 17, 2026",
   intro: [
-    { type: "p", text: "Flacron Enterprises (“Flacron,” “we,” “our,” or “us”) respects your privacy and is committed to protecting the personal information you share with us. This Privacy Policy explains how we collect, use, store, disclose, and protect your information when you visit our website, use our applications, request a demo, contact us, create an account, purchase a service, or interact with any of our AI-powered solutions." },
-    { type: "p", text: "This Privacy Policy applies to Flacron Enterprises and all products, services, platforms, websites, mobile applications, web applications, software tools, AI-powered systems, and digital services operated by Flacron Enterprises, including but not limited to FlacronBuild, RapidClaimPro, FlacronConnect AI, and any future Flacron products or services." },
-    { type: "p", text: "Because Flacron Enterprises may operate multiple applications for different industries, some apps may collect or process different types of information depending on their features. This Privacy Policy is designed to cover the general privacy practices of Flacron Enterprises, while also explaining app-specific data practices where applicable." },
+    { type: "p", text: "Flacron Enterprises LLC (“Flacron,” “we,” “our,” or “us”) respects your privacy and is committed to protecting the personal information you share with us. This Privacy Policy explains how we collect, use, store, disclose, and protect your information when you visit our website, use our applications, request a demo, contact us, create an account, purchase a service, or interact with any of our AI-powered solutions." },
+    { type: "p", text: "This Privacy Policy applies to Flacron Enterprises LLC and all products, services, platforms, websites, mobile applications, web applications, software tools, AI-powered systems, and digital services operated by Flacron Enterprises LLC, including but not limited to FlacronBuild, RapidClaimPro, FlacronConnect AI, and any future Flacron products or services." },
+    { type: "p", text: "Because Flacron Enterprises LLC may operate multiple applications for different industries, some apps may collect or process different types of information depending on their features. This Privacy Policy is designed to cover the general privacy practices of Flacron Enterprises LLC, while also explaining app-specific data practices where applicable." },
     { type: "p", text: "By using our website, applications, or services, you agree to the practices described in this Privacy Policy." },
   ],
   sections: [
@@ -29,7 +29,7 @@ export const privacyPolicy: LegalDocumentData = {
     {
       heading: "App-Specific Data Practices",
       blocks: [
-        { type: "p", text: "Flacron Enterprises builds and operates multiple apps and software tools. Each app may collect or process information based on its purpose and features." },
+        { type: "p", text: "Flacron Enterprises LLC builds and operates multiple apps and software tools. Each app may collect or process information based on its purpose and features." },
         { type: "p", text: "2.1 FlacronBuild — FlacronBuild may collect and process information related to construction, inspections, estimates, property damage, repairs, project management, and related workflows. This may include:" },
         { type: "ul", items: ["Construction documents", "Blueprints, plans, or project files", "Property photos", "Inspection notes", "Repair scopes", "Material and labor information", "Estimate details", "Contractor or client information", "Project addresses or property-related details", "Uploaded reports, PDFs, images, or supporting documents"] },
         { type: "p", text: "This information is used to help generate estimates, summaries, reports, project insights, and workflow support." },
@@ -39,7 +39,7 @@ export const privacyPolicy: LegalDocumentData = {
         { type: "p", text: "2.3 FlacronConnect AI — FlacronConnect AI may collect and process information related to business automation, customer communication, lead generation, sales workflows, marketing, CRM activity, and client engagement. This may include:" },
         { type: "ul", items: ["Business contact information", "Leads and customer records", "Customer messages", "CRM data", "Marketing preferences", "Appointment or inquiry information", "Communication history", "Automation workflows", "Sales and follow-up data", "Business performance information"] },
         { type: "p", text: "This information is used to help businesses automate communication, manage leads, improve follow-up, generate insights, and support growth." },
-        { type: "p", text: "2.4 Future Flacron Applications — Future Flacron Enterprises applications may collect information necessary to provide their specific features and services. If a future app collects different types of information or serves a different industry, we may update this Privacy Policy or provide an app-specific privacy notice inside the app, on the website, or during onboarding." },
+        { type: "p", text: "2.4 Future Flacron Applications — Future Flacron Enterprises LLC applications may collect information necessary to provide their specific features and services. If a future app collects different types of information or serves a different industry, we may update this Privacy Policy or provide an app-specific privacy notice inside the app, on the website, or during onboarding." },
       ],
     },
     {
@@ -52,7 +52,7 @@ export const privacyPolicy: LegalDocumentData = {
     {
       heading: "AI-Powered Services and Data Processing",
       blocks: [
-        { type: "p", text: "Flacron Enterprises provides AI-powered tools designed to help users automate workflows, generate insights, create reports, manage customer interactions, and improve business operations." },
+        { type: "p", text: "Flacron Enterprises LLC provides AI-powered tools designed to help users automate workflows, generate insights, create reports, manage customer interactions, and improve business operations." },
         { type: "p", text: "When you use our AI-powered services, you may submit text, images, documents, files, business data, customer information, project information, claim information, or other content. We may process this data to deliver the requested AI-generated output, such as:" },
         { type: "ul", items: ["Construction estimates", "Inspection summaries", "Insurance claim reports", "Customer communication drafts", "Lead generation insights", "Business automation recommendations", "Project summaries", "Industry-specific reports", "Marketing and sales workflow suggestions", "App-specific reports or recommendations"] },
         { type: "p", text: "We do not claim ownership of your submitted business data or uploaded files. You are responsible for ensuring that you have the right to upload, submit, or process any data through our services." },
@@ -76,7 +76,7 @@ export const privacyPolicy: LegalDocumentData = {
         { type: "ul", items: ["Hosting providers", "Payment processors", "Analytics providers", "Email service providers", "Customer support tools", "AI service providers", "Database and cloud infrastructure providers", "Security and fraud prevention providers", "App development and monitoring tools", "Communication and automation providers"] },
         { type: "p", text: "These providers are authorized to use your information only as necessary to provide services to us." },
         { type: "p", text: "6.2 Third-Party Integrations — If you choose to connect third-party tools or services to our apps, we may share information with those services as needed to provide the integration. For example, this may include CRM platforms, email tools, cloud storage providers, payment processors, calendar tools, communication platforms, or other business software." },
-        { type: "p", text: "6.3 Business Transfers — If Flacron Enterprises is involved in a merger, acquisition, financing, reorganization, sale of assets, or similar business transaction, your information may be transferred as part of that transaction." },
+        { type: "p", text: "6.3 Business Transfers — If Flacron Enterprises LLC is involved in a merger, acquisition, financing, reorganization, sale of assets, or similar business transaction, your information may be transferred as part of that transaction." },
         { type: "p", text: "6.4 Legal Requirements — We may disclose your information if required to do so by law or if we believe disclosure is necessary to:" },
         { type: "ul", items: ["Comply with a legal obligation", "Respond to lawful requests from public authorities", "Protect our rights, property, or safety", "Protect users or the public", "Prevent fraud, abuse, or security threats", "Enforce our Terms and Conditions or other agreements"] },
         { type: "p", text: "6.5 With Your Consent — We may share your information with third parties when you give us permission to do so." },
@@ -154,7 +154,7 @@ export const privacyPolicy: LegalDocumentData = {
     {
       heading: "Business and Professional Users",
       blocks: [
-        { type: "p", text: "Flacron Enterprises provides tools for businesses, professionals, contractors, inspectors, insurers, homeowners, salons, service providers, and other industry users." },
+        { type: "p", text: "Flacron Enterprises LLC provides tools for businesses, professionals, contractors, inspectors, insurers, homeowners, salons, service providers, and other industry users." },
         { type: "p", text: "If you use our services on behalf of a company, organization, or client, you represent that you have the authority to provide information to us and to allow us to process that information according to this Privacy Policy." },
         { type: "p", text: "You are responsible for ensuring that any personal information you upload or process through our services is collected and shared in compliance with applicable laws." },
       ],
@@ -217,13 +217,13 @@ export const privacyPolicy: LegalDocumentData = {
       heading: "Contact Us",
       blocks: [
         { type: "p", text: "If you have questions, concerns, or requests regarding this Privacy Policy or our privacy practices, you may contact us at:" },
-        { type: "ul", items: ["Flacron Enterprises", "Email: contact@flacronenterprises.com", "Website: https://flacronenterprises.com/", "Address: 410 E 95th St, Brooklyn, NY 11212, United States"] },
+        { type: "ul", items: ["Flacron Enterprises LLC", "Trade name: Flacron Enterprises", "Email: contact@flacronenterprises.com", "Website: https://flacronenterprises.com/", "Address: 410 E 95th St, Brooklyn, NY 11212, United States"] },
       ],
     },
   ],
   footerSummary: [
-    { type: "p", text: "Flacron Enterprises respects your privacy. We collect and use personal information to provide our AI-powered products, improve our services, process requests, communicate with users, process payments, support app functionality, and protect our platform." },
-    { type: "p", text: "This Privacy Policy applies to Flacron Enterprises websites, applications, platforms, and services, including FlacronBuild, RapidClaimPro, FlacronConnect AI, and future Flacron products. Different apps may process different types of data depending on their features." },
+    { type: "p", text: "Flacron Enterprises LLC respects your privacy. We collect and use personal information to provide our AI-powered products, improve our services, process requests, communicate with users, process payments, support app functionality, and protect our platform." },
+    { type: "p", text: "This Privacy Policy applies to Flacron Enterprises LLC websites, applications, platforms, and services, including FlacronBuild, RapidClaimPro, FlacronConnect AI, and future Flacron products. Different apps may process different types of data depending on their features." },
     { type: "p", text: "We do not sell your personal information. For questions or privacy requests, contact us at contact@flacronenterprises.com." },
   ],
 };

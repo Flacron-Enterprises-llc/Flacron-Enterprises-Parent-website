@@ -45,3 +45,6 @@ next-env.d.ts
 # local
 debug.log
 invoice-rodrigue.html
+
+# separate nested repo — deployed independently to EC2, not part of this Amplify app
+/FlacronAPIEngine/

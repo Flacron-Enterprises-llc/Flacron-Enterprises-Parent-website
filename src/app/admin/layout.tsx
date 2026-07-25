@@ -16,6 +16,7 @@ import {
   Building2,
   Layers,
   FileText,
+  Zap,
 } from "lucide-react";
 
 const navItems = [
@@ -26,6 +27,7 @@ const navItems = [
   { label: "Custom Orders", href: "/admin/custom-orders", icon: Layers },
   { label: "Invoices", href: "/admin/invoices", icon: FileText },
   { label: "Navigation & CTAs", href: "/admin/navigation", icon: Navigation },
+  { label: "API Engine", href: "/admin/api-engine", icon: Zap },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

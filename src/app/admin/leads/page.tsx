@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { Loader2, Trash2, Mail, Building2, Phone, MessageSquare, Tag, RefreshCw, Inbox, UserPlus, Copy, Check } from "lucide-react";
+import Link from "next/link";
+import { Loader2, Trash2, Mail, Building2, Phone, MessageSquare, Tag, RefreshCw, Inbox, UserPlus, Copy, Check, Zap } from "lucide-react";
 
 type LeadStatus = "new" | "contacted" | "qualified" | "closed";
 
@@ -19,9 +20,11 @@ interface Lead {
   status: LeadStatus;
   createdAt?: { seconds: number };
   convertedCustomerId?: string;
+  convertedApiEngineClientId?: string;
 }
 
 type ConversionResult = { temporaryPassword: string; loginLink: string; paymentLink: string };
+type ApiEngineConversionResult = { clientId: string; apiKey: string; prefix: string; planName: string };
 
 const STATUS_LABELS: Record<LeadStatus, string> = {
   new: "New",
@@ -61,6 +64,9 @@ export default function LeadsPage() {
   const [converting, setConverting] = useState<string | null>(null);
   const [conversionResults, setConversionResults] = useState<Record<string, ConversionResult>>({});
   const [conversionError, setConversionError] = useState<Record<string, string>>({});
+  const [apiEngineConverting, setApiEngineConverting] = useState<string | null>(null);
+  const [apiEngineResults, setApiEngineResults] = useState<Record<string, ApiEngineConversionResult>>({});
+  const [apiEngineError, setApiEngineError] = useState<Record<string, string>>({});
   const [copiedLink, setCopiedLink] = useState<string | null>(null);
 
   const load = useCallback(async () => {
@@ -98,6 +104,23 @@ export default function LeadsPage() {
       setLeads((prev) => prev.map((l) => l.id === id ? { ...l, convertedCustomerId: data.customerId, status: "qualified" } : l));
     } else {
       setConversionError((prev) => ({ ...prev, [id]: data.error || "Could not create customer" }));
+    }
+  }
+
+  async function makeApiEngineCustomer(id: string) {
+    setApiEngineConverting(id);
+    setApiEngineError((prev) => ({ ...prev, [id]: "" }));
+    const res = await fetch(`/api/admin/leads/${id}/make-api-engine-customer`, { method: "POST" });
+    const data = await res.json();
+    setApiEngineConverting(null);
+    if (res.ok) {
+      setApiEngineResults((prev) => ({
+        ...prev,
+        [id]: { clientId: data.clientId, apiKey: data.apiKey, prefix: data.prefix, planName: data.planName },
+      }));
+      setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, convertedApiEngineClientId: data.clientId, status: "qualified" } : l)));
+    } else {
+      setApiEngineError((prev) => ({ ...prev, [id]: data.error || "Could not create API Engine client" }));
     }
   }
 
@@ -324,6 +347,60 @@ export default function LeadsPage() {
                         </p>
                         {conversionError[lead.id] && (
                           <p className="mt-1.5 text-[11px] text-red-500">{conversionError[lead.id]}</p>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Add to API Engine */}
+                  <div className="mb-4">
+                    {lead.convertedApiEngineClientId ? (
+                      <div className="rounded-xl border border-indigo-200 bg-indigo-50 px-4 py-3">
+                        <p className="text-xs font-semibold text-indigo-700 mb-1">✓ API Engine client created</p>
+                        {apiEngineResults[lead.id] ? (
+                          <div className="space-y-1.5 mt-2">
+                            <div className="flex items-center gap-2">
+                              <span className="w-24 shrink-0 text-[11px] font-semibold text-indigo-700">API Key</span>
+                              <code className="flex-1 truncate rounded bg-white border border-indigo-200 px-2 py-1 text-[11px] text-slate-600">
+                                {apiEngineResults[lead.id].apiKey}
+                              </code>
+                              <button
+                                onClick={() => copyLink(apiEngineResults[lead.id].apiKey)}
+                                className="flex items-center gap-1 rounded bg-indigo-600 px-2 py-1 text-[11px] font-semibold text-white hover:bg-indigo-700"
+                              >
+                                {copiedLink === apiEngineResults[lead.id].apiKey ? <Check size={11} /> : <Copy size={11} />}
+                              </button>
+                            </div>
+                            <p className="text-[11px] text-indigo-700 mt-1">
+                              Plan: <strong className="capitalize">{apiEngineResults[lead.id].planName.replace("_", " ")}</strong> · Key shown once — relay it to {lead.email} now.
+                            </p>
+                          </div>
+                        ) : (
+                          <p className="text-xs text-indigo-600">
+                            Client already provisioned — view it in{" "}
+                            <Link href={`/admin/api-engine/clients/${lead.convertedApiEngineClientId}`} className="underline">
+                              API Engine → Clients
+                            </Link>
+                            .
+                          </p>
+                        )}
+                      </div>
+                    ) : (
+                      <div>
+                        <button
+                          onClick={() => makeApiEngineCustomer(lead.id)}
+                          disabled={apiEngineConverting === lead.id}
+                          className="flex items-center gap-2 rounded-lg bg-indigo-600 px-3 py-2 text-xs font-semibold text-white hover:bg-indigo-700 transition-colors disabled:opacity-60"
+                        >
+                          <Zap size={13} />
+                          {apiEngineConverting === lead.id ? "Provisioning…" : "Add to API Engine"}
+                        </button>
+                        <p className="mt-1.5 text-[11px] text-slate-400">
+                          Creates a client in the API Engine and generates an API key on the plan they asked about
+                          {lead.subject || lead.product ? ` (${lead.subject || lead.product})` : ""}.
+                        </p>
+                        {apiEngineError[lead.id] && (
+                          <p className="mt-1.5 text-[11px] text-red-500">{apiEngineError[lead.id]}</p>
                         )}
                       </div>
                     )}

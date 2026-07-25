@@ -150,7 +150,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
                 {/* Bottom */}
                 <div className="mt-12 border-t border-white/10 pt-8 flex flex-col items-center justify-between gap-4 sm:flex-row">
-                  <p className="text-sm text-slate-500">© 2026 Flacron Enterprises. All rights reserved.</p>
+                  <p className="text-sm text-slate-500">© 2026 Flacron Enterprises LLC. All rights reserved.</p>
                   <p className="text-xs text-slate-600">Microsoft Partner · IBM Certified · ISO 27001 Aligned</p>
                 </div>
               </div>

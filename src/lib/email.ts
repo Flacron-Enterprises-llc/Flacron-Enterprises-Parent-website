@@ -1,7 +1,26 @@
-const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
+import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2";
+
+let cachedClient: SESv2Client | null = null;
+
+function getClient(): SESv2Client {
+  if (!cachedClient) {
+    cachedClient = new SESv2Client({
+      region: process.env.SES_REGION || "us-east-1",
+      credentials: {
+        accessKeyId: process.env.SES_ACCESS_KEY_ID as string,
+        secretAccessKey: process.env.SES_SECRET_ACCESS_KEY as string,
+      },
+    });
+  }
+  return cachedClient;
+}
 
 export function isEmailConfigured(): boolean {
-  return !!process.env.BREVO_API_KEY;
+  return !!(
+    process.env.SES_ACCESS_KEY_ID &&
+    process.env.SES_SECRET_ACCESS_KEY &&
+    process.env.SES_FROM_EMAIL
+  );
 }
 
 export type SendEmailInput = {
@@ -12,35 +31,35 @@ export type SendEmailInput = {
 };
 
 /**
- * Sends a transactional email via Brevo. No-ops with a console warning when
- * BREVO_API_KEY isn't configured, so flows that trigger email (like
- * provisioning a customer) don't hard-fail in environments without it set up.
+ * Sends a transactional email via AWS SES. No-ops with a console warning when
+ * SES isn't configured, so flows that trigger email (like provisioning a
+ * customer) don't hard-fail in environments without it set up.
  */
 export async function sendEmail(input: SendEmailInput): Promise<void> {
   if (!isEmailConfigured()) {
-    console.warn(`[email] BREVO_API_KEY not configured — skipping email to ${input.to}: "${input.subject}"`);
+    console.warn(`[email] AWS SES not configured — skipping email to ${input.to}: "${input.subject}"`);
     return;
   }
 
-  const senderEmail = process.env.BREVO_SENDER_EMAIL || "marketing@flacronenterprises.com";
-  const senderName = process.env.BREVO_SENDER_NAME || "Flacron Enterprises";
+  const fromEmail = process.env.SES_FROM_EMAIL as string;
+  const fromName = process.env.SES_FROM_NAME || "Flacron Enterprises";
+  const replyTo = process.env.SES_REPLY_TO;
 
-  const res = await fetch(BREVO_API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      "api-key": process.env.BREVO_API_KEY as string,
+  const command = new SendEmailCommand({
+    FromEmailAddress: `${fromName} <${fromEmail}>`,
+    Destination: {
+      ToAddresses: [input.toName ? `${input.toName} <${input.to}>` : input.to],
     },
-    body: JSON.stringify({
-      sender: { name: senderName, email: senderEmail },
-      to: [{ email: input.to, name: input.toName || input.to }],
-      subject: input.subject,
-      htmlContent: input.html,
-    }),
+    ReplyToAddresses: replyTo ? [replyTo] : undefined,
+    Content: {
+      Simple: {
+        Subject: { Data: input.subject, Charset: "UTF-8" },
+        Body: {
+          Html: { Data: input.html, Charset: "UTF-8" },
+        },
+      },
+    },
   });
 
-  if (!res.ok) {
-    throw new Error(`Brevo send failed: ${res.status} ${await res.text()}`);
-  }
+  await getClient().send(command);
 }

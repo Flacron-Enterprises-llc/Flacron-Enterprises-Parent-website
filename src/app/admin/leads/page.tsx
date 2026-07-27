@@ -23,7 +23,7 @@ interface Lead {
   convertedApiEngineClientId?: string;
 }
 
-type ConversionResult = { temporaryPassword: string; loginLink: string; paymentLink: string };
+type ConversionResult = { dashboardLink: string };
 type ApiEngineConversionResult = { clientId: string; apiKey: string; prefix: string; planName: string };
 
 const STATUS_LABELS: Record<LeadStatus, string> = {
@@ -100,7 +100,7 @@ export default function LeadsPage() {
     const data = await res.json();
     setConverting(null);
     if (res.ok) {
-      setConversionResults((prev) => ({ ...prev, [id]: { temporaryPassword: data.temporaryPassword, loginLink: data.loginLink, paymentLink: data.paymentLink } }));
+      setConversionResults((prev) => ({ ...prev, [id]: { dashboardLink: data.dashboardLink } }));
       setLeads((prev) => prev.map((l) => l.id === id ? { ...l, convertedCustomerId: data.customerId, status: "qualified" } : l));
     } else {
       setConversionError((prev) => ({ ...prev, [id]: data.error || "Could not create customer" }));
@@ -301,35 +301,21 @@ export default function LeadsPage() {
                         {conversionResults[lead.id] ? (
                           <div className="space-y-1.5 mt-2">
                             <div className="flex items-center gap-2">
-                              <span className="w-24 shrink-0 text-[11px] font-semibold text-emerald-700">Password</span>
+                              <span className="w-24 shrink-0 text-[11px] font-semibold text-emerald-700">Dashboard link</span>
                               <code className="flex-1 truncate rounded bg-white border border-emerald-200 px-2 py-1 text-[11px] text-slate-600">
-                                {conversionResults[lead.id].temporaryPassword}
+                                {conversionResults[lead.id].dashboardLink}
                               </code>
                               <button
-                                onClick={() => copyLink(conversionResults[lead.id].temporaryPassword)}
+                                onClick={() => copyLink(conversionResults[lead.id].dashboardLink)}
                                 className="flex items-center gap-1 rounded bg-emerald-600 px-2 py-1 text-[11px] font-semibold text-white hover:bg-emerald-700"
                               >
-                                {copiedLink === conversionResults[lead.id].temporaryPassword ? <Check size={11} /> : <Copy size={11} />}
+                                {copiedLink === conversionResults[lead.id].dashboardLink ? <Check size={11} /> : <Copy size={11} />}
                               </button>
                             </div>
-                            {(["loginLink", "paymentLink"] as const).map((key) => (
-                              <div key={key} className="flex items-center gap-2">
-                                <span className="w-24 shrink-0 text-[11px] font-semibold text-emerald-700">{key === "loginLink" ? "Login link" : "Payment link"}</span>
-                                <code className="flex-1 truncate rounded bg-white border border-emerald-200 px-2 py-1 text-[11px] text-slate-600">
-                                  {conversionResults[lead.id][key]}
-                                </code>
-                                <button
-                                  onClick={() => copyLink(conversionResults[lead.id][key])}
-                                  className="flex items-center gap-1 rounded bg-emerald-600 px-2 py-1 text-[11px] font-semibold text-white hover:bg-emerald-700"
-                                >
-                                  {copiedLink === conversionResults[lead.id][key] ? <Check size={11} /> : <Copy size={11} />}
-                                </button>
-                              </div>
-                            ))}
-                            <p className="text-[11px] text-emerald-700 mt-1">Login credentials + payment link were also emailed to {lead.email} via Brevo.</p>
+                            <p className="text-[11px] text-emerald-700 mt-1">This link was also emailed to {lead.email}. It logs them in and takes them to checkout if payment is still pending.</p>
                           </div>
                         ) : (
-                          <p className="text-xs text-emerald-600">Login credentials + payment link were emailed to {lead.email}.</p>
+                          <p className="text-xs text-emerald-600">A dashboard link was emailed to {lead.email}.</p>
                         )}
                       </div>
                     ) : (

@@ -48,12 +48,12 @@ export default function NewsletterSignup() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Your email"
-        className="w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#F97316]/40 focus:border-[#F97316] transition-colors"
+        className="w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#FE4705]/40 focus:border-[#FE4705] transition-colors"
       />
       <button
         type="submit"
         disabled={state === "loading"}
-        className="flex shrink-0 items-center justify-center rounded-lg bg-[#F97316] px-3 text-white hover:bg-[#EA580C] transition-colors disabled:opacity-60"
+        className="flex shrink-0 items-center justify-center rounded-lg bg-[#FE4705] px-3 text-white hover:bg-[#D83C04] transition-colors disabled:opacity-60"
         aria-label="Subscribe"
       >
         <ArrowRight className="h-4 w-4" />

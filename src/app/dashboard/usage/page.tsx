@@ -31,24 +31,24 @@ export default async function UsagePage() {
       <div className="grid gap-4 sm:grid-cols-3 mb-6">
         <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-lg bg-orange-50">
-            <Gauge size={14} className="text-[#F97316]" />
+            <Gauge size={14} className="text-[#FE4705]" />
           </div>
           <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Quota Used</p>
           <p className="text-lg font-black text-flacron-navy">{usedPct}%</p>
           <div className="mt-2 h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
-            <div className={`h-full rounded-full ${usedPct >= 90 ? "bg-red-500" : "bg-gradient-to-r from-[#F97316] to-[#EA580C]"}`} style={{ width: `${usedPct}%` }} />
+            <div className={`h-full rounded-full ${usedPct >= 90 ? "bg-red-500" : "bg-gradient-to-r from-[#FE4705] to-[#D83C04]"}`} style={{ width: `${usedPct}%` }} />
           </div>
         </div>
         <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-lg bg-orange-50">
-            <Activity size={14} className="text-[#F97316]" />
+            <Activity size={14} className="text-[#FE4705]" />
           </div>
           <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Calls This Period</p>
           <p className="text-lg font-black text-flacron-navy">{quota.used.toLocaleString()}</p>
         </div>
         <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-lg bg-orange-50">
-            <Layers size={14} className="text-[#F97316]" />
+            <Layers size={14} className="text-[#FE4705]" />
           </div>
           <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Tokens (recent calls)</p>
           <p className="text-lg font-black text-flacron-navy">{recentTokens.toLocaleString()}</p>
@@ -68,7 +68,7 @@ export default async function UsagePage() {
                   <span className="text-slate-400">{count}</span>
                 </div>
                 <div className="h-2 w-full rounded-full bg-slate-100 overflow-hidden">
-                  <div className="h-full rounded-full bg-gradient-to-r from-[#F97316] to-[#EA580C]" style={{ width: `${(count / maxBreakdown) * 100}%` }} />
+                  <div className="h-full rounded-full bg-gradient-to-r from-[#FE4705] to-[#D83C04]" style={{ width: `${(count / maxBreakdown) * 100}%` }} />
                 </div>
               </div>
             ))}

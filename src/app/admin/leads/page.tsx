@@ -180,8 +180,8 @@ export default function LeadsPage() {
             onClick={() => setFilter(s)}
             className={`rounded-xl border px-3 py-3 text-center transition-colors ${
               filter === s
-                ? "bg-[#F97316] border-[#F97316] text-white"
-                : "bg-white border-slate-200 hover:border-[#F97316]/40 text-slate-700"
+                ? "bg-[#FE4705] border-[#FE4705] text-white"
+                : "bg-white border-slate-200 hover:border-[#FE4705]/40 text-slate-700"
             }`}
           >
             <p className="text-xl font-black">{counts[s]}</p>
@@ -228,7 +228,7 @@ export default function LeadsPage() {
                 onClick={() => setExpanded(expanded === lead.id ? null : lead.id)}
               >
                 {/* Avatar */}
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-orange-100 text-[#F97316] text-sm font-black">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-orange-100 text-[#FE4705] text-sm font-black">
                   {lead.name.charAt(0).toUpperCase()}
                 </div>
 
@@ -257,7 +257,7 @@ export default function LeadsPage() {
                     {lead.email && (
                       <div className="flex items-center gap-2 text-sm">
                         <Mail size={13} className="text-slate-400 shrink-0" />
-                        <a href={`mailto:${lead.email}`} className="text-[#F97316] hover:underline truncate">{lead.email}</a>
+                        <a href={`mailto:${lead.email}`} className="text-[#FE4705] hover:underline truncate">{lead.email}</a>
                       </div>
                     )}
                     {lead.phone && (

@@ -39,7 +39,7 @@ export default async function AppPage({ params }: PageProps) {
     <div className="min-h-screen">
       {/* 1. HERO */}
       <section className="relative pt-6 pb-10 px-4 sm:px-6 lg:px-8 overflow-hidden bg-white">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_-10%,rgba(249,115,22,0.06)_0%,transparent_70%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_-10%,rgba(254, 71, 5,0.06)_0%,transparent_70%)]" />
         <div className="mx-auto max-w-7xl relative z-10">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex-1 max-w-2xl">
@@ -47,7 +47,7 @@ export default async function AppPage({ params }: PageProps) {
                 <AppLogo name={app.name} size={52} />
                 <StatusBadge status={app.status} />
               </div>
-              <span className="text-xs font-semibold uppercase tracking-widest text-[#F97316] mb-2 block">{app.category}</span>
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#FE4705] mb-2 block">{app.category}</span>
               <h1 className="text-3xl font-black text-flacron-navy leading-tight sm:text-4xl md:text-5xl lg:text-6xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
                 {app.name}
               </h1>
@@ -55,12 +55,12 @@ export default async function AppPage({ params }: PageProps) {
               {!isComingSoon && (
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                   <Link href={app.primaryCTA.href}
-                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#F97316] px-6 py-3 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors shadow-[0_4px_16px_rgba(249,115,22,0.25)] sm:px-7 sm:py-3.5 sm:text-base">
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#FE4705] px-6 py-3 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors shadow-[0_4px_16px_rgba(254, 71, 5,0.25)] sm:px-7 sm:py-3.5 sm:text-base">
                     {app.primaryCTA.label} <ArrowRight className="h-4 w-4" />
                   </Link>
                   {app.secondaryCTA && (
                     <Link href={app.secondaryCTA.href}
-                      className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-flacron-navy hover:border-[#F97316] hover:text-[#F97316] transition-colors sm:px-7 sm:py-3.5 sm:text-base">
+                      className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-flacron-navy hover:border-[#FE4705] hover:text-[#FE4705] transition-colors sm:px-7 sm:py-3.5 sm:text-base">
                       {app.secondaryCTA.label}
                     </Link>
                   )}
@@ -69,7 +69,7 @@ export default async function AppPage({ params }: PageProps) {
               {isComingSoon && (
                 <div className="mt-5 flex flex-wrap items-center gap-2 rounded-xl bg-orange-50 border border-orange-200 px-4 py-3">
                   <span className="text-sm font-medium text-orange-700">This product is launching soon.</span>
-                  <a href="#waitlist" className="text-sm font-bold text-[#F97316] hover:underline whitespace-nowrap">Join the waitlist ↓</a>
+                  <a href="#waitlist" className="text-sm font-bold text-[#FE4705] hover:underline whitespace-nowrap">Join the waitlist ↓</a>
                 </div>
               )}
             </div>
@@ -77,7 +77,7 @@ export default async function AppPage({ params }: PageProps) {
             {app.metrics && (
               <div className="w-full sm:w-56 lg:w-56 xl:w-64">
                 <GlassCard priority="featured" className="p-5 sm:p-8 text-center">
-                  <p className="text-4xl sm:text-5xl font-black text-[#F97316]" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>{app.metrics.value}</p>
+                  <p className="text-4xl sm:text-5xl font-black text-[#FE4705]" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>{app.metrics.value}</p>
                   <p className="mt-2 text-sm font-medium text-slate-500">{app.metrics.label}</p>
                 </GlassCard>
               </div>
@@ -109,7 +109,7 @@ export default async function AppPage({ params }: PageProps) {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {app.features.map((f) => (
               <GlassCard key={f.title} className="p-5 sm:p-6">
-                <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-orange-50 text-[#F97316]">
+                <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-orange-50 text-[#FE4705]">
                   <DynamicIcon iconName={f.icon} className="h-5 w-5" />
                 </div>
                 <h3 className="text-sm font-bold text-flacron-navy mb-2">{f.title}</h3>
@@ -127,7 +127,7 @@ export default async function AppPage({ params }: PageProps) {
           <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {app.benefits.map((b) => (
               <div key={b.title} className="rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5">
-                <CheckCircle className="mb-3 h-6 w-6 text-[#F97316]" />
+                <CheckCircle className="mb-3 h-6 w-6 text-[#FE4705]" />
                 <h3 className="text-sm font-bold text-white mb-1">{b.title}</h3>
                 <p className="text-sm text-slate-400 leading-relaxed">{b.description}</p>
               </div>
@@ -142,7 +142,7 @@ export default async function AppPage({ params }: PageProps) {
           <SectionHeader eyebrow="Built For" title="Who uses it." description="Designed around the people who do this work every day." />
           <div className="flex flex-wrap gap-3">
             {app.targetAudience.map((a) => (
-              <span key={a} className="rounded-full border-2 border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 hover:border-[#F97316] hover:text-[#F97316] transition-colors">
+              <span key={a} className="rounded-full border-2 border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 hover:border-[#FE4705] hover:text-[#FE4705] transition-colors">
                 {a}
               </span>
             ))}
@@ -157,7 +157,7 @@ export default async function AppPage({ params }: PageProps) {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {app.useCases.map((uc, i) => (
               <div key={i} className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 sm:p-5 shadow-sm">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#F97316] text-xs font-black text-white">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#FE4705] text-xs font-black text-white">
                   {i + 1}
                 </span>
                 <p className="text-sm font-medium text-slate-700">{uc}</p>
@@ -173,7 +173,7 @@ export default async function AppPage({ params }: PageProps) {
           <p className="mb-4 text-xs font-bold uppercase tracking-wider text-slate-400">Tech Stack</p>
           <div className="flex flex-wrap gap-3">
             {app.techStack.map((t) => (
-              <span key={t} className="rounded-full border border-orange-200 bg-orange-50 px-5 py-2 text-sm font-semibold text-[#F97316]">{t}</span>
+              <span key={t} className="rounded-full border border-orange-200 bg-orange-50 px-5 py-2 text-sm font-semibold text-[#FE4705]">{t}</span>
             ))}
           </div>
         </div>
@@ -211,9 +211,9 @@ export default async function AppPage({ params }: PageProps) {
             </div>
           ) : (
             <div className="relative overflow-hidden rounded-2xl bg-flacron-navy p-7 sm:p-12 text-center">
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(249,115,22,0.12)_0%,transparent_70%)]" />
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(254, 71, 5,0.12)_0%,transparent_70%)]" />
               <div className="relative z-10">
-                <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#F97316]">{isBeta ? "Join the Beta" : "Get Started"}</p>
+                <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#FE4705]">{isBeta ? "Join the Beta" : "Get Started"}</p>
                 <h2 className="text-2xl font-black text-white sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
                   Ready to get started with {app.name}?
                 </h2>
@@ -224,7 +224,7 @@ export default async function AppPage({ params }: PageProps) {
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
                   <Link href={app.primaryCTA.href}
-                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#F97316] px-8 py-4 text-base font-semibold text-white hover:bg-[#EA580C] transition-colors shadow-[0_4px_20px_rgba(249,115,22,0.3)]">
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#FE4705] px-8 py-4 text-base font-semibold text-white hover:bg-[#D83C04] transition-colors shadow-[0_4px_20px_rgba(254, 71, 5,0.3)]">
                     {app.primaryCTA.label} <ArrowRight className="h-4 w-4" />
                   </Link>
                   {app.secondaryCTA && (

@@ -21,7 +21,7 @@ export default function SectionHeader({ eyebrow, title, description, centered = 
       className={cn("mb-8 sm:mb-12", centered && "text-center")}
     >
       {eyebrow && (
-        <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#F97316] sm:mb-3 sm:text-sm">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#FE4705] sm:mb-3 sm:text-sm">
           {eyebrow}
         </p>
       )}

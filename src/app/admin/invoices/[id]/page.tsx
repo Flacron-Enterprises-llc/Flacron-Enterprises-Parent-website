@@ -9,7 +9,7 @@ import { invoiceTotal } from "@/lib/invoice-utils";
 
 const STATUS_OPTIONS: InvoiceStatus[] = ["unpaid", "paid", "cancelled"];
 const STATUS_BADGE: Record<InvoiceStatus, string> = {
-  unpaid: "#F97316",
+  unpaid: "#FE4705",
   paid: "#22c55e",
   cancelled: "#94a3b8",
 };
@@ -67,7 +67,7 @@ export default function InvoiceDetailPage() {
           ))}
           <button
             onClick={() => window.print()}
-            className="flex items-center gap-1.5 rounded-lg bg-[#F97316] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#EA580C] transition-colors"
+            className="flex items-center gap-1.5 rounded-lg bg-[#FE4705] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#D83C04] transition-colors"
           >
             <Printer size={14} /> Print / Save PDF
           </button>
@@ -79,7 +79,7 @@ export default function InvoiceDetailPage() {
         {/* Header */}
         <div className="flex items-start justify-between bg-flacron-navy px-8 py-8 sm:px-12">
           <div>
-            <p className="text-2xl font-black tracking-wider text-[#F97316]">FLACRON</p>
+            <p className="text-2xl font-black tracking-wider text-[#FE4705]">FLACRON</p>
             <p className="mt-0.5 text-xs tracking-widest text-slate-400">ENTERPRISES LLC</p>
             <p className="mt-3 text-[11px] leading-relaxed text-slate-500">
               410 E 95th St, Brooklyn, NY 11212<br />
@@ -89,7 +89,7 @@ export default function InvoiceDetailPage() {
           </div>
           <div className="text-right">
             <p className="text-[11px] uppercase tracking-widest text-slate-500">Invoice</p>
-            <p className="my-1 text-xl font-extrabold text-[#F97316]">#{invoice.invoiceNumber}</p>
+            <p className="my-1 text-xl font-extrabold text-[#FE4705]">#{invoice.invoiceNumber}</p>
             <span
               className="inline-block rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"
               style={{ backgroundColor: STATUS_BADGE[invoice.status] }}
@@ -100,14 +100,14 @@ export default function InvoiceDetailPage() {
         </div>
 
         {/* Dates bar */}
-        <div className="flex bg-[#1e293b]">
+        <div className="flex bg-[#0A3D75]">
           <div className="flex-1 px-8 py-3.5 sm:px-12">
             <p className="text-[10px] uppercase tracking-widest text-slate-500">Issue Date</p>
             <p className="mt-0.5 text-sm font-semibold text-slate-100">{issueDate}</p>
           </div>
           <div className="flex-1 border-l border-slate-700 px-8 py-3.5 sm:px-12">
             <p className="text-[10px] uppercase tracking-widest text-slate-500">Amount Due</p>
-            <p className="mt-0.5 text-sm font-semibold text-[#F97316]">${total.toFixed(2)} USD</p>
+            <p className="mt-0.5 text-sm font-semibold text-[#FE4705]">${total.toFixed(2)} USD</p>
           </div>
         </div>
 
@@ -159,7 +159,7 @@ export default function InvoiceDetailPage() {
               <span>Subtotal</span><span>${total.toFixed(2)}</span>
             </div>
             <div className="mt-1.5 flex justify-between border-t-2 border-flacron-navy pt-3.5 text-lg font-extrabold text-flacron-navy">
-              <span>Total Due</span><span className="text-[#F97316]">${total.toFixed(2)}</span>
+              <span>Total Due</span><span className="text-[#FE4705]">${total.toFixed(2)}</span>
             </div>
           </div>
         </div>

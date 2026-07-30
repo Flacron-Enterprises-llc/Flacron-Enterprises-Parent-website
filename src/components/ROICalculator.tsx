@@ -33,11 +33,11 @@ export default function ROICalculator() {
   return (
     <div className="mx-auto max-w-4xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
       <div className="mb-6 flex items-center gap-3 sm:mb-8">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#F97316]/10">
-          <Calculator className="h-5 w-5 text-[#F97316]" />
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#FE4705]/10">
+          <Calculator className="h-5 w-5 text-[#FE4705]" />
         </div>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#F97316]">Estimate Your ROI</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#FE4705]">Estimate Your ROI</p>
           <h3 className="text-lg font-bold text-flacron-navy sm:text-xl">See what AI could save your team.</h3>
         </div>
       </div>
@@ -48,7 +48,7 @@ export default function ROICalculator() {
           <div>
             <div className="mb-2 flex items-center justify-between">
               <label className="text-sm font-medium text-flacron-navy">Team size</label>
-              <span className="text-sm font-bold text-[#F97316]">{teamSize} people</span>
+              <span className="text-sm font-bold text-[#FE4705]">{teamSize} people</span>
             </div>
             <input
               type="range"
@@ -56,13 +56,13 @@ export default function ROICalculator() {
               max={200}
               value={teamSize}
               onChange={(e) => { setTeamSize(Number(e.target.value)); handleSlide(); }}
-              className="w-full accent-[#F97316]"
+              className="w-full accent-[#FE4705]"
             />
           </div>
           <div>
             <div className="mb-2 flex items-center justify-between">
               <label className="text-sm font-medium text-flacron-navy">Hours/week on manual work (per person)</label>
-              <span className="text-sm font-bold text-[#F97316]">{hoursPerWeek}h</span>
+              <span className="text-sm font-bold text-[#FE4705]">{hoursPerWeek}h</span>
             </div>
             <input
               type="range"
@@ -70,7 +70,7 @@ export default function ROICalculator() {
               max={30}
               value={hoursPerWeek}
               onChange={(e) => { setHoursPerWeek(Number(e.target.value)); handleSlide(); }}
-              className="w-full accent-[#F97316]"
+              className="w-full accent-[#FE4705]"
             />
           </div>
         </div>
@@ -78,7 +78,7 @@ export default function ROICalculator() {
         {/* Output */}
         <div className="rounded-2xl bg-black p-6 text-center sm:p-7">
           <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">Estimated monthly savings</p>
-          <p className="mt-2 text-4xl font-black text-[#F97316] sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
+          <p className="mt-2 text-4xl font-black text-[#FE4705] sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
             ${monthlySavings.toLocaleString()}
           </p>
           <div className="mt-4 grid grid-cols-2 gap-3 border-t border-white/10 pt-4">
@@ -98,7 +98,7 @@ export default function ROICalculator() {
         href="/book-demo"
         event="cta_roi_calculator"
         eventData={{ teamSize, hoursPerWeek, monthlySavings }}
-        className="mt-7 flex w-full items-center justify-center gap-2 rounded-xl bg-[#F97316] px-6 py-3.5 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors sm:w-auto sm:mx-auto"
+        className="mt-7 flex w-full items-center justify-center gap-2 rounded-xl bg-[#FE4705] px-6 py-3.5 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors sm:w-auto sm:mx-auto"
       >
         Get My Personalized Plan <ArrowRight className="h-4 w-4" />
       </TrackedLink>

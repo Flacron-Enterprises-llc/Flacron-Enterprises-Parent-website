@@ -93,13 +93,13 @@ export default async function HomePage() {
           <FadeIn>
             <h2 className="text-2xl font-black leading-tight text-white sm:text-3xl lg:text-4xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
               Tell us what you need.{" "}
-              <span className="text-[#F97316]">We&apos;ll show you the AI for it.</span>
+              <span className="text-[#FE4705]">We&apos;ll show you the AI for it.</span>
             </h2>
             <Link
               href="/ecosystem"
-              className="mt-6 flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 px-5 py-4 text-left text-sm text-slate-300 hover:border-[#F97316]/50 hover:bg-white/[0.08] transition-colors sm:mt-8 sm:px-6 sm:py-5 sm:text-base"
+              className="mt-6 flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 px-5 py-4 text-left text-sm text-slate-300 hover:border-[#FE4705]/50 hover:bg-white/[0.08] transition-colors sm:mt-8 sm:px-6 sm:py-5 sm:text-base"
             >
-              <Search className="h-5 w-5 shrink-0 text-[#F97316]" />
+              <Search className="h-5 w-5 shrink-0 text-[#FE4705]" />
               Search the ecosystem — try &ldquo;construction&rdquo; or &ldquo;lead generation&rdquo;
             </Link>
           </FadeIn>
@@ -108,7 +108,7 @@ export default async function HomePage() {
               <FadeIn key={label} delay={i * 0.08}>
                 <Link
                   href={href}
-                  className="flex w-full items-center justify-center gap-2 rounded-full border border-white/15 px-4 py-2.5 text-xs font-semibold text-white hover:border-[#F97316] hover:text-[#F97316] transition-colors sm:w-auto sm:text-sm"
+                  className="flex w-full items-center justify-center gap-2 rounded-full border border-white/15 px-4 py-2.5 text-xs font-semibold text-white hover:border-[#FE4705] hover:text-[#FE4705] transition-colors sm:w-auto sm:text-sm"
                 >
                   <Icon className="h-3.5 w-3.5" />
                   {label}
@@ -143,10 +143,10 @@ export default async function HomePage() {
           <div className="grid gap-4 sm:grid-cols-3 sm:gap-6">
             {howItWorks.map(({ step, icon: Icon, title, desc }, i) => (
               <FadeIn key={step} delay={i * 0.1} direction="up">
-                <div className="h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-[#F97316]/30 transition-all sm:p-7">
+                <div className="h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-[#FE4705]/30 transition-all sm:p-7">
                   <div className="mb-4 flex items-center gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#F97316]/10 sm:h-12 sm:w-12">
-                      <Icon className="h-5 w-5 text-[#F97316] sm:h-6 sm:w-6" />
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#FE4705]/10 sm:h-12 sm:w-12">
+                      <Icon className="h-5 w-5 text-[#FE4705] sm:h-6 sm:w-6" />
                     </div>
                     <span className="text-3xl font-black text-slate-100 sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>{step}</span>
                   </div>
@@ -182,12 +182,12 @@ export default async function HomePage() {
                   <p className="mt-2 text-xs text-slate-500 flex-1 leading-relaxed sm:text-sm">{app.shortDescription}</p>
                   {app.metrics && (
                     <div className="mt-3 rounded-xl bg-orange-50 border border-orange-100 px-3 py-2.5 sm:mt-4 sm:px-4 sm:py-3">
-                      <p className="text-base font-black text-[#F97316] sm:text-lg">{app.metrics.value}</p>
+                      <p className="text-base font-black text-[#FE4705] sm:text-lg">{app.metrics.value}</p>
                       <p className="text-xs text-orange-600 font-medium">{app.metrics.label}</p>
                     </div>
                   )}
                   <Link href={`/apps/${app.slug}`}
-                    className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-[#F97316] hover:text-[#EA580C] transition-colors sm:mt-4 sm:text-sm">
+                    className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-[#FE4705] hover:text-[#D83C04] transition-colors sm:mt-4 sm:text-sm">
                     Get Started <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                   </Link>
                 </GlassCard>
@@ -213,7 +213,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── Stats / Social Proof banner ── */}
-      <section className="bg-[#F97316] py-10 px-4 sm:px-6 lg:px-8 sm:py-14">
+      <section className="bg-[#FE4705] py-10 px-4 sm:px-6 lg:px-8 sm:py-14">
         <FadeIn>
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-5xl font-black text-white sm:text-6xl lg:text-7xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
@@ -228,7 +228,7 @@ export default async function HomePage() {
                 See All Solutions
               </TrackedLink>
               <TrackedLink href="/book-demo" event="cta_book_demo_stats"
-                className="w-full rounded-xl border-2 border-white px-6 py-3 text-sm font-semibold text-white hover:bg-white hover:text-[#F97316] transition-colors text-center sm:w-auto sm:px-7 sm:py-3.5">
+                className="w-full rounded-xl border-2 border-white px-6 py-3 text-sm font-semibold text-white hover:bg-white hover:text-[#FE4705] transition-colors text-center sm:w-auto sm:px-7 sm:py-3.5">
                 Book a Demo
               </TrackedLink>
             </div>
@@ -248,18 +248,18 @@ export default async function HomePage() {
           <div className="grid gap-4 sm:grid-cols-3 sm:gap-5">
             {testimonials.map((t, i) => (
               <FadeIn key={t.name} delay={i * 0.12} direction="up">
-                <div className="h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-[#F97316]/30 transition-all flex flex-col sm:p-6">
-                  <Quote className="h-5 w-5 text-[#F97316]/40 mb-3 sm:h-6 sm:w-6 sm:mb-4" />
+                <div className="h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-[#FE4705]/30 transition-all flex flex-col sm:p-6">
+                  <Quote className="h-5 w-5 text-[#FE4705]/40 mb-3 sm:h-6 sm:w-6 sm:mb-4" />
                   <p className="text-sm text-slate-600 leading-relaxed flex-1 italic">&ldquo;{t.quote}&rdquo;</p>
                   <div className="mt-4 pt-4 border-t border-slate-100">
                     <div className="flex items-center gap-0.5 mb-2">
                       {Array.from({ length: t.rating }).map((_, i) => (
-                        <Star key={i} className="h-3 w-3 fill-[#F97316] text-[#F97316] sm:h-3.5 sm:w-3.5" />
+                        <Star key={i} className="h-3 w-3 fill-[#FE4705] text-[#FE4705] sm:h-3.5 sm:w-3.5" />
                       ))}
                     </div>
                     <p className="text-sm font-bold text-flacron-navy leading-tight">{t.name}</p>
                     {/* Split role and company so they render on two clean lines, no overflow */}
-                    <p className="text-xs text-[#F97316] font-medium mt-0.5">{t.role}</p>
+                    <p className="text-xs text-[#FE4705] font-medium mt-0.5">{t.role}</p>
                     <p className="text-xs text-slate-400">{t.company}</p>
                   </div>
                 </div>
@@ -282,9 +282,9 @@ export default async function HomePage() {
             {industries.map(({ icon: Icon, ...ind }, i) => (
               <FadeIn key={ind.name} delay={i * 0.07} direction="up">
                 <TrackedLink href="/industries" event="industry_tile_click" eventData={{ industry: ind.name }}
-                  className="group flex flex-col items-center rounded-2xl bg-black p-4 text-center hover:bg-[#F97316] transition-colors sm:p-5">
+                  className="group flex flex-col items-center rounded-2xl bg-black p-4 text-center hover:bg-[#FE4705] transition-colors sm:p-5">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 group-hover:bg-black/15 transition-colors sm:h-12 sm:w-12">
-                    <Icon className="h-5 w-5 text-[#F97316] group-hover:text-white sm:h-6 sm:w-6" />
+                    <Icon className="h-5 w-5 text-[#FE4705] group-hover:text-white sm:h-6 sm:w-6" />
                   </div>
                   <p className="mt-2.5 text-xs font-bold text-white sm:mt-3 sm:text-sm">{ind.name}</p>
                   <p className="mt-1 text-[10px] text-slate-400 group-hover:text-orange-100 leading-snug sm:text-xs">{ind.desc}</p>
@@ -310,7 +310,7 @@ export default async function HomePage() {
             {differentiators.map((d, i) => (
               <FadeIn key={d.title} delay={i * 0.08} direction="up">
                 <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/[0.08] hover:border-white/20 transition-all sm:p-6">
-                  <CheckCircle className="mb-3 h-5 w-5 text-[#F97316] sm:h-6 sm:w-6" />
+                  <CheckCircle className="mb-3 h-5 w-5 text-[#FE4705] sm:h-6 sm:w-6" />
                   <h3 className="text-sm font-bold text-white mb-1.5 sm:text-base">{d.title}</h3>
                   <p className="text-xs text-slate-400 leading-relaxed sm:text-sm">{d.desc}</p>
                 </div>
@@ -320,10 +320,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <WaveDivider fill="#F97316" flip={false} />
+      <WaveDivider fill="#FE4705" flip={false} />
 
       {/* ── Coming Soon teaser ── */}
-      <section className="py-10 px-4 sm:px-6 lg:px-8 sm:py-14 bg-[#F97316]">
+      <section className="py-10 px-4 sm:px-6 lg:px-8 sm:py-14 bg-[#FE4705]">
         <FadeIn direction="none">
           <div className="mx-auto max-w-xl text-center">
             <p className="text-xs font-semibold uppercase tracking-widest text-black mb-3 sm:text-sm">Ecosystem Expanding</p>
@@ -356,15 +356,15 @@ export default async function HomePage() {
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
               <TrackedLink href="/ecosystem" event="cta_explore_ecosystem_final"
-                className="ripple-btn w-full rounded-xl bg-[#F97316] px-6 py-3 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors shadow-[0_4px_20px_rgba(249,115,22,0.25)] text-center sm:w-auto sm:px-8 sm:py-4 sm:text-base">
+                className="ripple-btn w-full rounded-xl bg-[#FE4705] px-6 py-3 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors shadow-[0_4px_20px_rgba(254, 71, 5,0.25)] text-center sm:w-auto sm:px-8 sm:py-4 sm:text-base">
                 Explore Ecosystem
               </TrackedLink>
               <TrackedLink href="/book-demo" event="cta_book_demo_final"
-                className="w-full rounded-xl border-2 border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-flacron-navy hover:border-[#F97316] hover:text-[#F97316] transition-colors text-center sm:w-auto sm:px-8 sm:py-4 sm:text-base">
+                className="w-full rounded-xl border-2 border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-flacron-navy hover:border-[#FE4705] hover:text-[#FE4705] transition-colors text-center sm:w-auto sm:px-8 sm:py-4 sm:text-base">
                 Book a Demo
               </TrackedLink>
               <TrackedLink href="/contact" event="cta_talk_to_sales_final"
-                className="w-full rounded-xl border-2 border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-flacron-navy hover:border-[#F97316] hover:text-[#F97316] transition-colors text-center sm:w-auto sm:px-8 sm:py-4 sm:text-base">
+                className="w-full rounded-xl border-2 border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-flacron-navy hover:border-[#FE4705] hover:text-[#FE4705] transition-colors text-center sm:w-auto sm:px-8 sm:py-4 sm:text-base">
                 Talk to Sales
               </TrackedLink>
             </div>

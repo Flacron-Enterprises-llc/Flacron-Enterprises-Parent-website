@@ -66,7 +66,7 @@ export default function LiveChatWidget() {
             transition={{ type: "spring", stiffness: 320, damping: 26 }}
             className="absolute bottom-16 left-0 w-[min(92vw,340px)] overflow-hidden rounded-2xl bg-black shadow-2xl"
           >
-            <div className="flex items-center justify-between bg-[#F97316] px-4 py-3">
+            <div className="flex items-center justify-between bg-[#FE4705] px-4 py-3">
               <p className="text-sm font-bold text-white">Chat with Flacron</p>
               <button onClick={toggle} className="text-white/80 hover:text-white" aria-label="Close chat">
                 <X className="h-4 w-4" />
@@ -92,7 +92,7 @@ export default function LiveChatWidget() {
                       <button
                         key={p}
                         onClick={() => sendPrompt(p)}
-                        className="rounded-full border border-white/15 px-3 py-1.5 text-xs text-slate-300 hover:border-[#F97316] hover:text-[#F97316] transition-colors"
+                        className="rounded-full border border-white/15 px-3 py-1.5 text-xs text-slate-300 hover:border-[#FE4705] hover:text-[#FE4705] transition-colors"
                       >
                         {p}
                       </button>
@@ -104,7 +104,7 @@ export default function LiveChatWidget() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Your email (optional)"
-                      className="w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#F97316]/40 focus:border-[#F97316] transition-colors"
+                      className="w-full rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#FE4705]/40 focus:border-[#FE4705] transition-colors"
                     />
                     <div className="flex gap-2">
                       <input
@@ -113,12 +113,12 @@ export default function LiveChatWidget() {
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder="Type a message..."
-                        className="flex-1 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#F97316]/40 focus:border-[#F97316] transition-colors"
+                        className="flex-1 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#FE4705]/40 focus:border-[#FE4705] transition-colors"
                       />
                       <button
                         type="submit"
                         disabled={state === "loading"}
-                        className="flex shrink-0 items-center justify-center rounded-xl bg-[#F97316] px-3 text-white hover:bg-[#EA580C] transition-colors disabled:opacity-60"
+                        className="flex shrink-0 items-center justify-center rounded-xl bg-[#FE4705] px-3 text-white hover:bg-[#D83C04] transition-colors disabled:opacity-60"
                         aria-label="Send"
                       >
                         <Send className="h-4 w-4" />
@@ -134,7 +134,7 @@ export default function LiveChatWidget() {
 
       <button
         onClick={toggle}
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-[#F97316] text-white shadow-[0_4px_24px_rgba(249,115,22,0.4)] hover:bg-[#EA580C] transition-colors"
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-[#FE4705] text-white shadow-[0_4px_24px_rgba(254, 71, 5,0.4)] hover:bg-[#D83C04] transition-colors"
         aria-label="Open chat"
       >
         {open ? <X className="h-5 w-5" /> : <MessageCircle className="h-5 w-5" />}

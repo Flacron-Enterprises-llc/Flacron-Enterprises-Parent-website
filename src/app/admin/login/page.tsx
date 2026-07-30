@@ -33,17 +33,17 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0f172a] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#00285C] flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <span className="text-3xl font-black tracking-wider text-[#F97316]">FLACRON</span>
+          <span className="text-3xl font-black tracking-wider text-[#FE4705]">FLACRON</span>
           <p className="mt-1 text-slate-400 text-sm font-medium">Admin Dashboard</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-[#1e293b] rounded-2xl p-8 shadow-2xl border border-white/5">
+        <form onSubmit={handleSubmit} className="bg-[#0A3D75] rounded-2xl p-8 shadow-2xl border border-white/5">
           <div className="flex justify-center mb-6">
-            <div className="w-12 h-12 rounded-full bg-[#F97316]/10 flex items-center justify-center">
-              <Lock size={20} className="text-[#F97316]" />
+            <div className="w-12 h-12 rounded-full bg-[#FE4705]/10 flex items-center justify-center">
+              <Lock size={20} className="text-[#FE4705]" />
             </div>
           </div>
 
@@ -55,7 +55,7 @@ export default function AdminLoginPage() {
               type={showPw ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-[#0f172a] text-white border border-white/10 rounded-lg px-4 py-3 pr-10 text-sm focus:outline-none focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316] placeholder:text-slate-600"
+              className="w-full bg-[#00285C] text-white border border-white/10 rounded-lg px-4 py-3 pr-10 text-sm focus:outline-none focus:border-[#FE4705] focus:ring-1 focus:ring-[#FE4705] placeholder:text-slate-600"
               placeholder="Enter admin password"
               autoComplete="current-password"
               required
@@ -78,7 +78,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading || !password}
-            className="w-full bg-[#F97316] hover:bg-[#ea6b0e] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg py-3 text-sm transition-colors"
+            className="w-full bg-[#FE4705] hover:bg-[#ea6b0e] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg py-3 text-sm transition-colors"
           >
             {loading ? "Signing in…" : "Sign In"}
           </button>

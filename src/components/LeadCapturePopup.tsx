@@ -119,8 +119,8 @@ export default function LeadCapturePopup() {
               ) : (
                 <>
                   <div className="mb-4 flex items-center gap-2">
-                    <Sparkles className="h-5 w-5 text-[#F97316]" />
-                    <p className="text-xs font-semibold uppercase tracking-widest text-[#F97316]">Before you go</p>
+                    <Sparkles className="h-5 w-5 text-[#FE4705]" />
+                    <p className="text-xs font-semibold uppercase tracking-widest text-[#FE4705]">Before you go</p>
                   </div>
                   <h3 className="text-xl font-black text-slate-900 sm:text-2xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
                     Get a free AI readiness audit.
@@ -134,7 +134,7 @@ export default function LeadCapturePopup() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Your name"
-                      className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#F97316]/40 focus:border-[#F97316] transition-colors"
+                      className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FE4705]/40 focus:border-[#FE4705] transition-colors"
                     />
                     <input
                       type="email"
@@ -142,13 +142,13 @@ export default function LeadCapturePopup() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Work email"
-                      className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#F97316]/40 focus:border-[#F97316] transition-colors"
+                      className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FE4705]/40 focus:border-[#FE4705] transition-colors"
                     />
                     <button
                       type="submit"
                       disabled={state === "loading"}
                       className={cn(
-                        "w-full rounded-xl bg-[#F97316] px-6 py-3 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors disabled:opacity-60"
+                        "w-full rounded-xl bg-[#FE4705] px-6 py-3 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors disabled:opacity-60"
                       )}
                     >
                       {state === "loading" ? "Sending..." : "Send Me the Audit"}

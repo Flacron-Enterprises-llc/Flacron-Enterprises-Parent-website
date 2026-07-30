@@ -50,11 +50,11 @@ export default function AIEnginePage() {
       {/* ── Hero ── */}
       <section className="relative overflow-hidden bg-flacron-navy px-4 pt-20 pb-14 sm:px-6 sm:pt-28 sm:pb-20 lg:px-8">
         <div className="pointer-events-none absolute inset-0 particle-grid opacity-10" />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_80%,rgba(249,115,22,0.12)_0%,transparent_70%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_80%,rgba(254, 71, 5,0.12)_0%,transparent_70%)]" />
 
         <div className="relative z-10 mx-auto max-w-5xl text-center">
           <div className="mb-5 inline-flex items-center gap-2">
-            <span className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 text-xs font-semibold text-[#F97316] sm:text-sm">
+            <span className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 text-xs font-semibold text-[#FE4705] sm:text-sm">
               <Brain className="h-3.5 w-3.5" />
               Proprietary AI Infrastructure
             </span>
@@ -65,7 +65,7 @@ export default function AIEnginePage() {
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
             The Intelligence<br />
-            <span className="text-[#F97316]">Behind Everything.</span>
+            <span className="text-[#FE4705]">Behind Everything.</span>
           </h1>
 
           <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 leading-relaxed sm:mt-6 sm:text-base lg:text-lg">
@@ -75,7 +75,7 @@ export default function AIEnginePage() {
 
           <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:justify-center sm:gap-4">
             <Link href="/book-demo"
-              className="ripple-btn inline-flex items-center justify-center gap-2 rounded-xl bg-[#F97316] px-6 py-3 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors shadow-[0_4px_20px_rgba(249,115,22,0.35)] sm:px-8 sm:py-4">
+              className="ripple-btn inline-flex items-center justify-center gap-2 rounded-xl bg-[#FE4705] px-6 py-3 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors shadow-[0_4px_20px_rgba(254, 71, 5,0.35)] sm:px-8 sm:py-4">
               Request AI Demo <ArrowRight className="h-4 w-4" />
             </Link>
             <Link href="/ecosystem"
@@ -86,16 +86,16 @@ export default function AIEnginePage() {
 
           <p className="mt-5 text-xs text-slate-400 sm:text-sm">
             Already have API access?{" "}
-            <Link href="/dashboard/login" className="font-semibold text-[#F97316] hover:underline">Sign in to your dashboard</Link>
+            <Link href="/dashboard/login" className="font-semibold text-[#FE4705] hover:underline">Sign in to your dashboard</Link>
           </p>
 
           {/* Pillar stats */}
           <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-12 sm:grid-cols-4 sm:gap-4">
             {pillars.map(({ icon: Icon, title, value, desc }) => (
               <div key={title} className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center backdrop-blur-sm sm:p-5">
-                <Icon className="mx-auto mb-2 h-4 w-4 text-[#F97316] sm:h-5 sm:w-5 sm:mb-3" />
+                <Icon className="mx-auto mb-2 h-4 w-4 text-[#FE4705] sm:h-5 sm:w-5 sm:mb-3" />
                 <p className="text-lg font-black text-white sm:text-2xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>{value}</p>
-                <p className="text-[10px] font-semibold text-[#F97316] uppercase tracking-wider mt-0.5 sm:text-xs">{title}</p>
+                <p className="text-[10px] font-semibold text-[#FE4705] uppercase tracking-wider mt-0.5 sm:text-xs">{title}</p>
                 <p className="mt-1 hidden text-xs text-slate-400 leading-snug sm:block">{desc}</p>
               </div>
             ))}
@@ -117,8 +117,8 @@ export default function AIEnginePage() {
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
             {capabilities.map(({ icon: Icon, title, desc }) => (
               <GlassCard key={title} className="p-5 sm:p-6">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#F97316]/10 sm:mb-4 sm:h-11 sm:w-11">
-                  <Icon className="h-5 w-5 text-[#F97316]" />
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#FE4705]/10 sm:mb-4 sm:h-11 sm:w-11">
+                  <Icon className="h-5 w-5 text-[#FE4705]" />
                 </div>
                 <h3 className="text-sm font-bold text-flacron-navy mb-1.5 sm:text-base sm:mb-2">{title}</h3>
                 <p className="text-xs text-slate-500 leading-relaxed sm:text-sm">{desc}</p>
@@ -138,12 +138,12 @@ export default function AIEnginePage() {
             centered
           />
           <div className="relative">
-            <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-[#F97316]/30 via-[#F97316]/60 to-transparent hidden sm:block sm:left-8" />
+            <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-[#FE4705]/30 via-[#FE4705]/60 to-transparent hidden sm:block sm:left-8" />
             <div className="space-y-3 sm:space-y-4">
               {architecture.map(({ step, title, desc }) => (
-                <div key={step} className="relative flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm hover:border-[#F97316]/30 hover:shadow-md transition-all sm:gap-6 sm:p-6">
-                  <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[#F97316]/30 bg-orange-50 sm:h-12 sm:w-12">
-                    <span className="text-xs font-black text-[#F97316]">{step}</span>
+                <div key={step} className="relative flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm hover:border-[#FE4705]/30 hover:shadow-md transition-all sm:gap-6 sm:p-6">
+                  <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[#FE4705]/30 bg-orange-50 sm:h-12 sm:w-12">
+                    <span className="text-xs font-black text-[#FE4705]">{step}</span>
                   </div>
                   <div className="pt-1 sm:pt-0">
                     <h3 className="text-sm font-bold text-flacron-navy sm:text-base">{title}</h3>
@@ -168,13 +168,13 @@ export default function AIEnginePage() {
           <div className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
             {products.map(({ name, ai, slug }) => (
               <Link key={slug} href={`/apps/${slug}`}
-                className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:border-[#F97316]/40 hover:shadow-md transition-all sm:p-6">
-                <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-[#F97316]/10 sm:h-10 sm:w-10">
-                  <Brain className="h-4 w-4 text-[#F97316] sm:h-5 sm:w-5" />
+                className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:border-[#FE4705]/40 hover:shadow-md transition-all sm:p-6">
+                <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-[#FE4705]/10 sm:h-10 sm:w-10">
+                  <Brain className="h-4 w-4 text-[#FE4705] sm:h-5 sm:w-5" />
                 </div>
-                <h3 className="text-sm font-bold text-flacron-navy mb-1.5 group-hover:text-[#F97316] transition-colors">{name}</h3>
+                <h3 className="text-sm font-bold text-flacron-navy mb-1.5 group-hover:text-[#FE4705] transition-colors">{name}</h3>
                 <p className="text-xs text-slate-500 leading-relaxed">{ai}</p>
-                <div className="mt-3 flex items-center gap-1 text-xs font-semibold text-[#F97316]">
+                <div className="mt-3 flex items-center gap-1 text-xs font-semibold text-[#FE4705]">
                   View product <ArrowRight className="h-3 w-3" />
                 </div>
               </Link>
@@ -195,11 +195,11 @@ export default function AIEnginePage() {
           <div className="grid gap-5 sm:grid-cols-2">
 
             {/* Option 2 — API */}
-            <div className="flex flex-col rounded-2xl border border-orange-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-[#F97316]/50 transition-all sm:p-7">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#F97316]/10 mb-4 sm:h-12 sm:w-12 sm:mb-5">
-                <Code2 className="h-5 w-5 text-[#F97316] sm:h-6 sm:w-6" />
+            <div className="flex flex-col rounded-2xl border border-orange-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-[#FE4705]/50 transition-all sm:p-7">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#FE4705]/10 mb-4 sm:h-12 sm:w-12 sm:mb-5">
+                <Code2 className="h-5 w-5 text-[#FE4705] sm:h-6 sm:w-6" />
               </div>
-              <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-[#F97316]">Option 2</p>
+              <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-[#FE4705]">Option 2</p>
               <h3 className="text-lg font-black text-flacron-navy mb-2 sm:text-xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>API Platform Access</h3>
               <p className="text-sm text-slate-500 leading-relaxed mb-4 sm:mb-5">
                 Call our AI endpoints directly from your own product. Industry-trained models for language, vision, scoring, and prediction — on a simple REST API. Plans from $299/month.
@@ -207,18 +207,18 @@ export default function AIEnginePage() {
               <ul className="space-y-2 mb-5 flex-1 sm:mb-6">
                 {["50K–unlimited API calls/month", "12 AI model endpoints", "Sub-200ms inference", "Zero data retention"].map((f) => (
                   <li key={f} className="flex items-center gap-2 text-sm text-slate-600">
-                    <Check className="h-4 w-4 text-[#F97316] shrink-0" /> {f}
+                    <Check className="h-4 w-4 text-[#FE4705] shrink-0" /> {f}
                   </li>
                 ))}
               </ul>
               <Link href="/ai-engine/api-access"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#F97316] px-5 py-3 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors">
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#FE4705] px-5 py-3 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors">
                 Apply for API Access <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
 
             {/* Option 3 — White-Label */}
-            <div className="flex flex-col rounded-2xl border border-orange-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-[#F97316]/50 transition-all sm:p-7">
+            <div className="flex flex-col rounded-2xl border border-orange-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-[#FE4705]/50 transition-all sm:p-7">
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-flacron-navy/5 mb-4 sm:h-12 sm:w-12 sm:mb-5">
                 <Layers className="h-5 w-5 text-flacron-navy sm:h-6 sm:w-6" />
               </div>
@@ -248,7 +248,7 @@ export default function AIEnginePage() {
       <section className="bg-flacron-navy py-12 px-4 sm:px-6 sm:py-20 lg:px-8 relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 particle-grid opacity-10" />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#F97316] mb-3 sm:text-sm sm:mb-4">Enterprise Trust</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#FE4705] mb-3 sm:text-sm sm:mb-4">Enterprise Trust</p>
           <h2 className="text-2xl font-black text-white sm:text-3xl sm:mb-4 mb-3" style={{ fontFamily: "var(--font-space-grotesk)" }}>
             AI you can trust at scale.
           </h2>
@@ -264,7 +264,7 @@ export default function AIEnginePage() {
           </div>
           <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
             <Link href="/book-demo"
-              className="ripple-btn rounded-xl bg-[#F97316] px-6 py-3 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors text-center sm:px-8 sm:py-4">
+              className="ripple-btn rounded-xl bg-[#FE4705] px-6 py-3 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors text-center sm:px-8 sm:py-4">
               Request AI Demo
             </Link>
             <Link href="/contact"

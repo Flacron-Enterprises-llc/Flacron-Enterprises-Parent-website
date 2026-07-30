@@ -38,10 +38,10 @@ export default async function DashboardOverviewPage({
       {/* Hero banner */}
       <div className="relative mb-6 overflow-hidden rounded-2xl bg-flacron-navy px-5 py-6 sm:px-8 sm:py-8">
         <div className="pointer-events-none absolute inset-0 particle-grid opacity-10" />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_100%_0%,rgba(249,115,22,0.18)_0%,transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_100%_0%,rgba(254, 71, 5,0.18)_0%,transparent_60%)]" />
         <div className="relative z-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1 text-[11px] font-semibold text-[#F97316]">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1 text-[11px] font-semibold text-[#FE4705]">
               <Rocket className="h-3 w-3" /> {quota.plan.name} Plan
             </span>
             <h1 className="mt-3 text-2xl font-black text-white sm:text-3xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
@@ -51,7 +51,7 @@ export default async function DashboardOverviewPage({
           </div>
           <Link
             href="/dashboard/keys"
-            className="ripple-btn inline-flex items-center justify-center gap-2 rounded-xl bg-[#F97316] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors shadow-[0_4px_20px_rgba(249,115,22,0.3)] shrink-0"
+            className="ripple-btn inline-flex items-center justify-center gap-2 rounded-xl bg-[#FE4705] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors shadow-[0_4px_20px_rgba(254, 71, 5,0.3)] shrink-0"
           >
             Manage API Keys <ArrowRight className="h-4 w-4" />
           </Link>
@@ -72,18 +72,18 @@ export default async function DashboardOverviewPage({
 
       {/* Stat cards */}
       <div className="grid gap-4 sm:grid-cols-3 mb-6">
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-[#F97316]/30 transition-all">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-[#FE4705]/30 transition-all">
           <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-orange-50">
-            <Gauge size={16} className="text-[#F97316]" />
+            <Gauge size={16} className="text-[#FE4705]" />
           </div>
           <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Current Plan</p>
           <p className="text-xl font-black text-flacron-navy">{quota.plan.name}</p>
           <p className="text-xs text-slate-400 mt-0.5">{quota.plan.priceLabel}</p>
         </div>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-[#F97316]/30 transition-all">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-[#FE4705]/30 transition-all">
           <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-orange-50">
-            <Zap size={16} className="text-[#F97316]" />
+            <Zap size={16} className="text-[#FE4705]" />
           </div>
           <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Usage This Period</p>
           <p className="text-xl font-black text-flacron-navy">
@@ -95,20 +95,20 @@ export default async function DashboardOverviewPage({
           {quota.plan.monthlyQuota !== -1 && (
             <div className="mt-2 h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
               <div
-                className={`h-full rounded-full transition-all ${usedPct >= 90 ? "bg-red-500" : "bg-gradient-to-r from-[#F97316] to-[#EA580C]"}`}
+                className={`h-full rounded-full transition-all ${usedPct >= 90 ? "bg-red-500" : "bg-gradient-to-r from-[#FE4705] to-[#D83C04]"}`}
                 style={{ width: `${usedPct}%` }}
               />
             </div>
           )}
         </div>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-[#F97316]/30 transition-all">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-[#FE4705]/30 transition-all">
           <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-orange-50">
-            <KeyRound size={16} className="text-[#F97316]" />
+            <KeyRound size={16} className="text-[#FE4705]" />
           </div>
           <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Active API Keys</p>
           <p className="text-xl font-black text-flacron-navy">{activeKeys}</p>
-          <Link href="/dashboard/keys" className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-[#F97316] hover:text-[#EA580C]">
+          <Link href="/dashboard/keys" className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-[#FE4705] hover:text-[#D83C04]">
             Manage keys <ArrowRight className="h-3 w-3" />
           </Link>
         </div>
@@ -120,14 +120,14 @@ export default async function DashboardOverviewPage({
           <h2 className="text-sm font-bold text-flacron-navy mb-3">Quick start</h2>
           <p className="text-sm text-slate-500 mb-4">Call the estimate endpoint from your own code:</p>
           <CopyableCode code={curlSnippet} />
-          <Link href="/dashboard/keys" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#F97316] hover:text-[#EA580C]">
+          <Link href="/dashboard/keys" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#FE4705] hover:text-[#D83C04]">
             Create an API key <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
 
         <div className="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
           <div className="mb-3 flex items-center gap-2">
-            <TrendingUp size={15} className="text-[#F97316]" />
+            <TrendingUp size={15} className="text-[#FE4705]" />
             <h2 className="text-sm font-bold text-flacron-navy">Recent Activity</h2>
           </div>
           {recentUsage.length === 0 ? (

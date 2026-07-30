@@ -30,7 +30,7 @@ function Blocks({ blocks }: { blocks: LegalBlock[] }) {
           <ul key={i} className="mt-3 space-y-1.5">
             {block.items.map((item, j) => (
               <li key={j} className="flex gap-2 text-sm leading-relaxed text-slate-600 sm:text-base">
-                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#F97316]" />
+                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#FE4705]" />
                 {item}
               </li>
             ))}
@@ -46,7 +46,7 @@ export default function LegalDocument({ data }: { data: LegalDocumentData }) {
     <div className="min-h-screen bg-white">
       <section className="border-b border-slate-100 bg-slate-50 px-4 pt-8 pb-10 sm:px-6 sm:pt-12 sm:pb-14 lg:px-8">
         <div className="mx-auto max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#F97316]">Legal</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#FE4705]">Legal</p>
           <h1
             className="mt-2 text-3xl font-black leading-tight text-flacron-navy sm:text-4xl"
             style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
@@ -82,11 +82,11 @@ export default function LegalDocument({ data }: { data: LegalDocumentData }) {
             <Blocks blocks={data.footerSummary} />
             <p className="mt-4 text-xs text-slate-400">
               Questions? See our{" "}
-              <Link href="/privacy" className="font-medium text-[#F97316] hover:underline">Privacy Policy</Link>,{" "}
-              <Link href="/terms" className="font-medium text-[#F97316] hover:underline">Terms &amp; Conditions</Link>,{" "}
-              <Link href="/refund-policy" className="font-medium text-[#F97316] hover:underline">Cancellation &amp; Refund Policy</Link>,{" "}
-              <Link href="/disclaimer" className="font-medium text-[#F97316] hover:underline">Disclaimer</Link>, or{" "}
-              <Link href="/cookies" className="font-medium text-[#F97316] hover:underline">Cookies Policy</Link>.
+              <Link href="/privacy" className="font-medium text-[#FE4705] hover:underline">Privacy Policy</Link>,{" "}
+              <Link href="/terms" className="font-medium text-[#FE4705] hover:underline">Terms &amp; Conditions</Link>,{" "}
+              <Link href="/refund-policy" className="font-medium text-[#FE4705] hover:underline">Cancellation &amp; Refund Policy</Link>,{" "}
+              <Link href="/disclaimer" className="font-medium text-[#FE4705] hover:underline">Disclaimer</Link>, or{" "}
+              <Link href="/cookies" className="font-medium text-[#FE4705] hover:underline">Cookies Policy</Link>.
             </p>
           </div>
         </div>

@@ -72,7 +72,7 @@ export default function APIAccessPage() {
     setState("success");
   }
 
-  const inputClass = "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-flacron-navy placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316] transition-colors";
+  const inputClass = "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-flacron-navy placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705] transition-colors";
 
   return (
     <div className="min-h-screen">
@@ -84,13 +84,13 @@ export default function APIAccessPage() {
           <Link href="/ai-engine" className="flex w-fit items-center gap-2 text-slate-400 hover:text-white text-sm mb-6 transition-colors sm:mb-8">
             <ArrowLeft className="h-4 w-4" /> Back to AI Engine
           </Link>
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1.5 text-xs font-semibold text-[#F97316] mb-5 sm:px-4 sm:text-sm sm:mb-6">
+          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1.5 text-xs font-semibold text-[#FE4705] mb-5 sm:px-4 sm:text-sm sm:mb-6">
             <Code2 className="h-3.5 w-3.5" />
             Option 2 — API Platform Access
           </div>
           <h1 className="text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
             Add AI to your product.<br />
-            <span className="text-[#F97316]">Without building it.</span>
+            <span className="text-[#FE4705]">Without building it.</span>
           </h1>
           <p className="mt-4 max-w-2xl text-sm text-slate-300 leading-relaxed sm:mt-5 sm:text-base lg:text-lg">
             Call our AI endpoints directly from your codebase. Industry-trained models for language, vision, prediction, and scoring — all via a simple REST API. You ship the feature, we run the intelligence.
@@ -100,7 +100,7 @@ export default function APIAccessPage() {
           <div className="mt-6 grid grid-cols-1 gap-3 sm:mt-8 sm:grid-cols-2 lg:grid-cols-4">
             {capabilities.map(({ icon: Icon, title, desc }) => (
               <div key={title} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 sm:flex-col sm:items-start">
-                <Icon className="h-5 w-5 text-[#F97316] shrink-0 sm:mb-2" />
+                <Icon className="h-5 w-5 text-[#FE4705] shrink-0 sm:mb-2" />
                 <div>
                   <p className="text-sm font-bold text-white">{title}</p>
                   <p className="text-xs text-slate-400 leading-snug mt-0.5">{desc}</p>
@@ -121,11 +121,11 @@ export default function APIAccessPage() {
                 key={tier.name}
                 className={`flex flex-col rounded-2xl border p-5 sm:p-6 ${
                   tier.highlight
-                    ? "bg-[#F97316] border-[#F97316] shadow-[0_8px_32px_rgba(249,115,22,0.3)]"
+                    ? "bg-[#FE4705] border-[#FE4705] shadow-[0_8px_32px_rgba(254, 71, 5,0.3)]"
                     : "bg-white border-slate-200"
                 }`}
               >
-                <p className={`text-xs font-semibold uppercase tracking-widest mb-1 ${tier.highlight ? "text-orange-100" : "text-[#F97316]"}`}>
+                <p className={`text-xs font-semibold uppercase tracking-widest mb-1 ${tier.highlight ? "text-orange-100" : "text-[#FE4705]"}`}>
                   {tier.name}
                 </p>
                 <div className="flex items-end gap-1 mb-1">
@@ -134,12 +134,12 @@ export default function APIAccessPage() {
                   </p>
                   {tier.per && <p className={`text-sm mb-1 ${tier.highlight ? "text-orange-100" : "text-slate-400"}`}>{tier.per}</p>}
                 </div>
-                <p className={`text-xs font-semibold mb-2 ${tier.highlight ? "text-orange-100" : "text-[#F97316]"}`}>{tier.calls}</p>
+                <p className={`text-xs font-semibold mb-2 ${tier.highlight ? "text-orange-100" : "text-[#FE4705]"}`}>{tier.calls}</p>
                 <p className={`text-sm mb-4 leading-relaxed ${tier.highlight ? "text-orange-50" : "text-slate-500"}`}>{tier.desc}</p>
                 <ul className="space-y-2 flex-1">
                   {tier.features.map((f) => (
                     <li key={f} className="flex items-start gap-2 text-sm">
-                      <Check className={`h-4 w-4 shrink-0 mt-0.5 ${tier.highlight ? "text-orange-100" : "text-[#F97316]"}`} />
+                      <Check className={`h-4 w-4 shrink-0 mt-0.5 ${tier.highlight ? "text-orange-100" : "text-[#FE4705]"}`} />
                       <span className={tier.highlight ? "text-white" : "text-slate-600"}>{f}</span>
                     </li>
                   ))}
@@ -167,7 +167,7 @@ export default function APIAccessPage() {
               </div>
               <h3 className="text-lg font-bold text-flacron-navy mb-2 sm:text-xl">Application received!</h3>
               <p className="text-slate-500 text-sm">We&apos;ll reach out within 1 business day with your API credentials and onboarding guide.</p>
-              <Link href="/ai-engine" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#F97316] hover:text-[#EA580C]">
+              <Link href="/ai-engine" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#FE4705] hover:text-[#D83C04]">
                 Back to AI Engine <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
@@ -232,7 +232,7 @@ export default function APIAccessPage() {
                 <textarea name="message" value={form.message} onChange={handleChange} rows={3} placeholder="Tech stack, integration needs, timeline…" className={inputClass + " resize-none"} />
               </div>
               <button type="submit" disabled={state === "loading"}
-                className="w-full rounded-xl bg-[#F97316] py-3.5 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors disabled:opacity-60 shadow-[0_4px_16px_rgba(249,115,22,0.25)]">
+                className="w-full rounded-xl bg-[#FE4705] py-3.5 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors disabled:opacity-60 shadow-[0_4px_16px_rgba(254, 71, 5,0.25)]">
                 {state === "loading" ? "Submitting…" : "Apply for API Access"}
               </button>
               <p className="text-center text-xs text-slate-400">No commitment. We&apos;ll respond within 1 business day.</p>

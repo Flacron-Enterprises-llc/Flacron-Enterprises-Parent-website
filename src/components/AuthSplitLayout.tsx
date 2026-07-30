@@ -14,11 +14,11 @@ export default function AuthSplitLayout({ children }: { children: React.ReactNod
       {/* Left — branding panel */}
       <div className="relative hidden overflow-hidden bg-flacron-navy lg:flex lg:flex-col lg:justify-between p-10 xl:p-14">
         <div className="pointer-events-none absolute inset-0 particle-grid opacity-10" />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_20%_100%,rgba(249,115,22,0.15)_0%,transparent_70%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_20%_100%,rgba(254, 71, 5,0.15)_0%,transparent_70%)]" />
 
         <div className="relative z-10">
           <Link href="/">
-            <span className="text-2xl font-black tracking-wider text-[#F97316]">FLACRON</span>
+            <span className="text-2xl font-black tracking-wider text-[#FE4705]">FLACRON</span>
             <span className="ml-2 text-sm font-medium text-slate-400">AI Engine</span>
           </Link>
         </div>
@@ -28,7 +28,7 @@ export default function AuthSplitLayout({ children }: { children: React.ReactNod
             className="text-3xl font-black leading-tight text-white xl:text-4xl"
             style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
           >
-            The intelligence<br /><span className="text-[#F97316]">behind everything.</span>
+            The intelligence<br /><span className="text-[#FE4705]">behind everything.</span>
           </h1>
           <p className="mt-4 max-w-sm text-sm text-slate-400 leading-relaxed">
             One dashboard to manage your API keys, usage, and personalization across the entire Flacron AI ecosystem.
@@ -36,7 +36,7 @@ export default function AuthSplitLayout({ children }: { children: React.ReactNod
           <ul className="mt-6 space-y-3">
             {highlights.map((h) => (
               <li key={h} className="flex items-start gap-2.5 text-sm text-slate-300">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#F97316]" />
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#FE4705]" />
                 {h}
               </li>
             ))}

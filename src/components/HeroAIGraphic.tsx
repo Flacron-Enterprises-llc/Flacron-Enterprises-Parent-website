@@ -12,7 +12,7 @@ const barSets = [
 
 const activityPool = [
   { label: "New lead qualified", meta: "Coverline Insurance", color: "#22C55E" },
-  { label: "Model retrained", meta: "FraudGuard AI · just now", color: "#F97316" },
+  { label: "Model retrained", meta: "FraudGuard AI · just now", color: "#FE4705" },
   { label: "Report generated", meta: "Q3 Ops Summary", color: "#3B82F6" },
   { label: "Anomaly flagged", meta: "TrustLayer Inc", color: "#EF4444" },
   { label: "Deal closed", meta: "Apex Fieldworks · $12.4K", color: "#22C55E" },
@@ -22,7 +22,7 @@ const activityPool = [
 const insights = [
   { text: "Churn risk down", value: "18%", color: "text-green-600" },
   { text: "Response time improved", value: "32%", color: "text-green-600" },
-  { text: "Leads this hour", value: "+24", color: "text-[#F97316]" },
+  { text: "Leads this hour", value: "+24", color: "text-[#FE4705]" },
 ];
 
 const stats = [
@@ -69,7 +69,7 @@ export default function HeroAIGraphic() {
       <motion.div
         animate={{ scale: [1, 1.12, 1], opacity: [0.5, 0.7, 0.5] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-10 -right-6 h-56 w-56 rounded-full bg-[#F97316]/20 blur-3xl"
+        className="absolute -top-10 -right-6 h-56 w-56 rounded-full bg-[#FE4705]/20 blur-3xl"
       />
       <motion.div
         animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.6, 0.4] }}
@@ -82,7 +82,7 @@ export default function HeroAIGraphic() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_30px_80px_-20px_rgba(15,23,42,0.35)]"
+        className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_30px_80px_-20px_rgba(0, 40, 92,0.35)]"
       >
         {/* Title bar */}
         <div className="relative flex items-center gap-2 overflow-hidden border-b border-slate-100 bg-slate-50 px-4 py-3">
@@ -103,13 +103,13 @@ export default function HeroAIGraphic() {
         <div className="flex">
           {/* Sidebar */}
           <div className="hidden w-16 flex-col items-center gap-4 border-r border-slate-100 bg-slate-50/60 py-4 sm:flex">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-black text-xs font-black text-[#F97316]">F</div>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-black text-xs font-black text-[#FE4705]">F</div>
             {[Search, TrendingUp, Users, Bell].map((Icon, i) => (
               <motion.div
                 key={i}
                 animate={{
-                  backgroundColor: i === activeIcon ? "rgba(249,115,22,0.15)" : "rgba(0,0,0,0)",
-                  color: i === activeIcon ? "#F97316" : "#94A3B8",
+                  backgroundColor: i === activeIcon ? "rgba(254, 71, 5,0.15)" : "rgba(0,0,0,0)",
+                  color: i === activeIcon ? "#FE4705" : "#94A3B8",
                 }}
                 transition={{ duration: 0.4 }}
                 className="flex h-8 w-8 items-center justify-center rounded-lg"
@@ -161,7 +161,7 @@ export default function HeroAIGraphic() {
                   key={i}
                   animate={{ height: `${h}%` }}
                   transition={{ duration: 1, delay: i * 0.05, ease: "easeInOut" }}
-                  className={`flex-1 rounded-t-sm ${i === 5 ? "bg-[#F97316]" : "bg-slate-200"}`}
+                  className={`flex-1 rounded-t-sm ${i === 5 ? "bg-[#FE4705]" : "bg-slate-200"}`}
                 />
               ))}
             </div>
@@ -204,7 +204,7 @@ export default function HeroAIGraphic() {
         className="absolute -bottom-6 -left-6 hidden w-44 rounded-xl border border-slate-200 bg-white p-3 shadow-xl sm:block"
       >
         <div className="mb-1.5 flex items-center gap-1.5">
-          <Zap className="h-3.5 w-3.5 text-[#F97316]" />
+          <Zap className="h-3.5 w-3.5 text-[#FE4705]" />
           <span className="text-[10px] font-bold text-flacron-navy">AI Insight</span>
         </div>
         <AnimatePresence mode="wait">

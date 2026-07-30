@@ -25,10 +25,10 @@ export default async function AboutPage() {
       {/* Hero */}
       <section className="pt-8 pb-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="mx-auto max-w-4xl text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#F97316]">About Us</p>
+          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#FE4705]">About Us</p>
           <h1 className="text-3xl font-black leading-tight text-flacron-navy sm:text-4xl md:text-5xl lg:text-6xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
             One company. One ecosystem.{" "}
-            <span className="text-[#F97316]">Many solutions.</span>
+            <span className="text-[#FE4705]">Many solutions.</span>
           </h1>
           <p className="mt-4 text-base text-slate-500 leading-relaxed max-w-2xl mx-auto sm:mt-6 sm:text-xl">
             Flacron Enterprises is an AI-powered technology company building intelligent solutions for business growth, automation, industry operations, and digital transformation.
@@ -57,7 +57,7 @@ export default async function AboutPage() {
                 { value: "24/7", label: "Support" },
               ].map((s) => (
                 <div key={s.label} className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
-                  <p className="text-4xl font-black text-[#F97316]" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>{s.value}</p>
+                  <p className="text-4xl font-black text-[#FE4705]" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>{s.value}</p>
                   <p className="mt-2 text-sm font-medium text-slate-500">{s.label}</p>
                 </div>
               ))}
@@ -89,10 +89,10 @@ export default async function AboutPage() {
         <div className="mx-auto max-w-3xl text-center">
           <SectionHeader eyebrow="Join Us" title="Be part of the ecosystem." centered />
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
-            <Link href="/ecosystem" className="rounded-xl bg-[#F97316] px-6 py-3 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors shadow-sm text-center sm:px-8 sm:py-4 sm:text-base">
+            <Link href="/ecosystem" className="rounded-xl bg-[#FE4705] px-6 py-3 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors shadow-sm text-center sm:px-8 sm:py-4 sm:text-base">
               Explore Products
             </Link>
-            <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-slate-200 px-6 py-3 text-sm font-semibold text-flacron-navy hover:border-[#F97316] hover:text-[#F97316] transition-colors sm:px-8 sm:py-4 sm:text-base">
+            <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-slate-200 px-6 py-3 text-sm font-semibold text-flacron-navy hover:border-[#FE4705] hover:text-[#FE4705] transition-colors sm:px-8 sm:py-4 sm:text-base">
               Get In Touch <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

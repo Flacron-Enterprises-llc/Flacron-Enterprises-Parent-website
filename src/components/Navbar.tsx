@@ -134,7 +134,7 @@ export default function Navbar({ apps }: { apps: AppDefinition[] }) {
             <TrackedLink
               href="/book-demo"
               event="cta_book_demo_nav"
-              className="ripple-btn whitespace-nowrap rounded-lg bg-[#F97316] px-4 py-2 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors shadow-sm"
+              className="ripple-btn whitespace-nowrap rounded-lg bg-[#FE4705] px-4 py-2 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors shadow-sm"
             >
               Book a Demo
             </TrackedLink>
@@ -155,7 +155,7 @@ export default function Navbar({ apps }: { apps: AppDefinition[] }) {
                       <div className="col-span-3">
                         <div className="mb-3 flex items-center justify-between">
                           <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Our Products</p>
-                          <Link href="/ecosystem" className="flex items-center gap-1 text-xs font-medium text-[#F97316] hover:text-[#EA580C]" onClick={() => setMegaOpen(false)}>
+                          <Link href="/ecosystem" className="flex items-center gap-1 text-xs font-medium text-[#FE4705] hover:text-[#D83C04]" onClick={() => setMegaOpen(false)}>
                             View all <ArrowRight className="h-3 w-3" />
                           </Link>
                         </div>
@@ -181,8 +181,8 @@ export default function Navbar({ apps }: { apps: AppDefinition[] }) {
                         <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-400">Platform</p>
                         <Link href="/ai-engine" onClick={() => setMegaOpen(false)}
                           className="flex items-start gap-3 rounded-xl p-3 hover:bg-slate-50 transition-colors">
-                          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#F97316]/10">
-                            <Bot className="h-4 w-4 text-[#F97316]" />
+                          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#FE4705]/10">
+                            <Bot className="h-4 w-4 text-[#FE4705]" />
                           </div>
                           <div>
                             <p className="text-sm font-semibold text-flacron-navy">AI Engine</p>
@@ -259,12 +259,12 @@ export default function Navbar({ apps }: { apps: AppDefinition[] }) {
 
               <div className="pt-4 pb-8 space-y-3">
                 <Link href="/book-demo"
-                  className="block w-full rounded-xl bg-[#F97316] px-6 py-3.5 text-center font-semibold text-white hover:bg-[#EA580C] transition-colors"
+                  className="block w-full rounded-xl bg-[#FE4705] px-6 py-3.5 text-center font-semibold text-white hover:bg-[#D83C04] transition-colors"
                   onClick={() => setMobileOpen(false)}>
                   Book a Demo
                 </Link>
                 <Link href="/dashboard/login"
-                  className="block w-full rounded-xl border-2 border-slate-200 px-6 py-3.5 text-center font-semibold text-flacron-navy hover:border-[#F97316] hover:text-[#F97316] transition-colors"
+                  className="block w-full rounded-xl border-2 border-slate-200 px-6 py-3.5 text-center font-semibold text-flacron-navy hover:border-[#FE4705] hover:text-[#FE4705] transition-colors"
                   onClick={() => setMobileOpen(false)}>
                   Sign In to Dashboard
                 </Link>

@@ -57,8 +57,8 @@ export default function HeroSection() {
           >
             {/* Eyebrow */}
             <motion.div variants={item} className="mb-6 inline-flex items-center gap-2 sm:mb-8">
-              <span className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-1.5 text-xs sm:text-sm font-semibold text-[#F97316]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#F97316] animate-pulse" />
+              <span className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-1.5 text-xs sm:text-sm font-semibold text-[#FE4705]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#FE4705] animate-pulse" />
                 AI Apps for a Smarter World
               </span>
             </motion.div>
@@ -70,10 +70,10 @@ export default function HeroSection() {
               style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
             >
               One Ecosystem.{" "}
-              <span className="text-[#F97316]">Multiple</span>{" "}
+              <span className="text-[#FE4705]">Multiple</span>{" "}
               <br className="hidden sm:block" />
               AI-Powered{" "}
-              <span className="text-[#F97316]">Solutions.</span>
+              <span className="text-[#FE4705]">Solutions.</span>
             </motion.h1>
 
             {/* Subtext */}
@@ -93,14 +93,14 @@ export default function HeroSection() {
               <TrackedLink
                 href="/ecosystem"
                 event="cta_explore_ecosystem_hero"
-                className="ripple-btn inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F97316] px-8 py-4 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors shadow-[0_4px_20px_rgba(249,115,22,0.3)] sm:w-auto sm:text-base"
+                className="ripple-btn inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#FE4705] px-8 py-4 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors shadow-[0_4px_20px_rgba(254, 71, 5,0.3)] sm:w-auto sm:text-base"
               >
                 Explore Ecosystem <ArrowRight className="h-4 w-4" />
               </TrackedLink>
               <TrackedLink
                 href="/book-demo"
                 event="cta_book_demo_hero"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-slate-200 bg-white/80 backdrop-blur-sm px-8 py-4 text-sm font-semibold text-flacron-navy hover:border-[#F97316] hover:text-[#F97316] transition-colors sm:w-auto sm:text-base"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-slate-200 bg-white/80 backdrop-blur-sm px-8 py-4 text-sm font-semibold text-flacron-navy hover:border-[#FE4705] hover:text-[#FE4705] transition-colors sm:w-auto sm:text-base"
               >
                 Book a Demo
               </TrackedLink>
@@ -128,7 +128,7 @@ export default function HeroSection() {
                 >
                   <CountUp
                     value={s.value}
-                    className="block text-xl font-black text-[#F97316] sm:text-2xl"
+                    className="block text-xl font-black text-[#FE4705] sm:text-2xl"
                   />
                   <p className="text-xs font-medium text-slate-500">{s.label}</p>
                 </div>
@@ -142,7 +142,7 @@ export default function HeroSection() {
             >
               {["Microsoft Partner", "IBM Certified", "ISO 27001 Aligned", "Enterprise Ready"].map((badge) => (
                 <span key={badge} className="flex items-center gap-1.5">
-                  <span className="h-1 w-1 rounded-full bg-[#F97316]" />
+                  <span className="h-1 w-1 rounded-full bg-[#FE4705]" />
                   {badge}
                 </span>
               ))}

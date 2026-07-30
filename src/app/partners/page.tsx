@@ -68,7 +68,7 @@ export default function PartnersPage() {
                 <ul className="space-y-2">
                   {p.benefits.map((b) => (
                     <li key={b} className="flex items-center gap-2 text-sm text-slate-600">
-                      <CheckCircle className="h-4 w-4 shrink-0 text-[#F97316]" />{b}
+                      <CheckCircle className="h-4 w-4 shrink-0 text-[#FE4705]" />{b}
                     </li>
                   ))}
                 </ul>
@@ -79,11 +79,11 @@ export default function PartnersPage() {
 
         {/* Certifications */}
         <div className="rounded-2xl bg-flacron-navy p-6 sm:p-10">
-          <p className="text-center text-sm font-semibold uppercase tracking-widest text-[#F97316] mb-8">Security & Compliance</p>
+          <p className="text-center text-sm font-semibold uppercase tracking-widest text-[#FE4705] mb-8">Security & Compliance</p>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {certifications.map((c) => (
               <div key={c.name} className="rounded-xl border border-white/10 bg-white/5 p-5 text-center">
-                <CheckCircle className="mx-auto mb-3 h-6 w-6 text-[#F97316]" />
+                <CheckCircle className="mx-auto mb-3 h-6 w-6 text-[#FE4705]" />
                 <p className="text-sm font-bold text-white">{c.name}</p>
                 <p className="mt-1 text-xs text-slate-400">{c.desc}</p>
               </div>
@@ -100,7 +100,7 @@ export default function PartnersPage() {
             We welcome strategic partnerships, technology integrations, and channel partner opportunities.
           </p>
           <Link href="/contact"
-            className="inline-flex items-center gap-2 rounded-xl bg-[#F97316] px-7 py-3.5 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors">
+            className="inline-flex items-center gap-2 rounded-xl bg-[#FE4705] px-7 py-3.5 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors">
             Get In Touch <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

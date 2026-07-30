@@ -70,7 +70,7 @@ export default function AdminCustomersPage() {
                       <p className="text-xs text-slate-400">{c.email}</p>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-orange-50 text-[#F97316]">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-orange-50 text-[#FE4705]">
                         {c.plan.name}
                       </span>
                     </td>
@@ -88,7 +88,7 @@ export default function AdminCustomersPage() {
                     </td>
                     <td className="px-6 py-4 text-slate-400">{new Date(c.createdAt).toLocaleDateString()}</td>
                     <td className="px-6 py-4 text-right">
-                      <Link href={`/admin/customers/${c.id}`} className="text-xs font-medium text-[#F97316] hover:underline">
+                      <Link href={`/admin/customers/${c.id}`} className="text-xs font-medium text-[#FE4705] hover:underline">
                         View →
                       </Link>
                     </td>

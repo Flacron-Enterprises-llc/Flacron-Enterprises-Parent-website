@@ -30,7 +30,7 @@ export default function CustomOrderPage() {
     setState("success");
   }
 
-  const inputClass = "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-flacron-navy placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316] transition-colors";
+  const inputClass = "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-flacron-navy placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705] transition-colors";
 
   return (
     <div className="min-h-screen">
@@ -40,12 +40,12 @@ export default function CustomOrderPage() {
           <Link href="/ai-engine" className="flex w-fit items-center gap-2 text-slate-400 hover:text-white text-sm mb-6 transition-colors sm:mb-8">
             <ArrowLeft className="h-4 w-4" /> Back to AI Engine
           </Link>
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1.5 text-xs font-semibold text-[#F97316] mb-5 sm:px-4 sm:text-sm sm:mb-6">
+          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1.5 text-xs font-semibold text-[#FE4705] mb-5 sm:px-4 sm:text-sm sm:mb-6">
             <Layers className="h-3.5 w-3.5" />
             Custom Order
           </div>
           <h1 className="text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            Need something<br /><span className="text-[#F97316]">built for you.</span>
+            Need something<br /><span className="text-[#FE4705]">built for you.</span>
           </h1>
           <p className="mt-4 max-w-xl text-sm text-slate-300 leading-relaxed sm:mt-5 sm:text-base">
             Enterprise plans, white-label deployments, or a workflow that doesn&apos;t fit our standard tiers — tell us what you need and we&apos;ll put together a custom quote.
@@ -64,7 +64,7 @@ export default function CustomOrderPage() {
               </div>
               <h3 className="text-lg font-bold text-flacron-navy mb-2 sm:text-xl">Request received!</h3>
               <p className="text-slate-500 text-sm">Our team will review your request and follow up with a custom quote shortly.</p>
-              <Link href="/ai-engine" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#F97316] hover:text-[#EA580C]">
+              <Link href="/ai-engine" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#FE4705] hover:text-[#D83C04]">
                 Back to AI Engine <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
@@ -111,7 +111,7 @@ export default function CustomOrderPage() {
                 <textarea required name="description" value={form.description} onChange={handleChange} rows={5} placeholder="What are you trying to build or solve?" className={inputClass + " resize-none"} />
               </div>
               <button type="submit" disabled={state === "loading"}
-                className="w-full rounded-xl bg-[#F97316] py-3.5 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors disabled:opacity-60 shadow-[0_4px_16px_rgba(249,115,22,0.25)]">
+                className="w-full rounded-xl bg-[#FE4705] py-3.5 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors disabled:opacity-60 shadow-[0_4px_16px_rgba(254, 71, 5,0.25)]">
                 {state === "loading" ? "Submitting…" : "Submit Request"}
               </button>
               <p className="text-center text-xs text-slate-400">No commitment. We&apos;ll respond within 1-2 business days.</p>

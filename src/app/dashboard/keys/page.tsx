@@ -100,12 +100,12 @@ export default function ApiKeysPage() {
           value={label}
           onChange={(e) => setLabel(e.target.value)}
           placeholder="Key label (e.g. Production server)"
-          className="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+          className="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
         />
         <button
           onClick={handleCreate}
           disabled={creating}
-          className="ripple-btn flex items-center justify-center gap-2 rounded-xl bg-[#F97316] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#EA580C] disabled:opacity-60 transition-colors shadow-[0_4px_16px_rgba(249,115,22,0.2)]"
+          className="ripple-btn flex items-center justify-center gap-2 rounded-xl bg-[#FE4705] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#D83C04] disabled:opacity-60 transition-colors shadow-[0_4px_16px_rgba(254, 71, 5,0.2)]"
         >
           <Plus size={16} />
           {creating ? "Creating…" : "New Key"}
@@ -118,7 +118,7 @@ export default function ApiKeysPage() {
         ) : keys.length === 0 ? (
           <div className="p-10 text-center">
             <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50">
-              <KeyRound className="h-6 w-6 text-[#F97316]" />
+              <KeyRound className="h-6 w-6 text-[#FE4705]" />
             </div>
             <p className="text-sm text-slate-400">No API keys yet. Create one to start calling the API.</p>
           </div>
@@ -128,7 +128,7 @@ export default function ApiKeysPage() {
               <li key={k.id} className="flex items-center justify-between gap-3 p-4 hover:bg-slate-50/60 transition-colors">
                 <div className="flex items-center gap-3 min-w-0">
                   <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${k.revoked ? "bg-slate-100" : "bg-orange-50"}`}>
-                    <KeyRound size={15} className={k.revoked ? "text-slate-400" : "text-[#F97316]"} />
+                    <KeyRound size={15} className={k.revoked ? "text-slate-400" : "text-[#FE4705]"} />
                   </div>
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">

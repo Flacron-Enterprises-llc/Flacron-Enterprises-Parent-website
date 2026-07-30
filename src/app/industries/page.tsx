@@ -80,8 +80,8 @@ export default async function IndustriesPage() {
                   {/* Left info */}
                   <div className="p-5 sm:p-8 lg:col-span-2 border-b border-slate-100 lg:border-b-0 lg:border-r">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F97316]/10">
-                        <Icon className="h-5 w-5 text-[#F97316]" />
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FE4705]/10">
+                        <Icon className="h-5 w-5 text-[#FE4705]" />
                       </div>
                       <h2 className="text-xl font-bold text-flacron-navy">{ind.name}</h2>
                     </div>
@@ -91,7 +91,7 @@ export default async function IndustriesPage() {
                       <ul className="grid gap-2 sm:grid-cols-2">
                         {ind.challenges.map((c) => (
                           <li key={c} className="flex items-start gap-2 text-sm text-slate-600">
-                            <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[#F97316]" />{c}
+                            <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[#FE4705]" />{c}
                           </li>
                         ))}
                       </ul>
@@ -103,7 +103,7 @@ export default async function IndustriesPage() {
                     <div className="space-y-3">
                       {relatedApps.map((app) => (
                         <Link key={app.id} href={`/apps/${app.slug}`}
-                          className="flex items-center gap-3 rounded-xl border border-slate-100 p-3 hover:border-[#F97316]/30 hover:bg-orange-50/50 transition-all group">
+                          className="flex items-center gap-3 rounded-xl border border-slate-100 p-3 hover:border-[#FE4705]/30 hover:bg-orange-50/50 transition-all group">
                           <AppLogo name={app.name} size={36} />
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2">
@@ -112,7 +112,7 @@ export default async function IndustriesPage() {
                             </div>
                             <p className="text-xs text-slate-400 truncate">{app.tagline}</p>
                           </div>
-                          <ArrowRight className="h-4 w-4 text-slate-300 group-hover:text-[#F97316] transition-colors shrink-0" />
+                          <ArrowRight className="h-4 w-4 text-slate-300 group-hover:text-[#FE4705] transition-colors shrink-0" />
                         </Link>
                       ))}
                     </div>

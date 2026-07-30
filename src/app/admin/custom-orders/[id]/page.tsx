@@ -52,7 +52,7 @@ export default function AdminCustomOrderDetailPage() {
         </div>
         <Link
           href={invoiceHref}
-          className="flex items-center gap-2 px-4 py-2 bg-[#F97316] hover:bg-[#ea6b0e] text-white text-sm font-semibold rounded-lg transition-colors shrink-0"
+          className="flex items-center gap-2 px-4 py-2 bg-[#FE4705] hover:bg-[#ea6b0e] text-white text-sm font-semibold rounded-lg transition-colors shrink-0"
         >
           <FileText size={14} /> Generate Invoice
         </Link>

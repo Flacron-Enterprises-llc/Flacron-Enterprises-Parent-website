@@ -41,8 +41,8 @@ export default function GlassCard({ children, className, priority = "default", t
       className={cn(
         "cursor-glow relative rounded-2xl border bg-white transition-shadow duration-300",
         isFeatured
-          ? "border-[#F97316]/30 shadow-[0_8px_40px_rgba(249,115,22,0.12)]"
-          : "border-slate-200 shadow-sm hover:border-[#F97316]/30 hover:shadow-[0_8px_32px_rgba(249,115,22,0.1)]",
+          ? "border-[#FE4705]/30 shadow-[0_8px_40px_rgba(254, 71, 5,0.12)]"
+          : "border-slate-200 shadow-sm hover:border-[#FE4705]/30 hover:shadow-[0_8px_32px_rgba(254, 71, 5,0.1)]",
         className
       )}
     >

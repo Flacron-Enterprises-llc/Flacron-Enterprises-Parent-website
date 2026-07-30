@@ -63,7 +63,7 @@ function NewInvoiceForm() {
     }
   }
 
-  const inputClass = "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]";
+  const inputClass = "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]";
 
   return (
     <div className="p-4 sm:p-8 max-w-3xl mx-auto">
@@ -92,7 +92,7 @@ function NewInvoiceForm() {
         <div>
           <div className="flex items-center justify-between mb-2">
             <label className="block text-sm font-medium text-slate-700">Line items</label>
-            <button type="button" onClick={addItem} className="flex items-center gap-1 text-xs font-semibold text-[#F97316] hover:text-[#EA580C]">
+            <button type="button" onClick={addItem} className="flex items-center gap-1 text-xs font-semibold text-[#FE4705] hover:text-[#D83C04]">
               <Plus size={14} /> Add item
             </button>
           </div>
@@ -150,7 +150,7 @@ function NewInvoiceForm() {
         <button
           type="submit"
           disabled={saving}
-          className="w-full rounded-xl bg-[#F97316] py-3 text-sm font-semibold text-white hover:bg-[#EA580C] disabled:opacity-60 transition-colors"
+          className="w-full rounded-xl bg-[#FE4705] py-3 text-sm font-semibold text-white hover:bg-[#D83C04] disabled:opacity-60 transition-colors"
         >
           {saving ? "Generating…" : "Generate Invoice"}
         </button>

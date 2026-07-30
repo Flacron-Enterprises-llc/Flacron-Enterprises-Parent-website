@@ -57,7 +57,7 @@ export default function AdminAppsPage() {
         </div>
         <Link
           href="/admin/apps/new"
-          className="flex items-center gap-2 px-4 py-2 bg-[#F97316] hover:bg-[#ea6b0e] text-white text-sm font-semibold rounded-lg transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-[#FE4705] hover:bg-[#ea6b0e] text-white text-sm font-semibold rounded-lg transition-colors"
         >
           <Plus size={14} /> New App
         </Link>
@@ -71,13 +71,13 @@ export default function AdminAppsPage() {
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
             placeholder="Search apps…"
-            className="w-full pl-9 pr-4 py-2.5 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+            className="w-full pl-9 pr-4 py-2.5 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
           />
         </div>
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+          className="border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
         >
           <option value="all">All statuses</option>
           <option value="live">Live</option>
@@ -138,7 +138,7 @@ export default function AdminAppsPage() {
                       </Link>
                       <Link
                         href={`/admin/apps/${app.slug}`}
-                        className="p-1.5 text-slate-400 hover:text-[#F97316] rounded-md hover:bg-orange-50 transition-colors"
+                        className="p-1.5 text-slate-400 hover:text-[#FE4705] rounded-md hover:bg-orange-50 transition-colors"
                         title="Edit"
                       >
                         <Pencil size={14} />

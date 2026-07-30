@@ -96,7 +96,7 @@ export default function SearchModal({ open, onClose, apps }: SearchModalProps) {
                   {filteredApps.map((app) => (
                     <button key={app.id} onClick={() => go(`/apps/${app.slug}`)}
                       className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left hover:bg-slate-50 transition-colors">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-50 text-xs font-bold text-[#F97316]">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-50 text-xs font-bold text-[#FE4705]">
                         {app.name.slice(0, 2).toUpperCase()}
                       </div>
                       <div className="min-w-0 flex-1">

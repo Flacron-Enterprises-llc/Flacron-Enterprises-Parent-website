@@ -3,12 +3,12 @@
 @import "shadcn/tailwind.css";
 
 @theme inline {
-  /* Brand tokens */
-  --color-flacron-orange: #F97316;
-  --color-flacron-orange-dark: #EA580C;
-  --color-flacron-orange-light: #FFF7ED;
-  --color-flacron-navy: #0F172A;
-  --color-flacron-navy-mid: #1E293B;
+  /* Brand tokens (exact logo colors) */
+  --color-flacron-orange: #FE4705;
+  --color-flacron-orange-dark: #D83C04;
+  --color-flacron-orange-light: #FFF3EC;
+  --color-flacron-navy: #00285C;
+  --color-flacron-navy-mid: #0A3D75;
   --color-flacron-blue: #2563EB;
 
   /* Shadcn tokens */
@@ -56,7 +56,7 @@
   --card-foreground: oklch(0.1 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.1 0 0);
-  --primary: oklch(0.68 0.19 40);
+  --primary: #FE4705;
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.2 0 0);
@@ -67,16 +67,16 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.91 0 0);
   --input: oklch(0.91 0 0);
-  --ring: oklch(0.68 0.19 40);
+  --ring: #FE4705;
   --radius: 0.75rem;
   --sidebar: oklch(0.98 0 0);
   --sidebar-foreground: oklch(0.2 0 0);
-  --sidebar-primary: oklch(0.68 0.19 40);
+  --sidebar-primary: #FE4705;
   --sidebar-primary-foreground: oklch(1 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.2 0 0);
   --sidebar-border: oklch(0.91 0 0);
-  --sidebar-ring: oklch(0.68 0.19 40);
+  --sidebar-ring: #FE4705;
 }
 
 @layer base {
@@ -103,11 +103,11 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #F97316;
+  background: #FE4705;
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #EA580C;
+  background: #D83C04;
 }
 
 /* ─── Shimmer ─── */
@@ -130,11 +130,11 @@
 .hero-aurora {
   background: linear-gradient(
     135deg,
-    rgba(249,115,22,0.13) 0%,
+    rgba(254, 71, 5,0.13) 0%,
     rgba(37,99,235,0.09) 25%,
-    rgba(249,115,22,0.06) 50%,
+    rgba(254, 71, 5,0.06) 50%,
     rgba(37,99,235,0.11) 75%,
-    rgba(249,115,22,0.10) 100%
+    rgba(254, 71, 5,0.10) 100%
   );
   background-size: 400% 400%;
   animation: aurora-shift 10s ease infinite;
@@ -142,7 +142,7 @@
 
 /* ─── Particle / Dot Grid ─── */
 .particle-grid {
-  background-image: radial-gradient(circle, rgba(249,115,22,0.12) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(254, 71, 5,0.12) 1px, transparent 1px);
   background-size: 36px 36px;
 }
 
@@ -187,7 +187,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(circle 160px at var(--mx, 50%) var(--my, 50%), rgba(249,115,22,0.25), transparent 70%);
+  background: radial-gradient(circle 160px at var(--mx, 50%) var(--my, 50%), rgba(254, 71, 5,0.25), transparent 70%);
   opacity: 0;
   transition: opacity 0.25s ease;
   pointer-events: none;

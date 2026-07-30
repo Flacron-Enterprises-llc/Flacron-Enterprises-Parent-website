@@ -35,11 +35,11 @@ export default function CustomerLoginPage() {
     }
   }
 
-  const inputClass = "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-flacron-navy placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316] transition-colors";
+  const inputClass = "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-flacron-navy placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705] transition-colors";
 
   return (
     <AuthSplitLayout>
-      <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-[#F97316]">Welcome back</p>
+      <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-[#FE4705]">Welcome back</p>
       <h2 className="mb-8 text-2xl font-black text-flacron-navy" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
         Sign in to your dashboard
       </h2>
@@ -89,7 +89,7 @@ export default function CustomerLoginPage() {
         <button
           type="submit"
           disabled={loading || !password || !email}
-          className="ripple-btn flex w-full items-center justify-center gap-2 rounded-xl bg-[#F97316] py-3.5 text-sm font-semibold text-white hover:bg-[#EA580C] disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-[0_4px_20px_rgba(249,115,22,0.25)]"
+          className="ripple-btn flex w-full items-center justify-center gap-2 rounded-xl bg-[#FE4705] py-3.5 text-sm font-semibold text-white hover:bg-[#D83C04] disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-[0_4px_20px_rgba(254, 71, 5,0.25)]"
         >
           {loading ? "Signing in…" : "Sign In"}
           {!loading && <ArrowRight className="h-4 w-4" />}
@@ -97,9 +97,9 @@ export default function CustomerLoginPage() {
 
         <p className="text-center text-xs text-slate-400">
           Don&apos;t have login details? Request access via{" "}
-          <Link href="/ai-engine/api-access" className="font-semibold text-[#F97316] hover:underline">API Access</Link>{" "}
+          <Link href="/ai-engine/api-access" className="font-semibold text-[#FE4705] hover:underline">API Access</Link>{" "}
           or{" "}
-          <Link href="/custom-order" className="font-semibold text-[#F97316] hover:underline">Custom Order</Link>.
+          <Link href="/custom-order" className="font-semibold text-[#FE4705] hover:underline">Custom Order</Link>.
         </p>
       </form>
     </AuthSplitLayout>

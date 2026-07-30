@@ -34,7 +34,7 @@ export default function StickyDemoCTA() {
           <TrackedLink
             href="/book-demo"
             event="cta_sticky_side"
-            className="ripple-btn flex items-center gap-2 rounded-l-2xl bg-[#F97316] px-4 py-3.5 text-sm font-semibold text-white shadow-[0_4px_24px_rgba(249,115,22,0.35)] hover:bg-[#EA580C] hover:pr-5 transition-all"
+            className="ripple-btn flex items-center gap-2 rounded-l-2xl bg-[#FE4705] px-4 py-3.5 text-sm font-semibold text-white shadow-[0_4px_24px_rgba(254, 71, 5,0.35)] hover:bg-[#D83C04] hover:pr-5 transition-all"
           >
             <CalendarCheck className="h-4 w-4" />
             <span style={{ writingMode: "horizontal-tb" }}>Book a Demo</span>

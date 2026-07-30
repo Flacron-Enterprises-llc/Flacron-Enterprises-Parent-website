@@ -96,7 +96,7 @@ export default function AdminDashboard() {
           )}
           <Link
             href="/admin/apps/new"
-            className="flex items-center gap-2 px-4 py-2 bg-[#F97316] hover:bg-[#ea6b0e] text-white text-sm font-semibold rounded-lg transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-[#FE4705] hover:bg-[#ea6b0e] text-white text-sm font-semibold rounded-lg transition-colors"
           >
             <Plus size={14} />
             New App
@@ -113,12 +113,12 @@ export default function AdminDashboard() {
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 mb-8">
         {statCards.map(({ label, value, icon: Icon, color, bg, href }) => (
-          <Link key={label} href={href} className="bg-white rounded-xl border border-slate-200 p-5 hover:border-[#F97316]/40 hover:shadow-sm transition-all group">
+          <Link key={label} href={href} className="bg-white rounded-xl border border-slate-200 p-5 hover:border-[#FE4705]/40 hover:shadow-sm transition-all group">
             <div className={`inline-flex items-center justify-center w-9 h-9 rounded-lg ${bg} mb-3`}>
               <Icon size={16} className={color} />
             </div>
             <div className="text-2xl font-bold text-slate-900">{loading && label !== "New Leads" ? "—" : value}</div>
-            <div className="text-sm text-slate-500 mt-0.5 group-hover:text-[#F97316] transition-colors">{label}</div>
+            <div className="text-sm text-slate-500 mt-0.5 group-hover:text-[#FE4705] transition-colors">{label}</div>
           </Link>
         ))}
       </div>
@@ -127,7 +127,7 @@ export default function AdminDashboard() {
       <div className="bg-white rounded-xl border border-slate-200">
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
           <h2 className="font-semibold text-slate-900">All Apps</h2>
-          <Link href="/admin/apps" className="text-sm text-[#F97316] hover:underline font-medium">
+          <Link href="/admin/apps" className="text-sm text-[#FE4705] hover:underline font-medium">
             Manage →
           </Link>
         </div>

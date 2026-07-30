@@ -32,7 +32,7 @@ export default function AdminInvoicesPage() {
         </div>
         <Link
           href="/admin/invoices/new"
-          className="flex items-center gap-2 px-4 py-2 bg-[#F97316] hover:bg-[#ea6b0e] text-white text-sm font-semibold rounded-lg transition-colors shrink-0"
+          className="flex items-center gap-2 px-4 py-2 bg-[#FE4705] hover:bg-[#ea6b0e] text-white text-sm font-semibold rounded-lg transition-colors shrink-0"
         >
           <Plus size={14} /> Generate Invoice
         </Link>
@@ -59,7 +59,7 @@ export default function AdminInvoicesPage() {
               >
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-sm font-semibold text-[#F97316]">{inv.invoiceNumber}</span>
+                    <span className="font-mono text-sm font-semibold text-[#FE4705]">{inv.invoiceNumber}</span>
                     <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${STATUS_STYLES[inv.status]}`}>
                       {inv.status}
                     </span>

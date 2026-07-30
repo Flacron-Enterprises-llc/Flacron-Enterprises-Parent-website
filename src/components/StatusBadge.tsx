@@ -16,7 +16,7 @@ const config: Record<Status, { label: string; dot: string; badge: string; pulse:
   },
   beta: {
     label: "Beta",
-    dot: "bg-[#F97316]",
+    dot: "bg-[#FE4705]",
     badge: "bg-orange-50 border border-orange-200 text-orange-700",
     pulse: false,
   },

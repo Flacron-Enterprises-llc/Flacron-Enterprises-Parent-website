@@ -6,7 +6,7 @@ const badges = [
         <rect x="2" y="2" width="9" height="9" className="fill-slate-700" />
         <rect x="13" y="2" width="9" height="9" className="fill-slate-400" />
         <rect x="2" y="13" width="9" height="9" className="fill-slate-400" />
-        <rect x="13" y="13" width="9" height="9" className="fill-[#F97316]" />
+        <rect x="13" y="13" width="9" height="9" className="fill-[#FE4705]" />
       </svg>
     ),
   },
@@ -24,8 +24,8 @@ const badges = [
     name: "AWS Infrastructure",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none">
-        <path d="M3 16c4 4 14 4 18 0" stroke="#F97316" strokeWidth="2" strokeLinecap="round" fill="none" />
-        <path d="M16 14l3 2-1 3" stroke="#F97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        <path d="M3 16c4 4 14 4 18 0" stroke="#FE4705" strokeWidth="2" strokeLinecap="round" fill="none" />
+        <path d="M16 14l3 2-1 3" stroke="#FE4705" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
       </svg>
     ),
   },
@@ -41,8 +41,8 @@ const badges = [
     name: "ISO 27001 Aligned",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none">
-        <circle cx="12" cy="12" r="9" stroke="#F97316" strokeWidth="2" fill="none" />
-        <path d="M8 12l3 3 5-6" stroke="#F97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        <circle cx="12" cy="12" r="9" stroke="#FE4705" strokeWidth="2" fill="none" />
+        <path d="M8 12l3 3 5-6" stroke="#FE4705" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
       </svg>
     ),
   },

@@ -40,13 +40,13 @@ export default function SettingsPage() {
 
   if (!profile) return <div className="p-6 text-sm text-slate-400">Loading…</div>;
 
-  const inputClass = "w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]";
+  const inputClass = "w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]";
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 max-w-4xl">
       <div className="mb-6 flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50">
-          <Sparkles size={18} className="text-[#F97316]" />
+          <Sparkles size={18} className="text-[#FE4705]" />
         </div>
         <div>
           <h1 className="text-2xl font-black text-flacron-navy">Personalization</h1>
@@ -118,7 +118,7 @@ export default function SettingsPage() {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="ripple-btn flex items-center gap-2 rounded-xl bg-[#F97316] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#EA580C] disabled:opacity-60 transition-colors shadow-[0_4px_16px_rgba(249,115,22,0.2)]"
+            className="ripple-btn flex items-center gap-2 rounded-xl bg-[#FE4705] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#D83C04] disabled:opacity-60 transition-colors shadow-[0_4px_16px_rgba(254, 71, 5,0.2)]"
           >
             {saved ? <Check size={16} /> : null}
             {saving ? "Saving…" : saved ? "Saved" : "Save changes"}
@@ -127,7 +127,7 @@ export default function SettingsPage() {
 
         <div className="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm h-fit">
           <div className="mb-3 flex items-center gap-2">
-            <Eye size={15} className="text-[#F97316]" />
+            <Eye size={15} className="text-[#FE4705]" />
             <h2 className="text-sm font-bold text-flacron-navy">Live preview</h2>
           </div>
           <p className="mb-3 text-xs text-slate-400">This is the context injected before every AI request:</p>
@@ -135,7 +135,7 @@ export default function SettingsPage() {
             <p>Region: <span className="text-white">{profile.region || "—"}</span></p>
             <p>Units: <span className="text-white">{profile.units === "imperial" ? "imperial (ft, sq ft)" : "metric (m, sq m)"}</span></p>
             <p>Currency: <span className="text-white">{profile.currency || "—"}</span></p>
-            <p>Markup: <span className="text-[#F97316] font-semibold">{profile.markupPercent}%</span></p>
+            <p>Markup: <span className="text-[#FE4705] font-semibold">{profile.markupPercent}%</span></p>
             {profile.notes && <p className="pt-1 text-slate-400 italic">&ldquo;{profile.notes}&rdquo;</p>}
           </div>
         </div>

@@ -31,7 +31,7 @@ export default function BookDemoForm({ apps }: { apps: AppDefinition[] }) {
     setState("success");
   }
 
-  const inputClass = "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-flacron-navy placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316] transition-colors";
+  const inputClass = "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-flacron-navy placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705] transition-colors";
 
   return (
     <div className="min-h-screen pt-6 pb-24 px-4 sm:px-6 lg:px-8">
@@ -52,7 +52,7 @@ export default function BookDemoForm({ apps }: { apps: AppDefinition[] }) {
                 { title: "No commitment required", desc: "A demo is just a conversation. There's no pressure or obligation." },
               ].map((item) => (
                 <div key={item.title} className="flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50 p-4">
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#F97316]">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FE4705]">
                     <Check className="h-3.5 w-3.5 text-white" />
                   </div>
                   <div>
@@ -63,7 +63,7 @@ export default function BookDemoForm({ apps }: { apps: AppDefinition[] }) {
               ))}
             </div>
             <div className="mt-8 flex items-center gap-3 rounded-2xl border border-orange-100 bg-orange-50 p-5">
-              <Calendar className="h-8 w-8 shrink-0 text-[#F97316]" />
+              <Calendar className="h-8 w-8 shrink-0 text-[#FE4705]" />
               <div>
                 <p className="text-sm font-bold text-flacron-navy">Average response time: under 24 hours</p>
                 <p className="text-xs text-slate-500">We confirm every demo request within one business day.</p>
@@ -135,7 +135,7 @@ export default function BookDemoForm({ apps }: { apps: AppDefinition[] }) {
                   <textarea name="message" value={form.message} onChange={handleChange} rows={3} placeholder="Tell us about your use case or specific questions..." className={inputClass + " resize-none"} />
                 </div>
                 <button type="submit" disabled={state === "loading"}
-                  className="w-full rounded-xl bg-[#F97316] py-4 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors disabled:opacity-60 shadow-[0_4px_16px_rgba(249,115,22,0.25)]">
+                  className="w-full rounded-xl bg-[#FE4705] py-4 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors disabled:opacity-60 shadow-[0_4px_16px_rgba(254, 71, 5,0.25)]">
                   {state === "loading" ? "Submitting..." : "Request My Demo"}
                 </button>
                 <p className="text-center text-xs text-slate-400">No spam. No commitment. Just a conversation.</p>

@@ -25,7 +25,7 @@ export function useToast() {
 const icons: Record<ToastType, React.ReactNode> = {
   success: <CheckCircle className="h-4 w-4 text-green-500 shrink-0" />,
   error: <XCircle className="h-4 w-4 text-red-500 shrink-0" />,
-  info: <Info className="h-4 w-4 text-[#F97316] shrink-0" />,
+  info: <Info className="h-4 w-4 text-[#FE4705] shrink-0" />,
 };
 
 const styles: Record<ToastType, string> = {

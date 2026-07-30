@@ -99,7 +99,7 @@ function BillingContent() {
           <div>
             <div className="flex items-center gap-2">
               <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Current plan</p>
-              <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${me.billingStatus === "active" ? "bg-emerald-50 text-emerald-600" : "bg-orange-50 text-[#F97316]"}`}>
+              <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${me.billingStatus === "active" ? "bg-emerald-50 text-emerald-600" : "bg-orange-50 text-[#FE4705]"}`}>
                 {me.billingStatus === "active" ? "Active" : "Pending payment"}
               </span>
             </div>
@@ -108,7 +108,7 @@ function BillingContent() {
           <button
             onClick={handleManageBilling}
             disabled={portalLoading}
-            className="flex items-center gap-1.5 rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 hover:border-[#F97316] hover:text-[#F97316] transition-colors disabled:opacity-60"
+            className="flex items-center gap-1.5 rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 hover:border-[#FE4705] hover:text-[#FE4705] transition-colors disabled:opacity-60"
           >
             {portalLoading ? "Loading…" : "Manage Billing"} <ExternalLink className="h-3.5 w-3.5" />
           </button>
@@ -123,20 +123,20 @@ function BillingContent() {
           return (
             <div
               key={id}
-              className={`relative flex flex-col rounded-2xl border p-5 ${isCurrent ? "border-[#F97316] shadow-[0_4px_20px_rgba(249,115,22,0.15)]" : "border-slate-200"} bg-white`}
+              className={`relative flex flex-col rounded-2xl border p-5 ${isCurrent ? "border-[#FE4705] shadow-[0_4px_20px_rgba(254, 71, 5,0.15)]" : "border-slate-200"} bg-white`}
             >
               {id === "growth" && !isCurrent && (
                 <span className="absolute -top-2.5 right-5 rounded-full bg-flacron-navy px-2.5 py-0.5 text-[10px] font-bold text-white">Popular</span>
               )}
               <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-xl bg-orange-50">
-                <Icon size={16} className="text-[#F97316]" />
+                <Icon size={16} className="text-[#FE4705]" />
               </div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#F97316] mb-1">{plan.name}</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#FE4705] mb-1">{plan.name}</p>
               <p className="text-2xl font-black text-flacron-navy mb-3">{plan.priceLabel}</p>
               <ul className="space-y-2 mb-5 flex-1">
                 {planFeatures[id].map((f) => (
                   <li key={f} className="flex items-start gap-2 text-sm text-slate-600">
-                    <Check className="h-4 w-4 shrink-0 mt-0.5 text-[#F97316]" /> {f}
+                    <Check className="h-4 w-4 shrink-0 mt-0.5 text-[#FE4705]" /> {f}
                   </li>
                 ))}
               </ul>
@@ -153,7 +153,7 @@ function BillingContent() {
                 <button
                   onClick={() => handleUpgrade(id)}
                   disabled={busyPlan === id}
-                  className="rounded-xl bg-[#F97316] py-2.5 text-sm font-semibold text-white hover:bg-[#EA580C] disabled:opacity-60 transition-colors"
+                  className="rounded-xl bg-[#FE4705] py-2.5 text-sm font-semibold text-white hover:bg-[#D83C04] disabled:opacity-60 transition-colors"
                 >
                   {busyPlan === id ? "Redirecting…" : "Upgrade"}
                 </button>

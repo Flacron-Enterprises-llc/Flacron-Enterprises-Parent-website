@@ -38,20 +38,20 @@ function LinkEditor({ links, onChange, placeholder = "e.g. /ecosystem" }: {
             value={link.label}
             onChange={(e) => update(i, "label", e.target.value)}
             placeholder="Label"
-            className="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+            className="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
           />
           <input
             value={link.href}
             onChange={(e) => update(i, "href", e.target.value)}
             placeholder={placeholder}
-            className="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+            className="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
           />
           <button onClick={() => remove(i)} className="p-2 text-slate-400 hover:text-red-500 rounded-lg hover:bg-red-50 transition-colors">
             <Trash2 size={13} />
           </button>
         </div>
       ))}
-      <button onClick={add} className="flex items-center gap-1.5 text-sm text-[#F97316] font-medium mt-1">
+      <button onClick={add} className="flex items-center gap-1.5 text-sm text-[#FE4705] font-medium mt-1">
         <Plus size={13} /> Add link
       </button>
     </div>
@@ -122,7 +122,7 @@ export default function NavigationPage() {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="flex items-center gap-2 px-5 py-2 bg-[#F97316] hover:bg-[#ea6b0e] disabled:opacity-60 text-white text-sm font-semibold rounded-lg transition-colors"
+          className="flex items-center gap-2 px-5 py-2 bg-[#FE4705] hover:bg-[#ea6b0e] disabled:opacity-60 text-white text-sm font-semibold rounded-lg transition-colors"
         >
           {saving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
           {saving ? "Saving…" : "Save All"}
@@ -151,7 +151,7 @@ export default function NavigationPage() {
               <input
                 value={config.primaryCTA?.label || ""}
                 onChange={(e) => setConfig((prev) => ({ ...prev, primaryCTA: { ...prev.primaryCTA, label: e.target.value } }))}
-                className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+                className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                 placeholder="Book a Demo"
               />
             </div>
@@ -160,7 +160,7 @@ export default function NavigationPage() {
               <input
                 value={config.primaryCTA?.href || ""}
                 onChange={(e) => setConfig((prev) => ({ ...prev, primaryCTA: { ...prev.primaryCTA, href: e.target.value } }))}
-                className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+                className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                 placeholder="/book-demo"
               />
             </div>
@@ -201,7 +201,7 @@ export default function NavigationPage() {
               onChange={(e) => setNewGroupName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && addFooterGroup()}
               placeholder="New group name (e.g. Resources)"
-              className="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+              className="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
             />
             <button
               onClick={addFooterGroup}

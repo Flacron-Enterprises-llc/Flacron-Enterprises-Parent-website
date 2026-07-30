@@ -52,7 +52,7 @@ export default function WhiteLabelPage() {
     setState("success");
   }
 
-  const inputClass = "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-flacron-navy placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316] transition-colors";
+  const inputClass = "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-flacron-navy placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705] transition-colors";
 
   return (
     <div className="min-h-screen">
@@ -65,20 +65,20 @@ export default function WhiteLabelPage() {
           <Link href="/ai-engine" className="flex w-fit items-center gap-2 text-slate-400 hover:text-white text-sm mb-6 transition-colors sm:mb-8">
             <ArrowLeft className="h-4 w-4" /> Back to AI Engine
           </Link>
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1.5 text-xs font-semibold text-[#F97316] mb-5 sm:px-4 sm:text-sm sm:mb-6">
+          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1.5 text-xs font-semibold text-[#FE4705] mb-5 sm:px-4 sm:text-sm sm:mb-6">
             <Layers className="h-3.5 w-3.5" />
             Option 3 — White-Label Deployment
           </div>
           <h1 className="text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
             Our AI platform.<br />
-            <span className="text-[#F97316]">Your product.</span>
+            <span className="text-[#FE4705]">Your product.</span>
           </h1>
           <p className="mt-4 max-w-2xl text-sm text-slate-300 leading-relaxed sm:mt-5 sm:text-base lg:text-lg">
             License the full Flacron AI stack — rebranded as your own, deployed on your infrastructure, and tailored to your industry and workflows. You keep the client relationship and revenue. We provide the intelligence.
           </p>
           <div className="mt-6 sm:mt-8">
             <a href="#enquiry-form"
-              className="ripple-btn inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F97316] px-6 py-3 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors sm:w-auto sm:px-7 sm:py-3.5">
+              className="ripple-btn inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#FE4705] px-6 py-3 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors sm:w-auto sm:px-7 sm:py-3.5">
               Start Your Enquiry <ArrowRight className="h-4 w-4" />
             </a>
           </div>
@@ -91,9 +91,9 @@ export default function WhiteLabelPage() {
           <SectionHeader eyebrow="What's Included" title="Everything you need to launch your AI product." centered />
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
             {whatYouGet.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:border-[#F97316]/30 hover:shadow-md transition-all sm:p-6">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#F97316]/10 sm:mb-4 sm:h-11 sm:w-11">
-                  <Icon className="h-5 w-5 text-[#F97316]" />
+              <div key={title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:border-[#FE4705]/30 hover:shadow-md transition-all sm:p-6">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#FE4705]/10 sm:mb-4 sm:h-11 sm:w-11">
+                  <Icon className="h-5 w-5 text-[#FE4705]" />
                 </div>
                 <h3 className="text-sm font-bold text-flacron-navy mb-1.5 sm:text-base sm:mb-2">{title}</h3>
                 <p className="text-xs text-slate-500 leading-relaxed sm:text-sm">{desc}</p>
@@ -111,7 +111,7 @@ export default function WhiteLabelPage() {
             {useCases.map(({ title, desc }) => (
               <div key={title} className="flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-100">
-                  <Check className="h-4 w-4 text-[#F97316]" />
+                  <Check className="h-4 w-4 text-[#FE4705]" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-flacron-navy mb-1">{title}</h3>
@@ -140,7 +140,7 @@ export default function WhiteLabelPage() {
               </div>
               <h3 className="text-lg font-bold text-flacron-navy mb-2 sm:text-xl">Enquiry submitted!</h3>
               <p className="text-slate-500 text-sm">Our enterprise team will review your project and reach out within 2 business days to schedule a scoping call.</p>
-              <Link href="/ai-engine" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#F97316] hover:text-[#EA580C]">
+              <Link href="/ai-engine" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#FE4705] hover:text-[#D83C04]">
                 Back to AI Engine <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
@@ -226,7 +226,7 @@ export default function WhiteLabelPage() {
                   className={inputClass + " resize-none"} />
               </div>
               <button type="submit" disabled={state === "loading"}
-                className="w-full rounded-xl bg-[#F97316] py-3.5 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors disabled:opacity-60 shadow-[0_4px_16px_rgba(249,115,22,0.25)]">
+                className="w-full rounded-xl bg-[#FE4705] py-3.5 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors disabled:opacity-60 shadow-[0_4px_16px_rgba(254, 71, 5,0.25)]">
                 {state === "loading" ? "Submitting…" : "Submit White-Label Enquiry"}
               </button>
               <p className="text-center text-xs text-slate-400">Enterprise team responds within 2 business days.</p>

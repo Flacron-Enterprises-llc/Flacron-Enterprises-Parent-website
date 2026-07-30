@@ -49,7 +49,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Logo */}
       <div className="px-5 py-4 border-b border-white/5 flex items-center justify-between">
         <Link href="/" target="_blank" rel="noopener noreferrer">
-          <span className="text-xl font-black tracking-wider text-[#F97316]">FLACRON</span>
+          <span className="text-xl font-black tracking-wider text-[#FE4705]">FLACRON</span>
           <span className="ml-2 text-xs font-medium text-slate-500">Admin</span>
         </Link>
         <button
@@ -71,13 +71,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               onClick={() => setSidebarOpen(false)}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors group ${
                 active
-                  ? "bg-[#F97316]/15 text-[#F97316]"
+                  ? "bg-[#FE4705]/15 text-[#FE4705]"
                   : "text-slate-400 hover:text-white hover:bg-white/5"
               }`}
             >
-              <Icon size={16} className={active ? "text-[#F97316]" : "text-slate-500 group-hover:text-slate-300"} />
+              <Icon size={16} className={active ? "text-[#FE4705]" : "text-slate-500 group-hover:text-slate-300"} />
               {label}
-              {active && <ChevronRight size={14} className="ml-auto text-[#F97316]/60" />}
+              {active && <ChevronRight size={14} className="ml-auto text-[#FE4705]/60" />}
             </Link>
           );
         })}
@@ -120,7 +120,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Sidebar — desktop always visible, mobile drawer */}
       <aside
         className={`
-          app-sidebar fixed lg:relative inset-y-0 left-0 z-50 w-60 shrink-0 bg-[#0f172a] flex flex-col h-full
+          app-sidebar fixed lg:relative inset-y-0 left-0 z-50 w-60 shrink-0 bg-[#00285C] flex flex-col h-full
           transform transition-transform duration-200 ease-in-out lg:transform-none
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}
@@ -138,7 +138,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           >
             <Menu size={18} />
           </button>
-          <span className="text-sm font-bold text-[#F97316] tracking-wider">FLACRON Admin</span>
+          <span className="text-sm font-bold text-[#FE4705] tracking-wider">FLACRON Admin</span>
         </div>
 
         <main className="app-main flex-1 overflow-y-auto">

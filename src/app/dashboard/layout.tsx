@@ -43,7 +43,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <div className="relative px-5 py-4 border-b border-white/5 flex items-center justify-between overflow-hidden">
         <div className="pointer-events-none absolute inset-0 particle-grid opacity-10" />
         <Link href="/" className="relative z-10">
-          <span className="text-xl font-black tracking-wider text-[#F97316]">FLACRON</span>
+          <span className="text-xl font-black tracking-wider text-[#FE4705]">FLACRON</span>
           <span className="ml-2 text-xs font-medium text-slate-500">AI Engine</span>
         </Link>
         <button className="relative z-10 lg:hidden p-1 text-slate-500 hover:text-white" onClick={() => setSidebarOpen(false)}>
@@ -60,12 +60,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               href={href}
               onClick={() => setSidebarOpen(false)}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors group ${
-                active ? "bg-[#F97316]/15 text-[#F97316]" : "text-slate-400 hover:text-white hover:bg-white/5"
+                active ? "bg-[#FE4705]/15 text-[#FE4705]" : "text-slate-400 hover:text-white hover:bg-white/5"
               }`}
             >
-              <Icon size={16} className={active ? "text-[#F97316]" : "text-slate-500 group-hover:text-slate-300"} />
+              <Icon size={16} className={active ? "text-[#FE4705]" : "text-slate-500 group-hover:text-slate-300"} />
               {label}
-              {active && <ChevronRight size={14} className="ml-auto text-[#F97316]/60" />}
+              {active && <ChevronRight size={14} className="ml-auto text-[#FE4705]/60" />}
             </Link>
           );
         })}
@@ -74,13 +74,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <div className="px-3 pb-3">
         <div className="rounded-xl border border-white/5 bg-white/5 px-3 py-3 mb-2">
           <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#F97316]/15 text-[10px] font-black text-[#F97316]">
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#FE4705]/15 text-[10px] font-black text-[#FE4705]">
               {(me?.orgName || "?").charAt(0).toUpperCase()}
             </div>
             <div className="min-w-0">
               <p className="truncate text-xs font-semibold text-white">{me?.orgName || "Loading…"}</p>
               <p className="flex items-center gap-1 text-[10px] text-slate-400">
-                <Sparkles size={9} className="text-[#F97316]" />
+                <Sparkles size={9} className="text-[#FE4705]" />
                 {me?.plan?.name || "—"} plan
               </p>
             </div>
@@ -108,7 +108,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
       <aside
         className={`
-          app-sidebar fixed lg:relative inset-y-0 left-0 z-50 w-64 shrink-0 bg-[#0f172a] flex flex-col h-full
+          app-sidebar fixed lg:relative inset-y-0 left-0 z-50 w-64 shrink-0 bg-[#00285C] flex flex-col h-full
           transform transition-transform duration-200 ease-in-out lg:transform-none
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}
@@ -121,10 +121,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <button onClick={() => setSidebarOpen(true)} className="p-2 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors">
             <Menu size={18} />
           </button>
-          <span className="text-sm font-bold text-[#F97316] tracking-wider">FLACRON AI Engine</span>
+          <span className="text-sm font-bold text-[#FE4705] tracking-wider">FLACRON AI Engine</span>
         </div>
 
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_100%_0%,rgba(249,115,22,0.06)_0%,transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_100%_0%,rgba(254, 71, 5,0.06)_0%,transparent_60%)]" />
 
         <main className="app-main flex-1 overflow-y-auto relative">{children}</main>
       </div>

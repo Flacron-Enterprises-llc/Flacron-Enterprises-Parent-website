@@ -30,7 +30,7 @@ function arrayField(items: string[], onChange: (v: string[]) => void, placeholde
           <input
             value={item}
             onChange={(e) => update(i, e.target.value)}
-            className="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+            className="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
             placeholder={placeholder}
           />
           <button type="button" onClick={() => remove(i)} className="p-2 text-slate-400 hover:text-red-500 rounded-lg hover:bg-red-50 transition-colors">
@@ -38,7 +38,7 @@ function arrayField(items: string[], onChange: (v: string[]) => void, placeholde
           </button>
         </div>
       ))}
-      <button type="button" onClick={add} className="flex items-center gap-1.5 text-sm text-[#F97316] hover:text-[#ea6b0e] font-medium">
+      <button type="button" onClick={add} className="flex items-center gap-1.5 text-sm text-[#FE4705] hover:text-[#ea6b0e] font-medium">
         <Plus size={14} /> Add item
       </button>
     </div>
@@ -131,14 +131,14 @@ export default function AppForm({ initial, isNew = false }: Props) {
           value={(app[key] as string) || ""}
           onChange={(e) => set(key, e.target.value as AppDefinition[typeof key])}
           rows={4}
-          className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316] resize-none"
+          className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705] resize-none"
         />
       ) : (
         <input
           type="text"
           value={(app[key] as string) || ""}
           onChange={(e) => set(key, e.target.value as AppDefinition[typeof key])}
-          className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+          className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
         />
       )}
     </div>
@@ -164,7 +164,7 @@ export default function AppForm({ initial, isNew = false }: Props) {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-2 px-5 py-2 bg-[#F97316] hover:bg-[#ea6b0e] disabled:opacity-60 text-white text-sm font-semibold rounded-lg transition-colors"
+            className="flex items-center gap-2 px-5 py-2 bg-[#FE4705] hover:bg-[#ea6b0e] disabled:opacity-60 text-white text-sm font-semibold rounded-lg transition-colors"
           >
             {saving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
             {saving ? "Saving…" : "Save Changes"}
@@ -207,7 +207,7 @@ export default function AppForm({ initial, isNew = false }: Props) {
                 <select
                   value={app.category || "Business"}
                   onChange={(e) => set("category", e.target.value as AppDefinition["category"])}
-                  className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+                  className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                 >
                   {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
                 </select>
@@ -217,7 +217,7 @@ export default function AppForm({ initial, isNew = false }: Props) {
                 <select
                   value={app.status || "coming-soon"}
                   onChange={(e) => set("status", e.target.value as AppDefinition["status"])}
-                  className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+                  className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                 >
                   {STATUSES.map((s) => <option key={s.value} value={s.value}>{s.label}</option>)}
                 </select>
@@ -232,14 +232,14 @@ export default function AppForm({ initial, isNew = false }: Props) {
                   value={app.metrics?.label || ""}
                   onChange={(e) => setNested("metrics", "label", e.target.value)}
                   placeholder="Label (e.g. Active Projects)"
-                  className="border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+                  className="border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                 />
                 <input
                   type="text"
                   value={app.metrics?.value || ""}
                   onChange={(e) => setNested("metrics", "value", e.target.value)}
                   placeholder="Value (e.g. 2,400+)"
-                  className="border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+                  className="border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                 />
               </div>
             </div>
@@ -282,7 +282,7 @@ export default function AppForm({ initial, isNew = false }: Props) {
               <button
                 type="button"
                 onClick={() => set("features", [...(app.features || []), { title: "", description: "", icon: "" }])}
-                className="flex items-center gap-1.5 text-sm text-[#F97316] font-medium"
+                className="flex items-center gap-1.5 text-sm text-[#FE4705] font-medium"
               >
                 <Plus size={14} /> Add Feature
               </button>
@@ -308,7 +308,7 @@ export default function AppForm({ initial, isNew = false }: Props) {
                       set("features", next);
                     }}
                     placeholder="Feature title"
-                    className="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+                    className="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                   />
                   <input
                     value={f.icon}
@@ -318,7 +318,7 @@ export default function AppForm({ initial, isNew = false }: Props) {
                       set("features", next);
                     }}
                     placeholder="Lucide icon name (e.g. Calculator)"
-                    className="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+                    className="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                   />
                 </div>
                 <textarea
@@ -330,7 +330,7 @@ export default function AppForm({ initial, isNew = false }: Props) {
                   }}
                   placeholder="Feature description"
                   rows={2}
-                  className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316] resize-none"
+                  className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705] resize-none"
                 />
               </div>
             ))}
@@ -346,7 +346,7 @@ export default function AppForm({ initial, isNew = false }: Props) {
                 <button
                   type="button"
                   onClick={() => set("benefits", [...(app.benefits || []), { title: "", description: "" }])}
-                  className="flex items-center gap-1.5 text-sm text-[#F97316] font-medium"
+                  className="flex items-center gap-1.5 text-sm text-[#FE4705] font-medium"
                 >
                   <Plus size={14} /> Add
                 </button>
@@ -363,13 +363,13 @@ export default function AppForm({ initial, isNew = false }: Props) {
                     value={b.title}
                     onChange={(e) => { const n = [...(app.benefits || [])]; n[i] = { ...n[i], title: e.target.value }; set("benefits", n); }}
                     placeholder="Benefit title"
-                    className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+                    className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                   />
                   <input
                     value={b.description}
                     onChange={(e) => { const n = [...(app.benefits || [])]; n[i] = { ...n[i], description: e.target.value }; set("benefits", n); }}
                     placeholder="Benefit description"
-                    className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+                    className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                   />
                 </div>
               ))}
@@ -383,7 +383,7 @@ export default function AppForm({ initial, isNew = false }: Props) {
                 <button
                   type="button"
                   onClick={() => set("faqs", [...(app.faqs || []), { question: "", answer: "" }])}
-                  className="flex items-center gap-1.5 text-sm text-[#F97316] font-medium"
+                  className="flex items-center gap-1.5 text-sm text-[#FE4705] font-medium"
                 >
                   <Plus size={14} /> Add FAQ
                 </button>
@@ -400,14 +400,14 @@ export default function AppForm({ initial, isNew = false }: Props) {
                     value={faq.question}
                     onChange={(e) => { const n = [...(app.faqs || [])]; n[i] = { ...n[i], question: e.target.value }; set("faqs", n); }}
                     placeholder="Question"
-                    className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+                    className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                   />
                   <textarea
                     value={faq.answer}
                     onChange={(e) => { const n = [...(app.faqs || [])]; n[i] = { ...n[i], answer: e.target.value }; set("faqs", n); }}
                     placeholder="Answer"
                     rows={2}
-                    className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316] resize-none"
+                    className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705] resize-none"
                   />
                 </div>
               ))}
@@ -426,7 +426,7 @@ export default function AppForm({ initial, isNew = false }: Props) {
                   <input
                     value={app.primaryCTA?.label || ""}
                     onChange={(e) => setNested("primaryCTA", "label", e.target.value)}
-                    className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+                    className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                     placeholder="e.g. Start Free Trial"
                   />
                 </div>
@@ -435,7 +435,7 @@ export default function AppForm({ initial, isNew = false }: Props) {
                   <input
                     value={app.primaryCTA?.href || ""}
                     onChange={(e) => setNested("primaryCTA", "href", e.target.value)}
-                    className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+                    className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                     placeholder="/book-demo"
                   />
                 </div>
@@ -450,7 +450,7 @@ export default function AppForm({ initial, isNew = false }: Props) {
                   <input
                     value={app.secondaryCTA?.label || ""}
                     onChange={(e) => setNested("secondaryCTA", "label", e.target.value)}
-                    className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+                    className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                     placeholder="e.g. Book a Demo"
                   />
                 </div>
@@ -459,7 +459,7 @@ export default function AppForm({ initial, isNew = false }: Props) {
                   <input
                     value={app.secondaryCTA?.href || ""}
                     onChange={(e) => setNested("secondaryCTA", "href", e.target.value)}
-                    className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+                    className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                     placeholder="/book-demo"
                   />
                 </div>
@@ -471,7 +471,7 @@ export default function AppForm({ initial, isNew = false }: Props) {
               <input
                 value={app.demoURL || ""}
                 onChange={(e) => set("demoURL", e.target.value)}
-                className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+                className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                 placeholder="https://demo.yourapp.com or /book-demo"
               />
             </div>
@@ -486,7 +486,7 @@ export default function AppForm({ initial, isNew = false }: Props) {
               <input
                 value={app.seo?.title || ""}
                 onChange={(e) => setNested("seo", "title", e.target.value)}
-                className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]"
+                className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                 placeholder="App Name — Tagline | Flacron Enterprises"
               />
             </div>
@@ -496,7 +496,7 @@ export default function AppForm({ initial, isNew = false }: Props) {
                 value={app.seo?.description || ""}
                 onChange={(e) => setNested("seo", "description", e.target.value)}
                 rows={3}
-                className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316] resize-none"
+                className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705] resize-none"
               />
             </div>
             <div>

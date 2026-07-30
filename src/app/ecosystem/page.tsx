@@ -35,7 +35,7 @@ export default async function EcosystemPage() {
             { value: "6+", label: "Industries" },
           ].map((s) => (
             <div key={s.label} className="rounded-2xl border border-slate-100 bg-slate-50 px-3 py-4 text-center">
-              <p className="text-2xl font-black text-[#F97316] sm:text-3xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>{s.value}</p>
+              <p className="text-2xl font-black text-[#FE4705] sm:text-3xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>{s.value}</p>
               <p className="mt-0.5 text-xs font-medium text-slate-500 sm:text-sm">{s.label}</p>
             </div>
           ))}
@@ -45,7 +45,7 @@ export default async function EcosystemPage() {
 
         {/* More coming */}
         <div className="mt-10 sm:mt-20 rounded-2xl bg-orange-50 border border-orange-100 p-6 sm:p-10 text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-[#F97316] mb-2">Growing Ecosystem</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-[#FE4705] mb-2">Growing Ecosystem</p>
           <h3 className="text-2xl font-black text-flacron-navy" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
             More solutions are on the way.
           </h3>
@@ -53,7 +53,7 @@ export default async function EcosystemPage() {
             We are continuously building and launching new AI-powered products. Want to be first to know?
           </p>
           <a href="/contact"
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#F97316] px-6 py-3 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors">
+            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#FE4705] px-6 py-3 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors">
             Stay in the Loop
           </a>
         </div>

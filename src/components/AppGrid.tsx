@@ -77,8 +77,8 @@ export default function AppGrid({ apps, mode = "full" }: AppGridProps) {
                   className={cn(
                     "shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors border whitespace-nowrap",
                     active
-                      ? "bg-[#F97316] text-white border-[#F97316]"
-                      : "bg-white text-slate-600 border-slate-200 hover:border-[#F97316] hover:text-[#F97316]"
+                      ? "bg-[#FE4705] text-white border-[#FE4705]"
+                      : "bg-white text-slate-600 border-slate-200 hover:border-[#FE4705] hover:text-[#FE4705]"
                   )}
                 >
                   {cat}
@@ -95,8 +95,8 @@ export default function AppGrid({ apps, mode = "full" }: AppGridProps) {
                   className={cn(
                     "shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors border whitespace-nowrap",
                     active
-                      ? "bg-[#F97316] text-white border-[#F97316]"
-                      : "bg-white text-slate-600 border-slate-200 hover:border-[#F97316] hover:text-[#F97316]"
+                      ? "bg-[#FE4705] text-white border-[#FE4705]"
+                      : "bg-white text-slate-600 border-slate-200 hover:border-[#FE4705] hover:text-[#FE4705]"
                   )}
                 >
                   {statusLabel[s]}
@@ -152,7 +152,7 @@ export default function AppGrid({ apps, mode = "full" }: AppGridProps) {
                 <div className="mt-3 pt-3 border-t border-slate-100 sm:mt-4 sm:pt-4">
                   <Link
                     href={`/apps/${app.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#F97316] hover:text-[#EA580C] transition-colors sm:text-sm"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#FE4705] hover:text-[#D83C04] transition-colors sm:text-sm"
                   >
                     Learn More <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                   </Link>
@@ -174,7 +174,7 @@ export default function AppGrid({ apps, mode = "full" }: AppGridProps) {
         <div className="mt-8 text-center">
           <button
             onClick={() => setShowAll(true)}
-            className="inline-flex items-center gap-2 rounded-xl border-2 border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 hover:border-[#F97316] hover:text-[#F97316] transition-colors"
+            className="inline-flex items-center gap-2 rounded-xl border-2 border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 hover:border-[#FE4705] hover:text-[#FE4705] transition-colors"
           >
             Show {hiddenCount} more {hiddenCount === 1 ? "app" : "apps"}
             <ChevronDown className="h-4 w-4" />

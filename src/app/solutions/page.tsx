@@ -106,7 +106,7 @@ export default async function SolutionsPage() {
                           </div>
                           <p className="text-xs text-slate-500 mt-0.5 line-clamp-1">{app.tagline}</p>
                         </div>
-                        <Link href={`/apps/${app.slug}`} className="shrink-0 text-[#F97316] hover:text-[#EA580C]">
+                        <Link href={`/apps/${app.slug}`} className="shrink-0 text-[#FE4705] hover:text-[#D83C04]">
                           <ArrowRight className="h-4 w-4" />
                         </Link>
                       </div>
@@ -121,11 +121,11 @@ export default async function SolutionsPage() {
         <div className="mt-12 sm:mt-16">
           <div className="relative overflow-hidden rounded-2xl bg-flacron-navy px-6 py-10 text-center sm:px-12 sm:py-14">
             {/* Background glow */}
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(249,115,22,0.15)_0%,transparent_70%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(254, 71, 5,0.15)_0%,transparent_70%)]" />
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_80%_80%,rgba(37,99,235,0.1)_0%,transparent_70%)]" />
 
             <div className="relative z-10">
-              <span className="inline-block rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[#F97316] mb-4">
+              <span className="inline-block rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[#FE4705] mb-4">
                 Custom Solutions
               </span>
               <h2 className="text-2xl font-black text-white sm:text-3xl lg:text-4xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
@@ -137,7 +137,7 @@ export default async function SolutionsPage() {
 
               <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
                 <Link href="/contact"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F97316] px-7 py-3.5 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors shadow-[0_4px_20px_rgba(249,115,22,0.3)] sm:w-auto">
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#FE4705] px-7 py-3.5 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors shadow-[0_4px_20px_rgba(254, 71, 5,0.3)] sm:w-auto">
                   Talk to Our Team <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link href="/book-demo"

@@ -36,7 +36,7 @@ export default function Breadcrumbs() {
     <nav aria-label="Breadcrumb" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-2">
       <ol className="flex flex-wrap items-center gap-1 text-xs text-slate-400">
         <li>
-          <Link href="/" className="flex items-center gap-1 hover:text-[#F97316] transition-colors">
+          <Link href="/" className="flex items-center gap-1 hover:text-[#FE4705] transition-colors">
             <Home className="h-3 w-3" />
             Home
           </Link>
@@ -47,7 +47,7 @@ export default function Breadcrumbs() {
             {i === crumbs.length - 1 ? (
               <span className="text-flacron-navy font-medium">{crumb.label}</span>
             ) : (
-              <Link href={crumb.href} className="hover:text-[#F97316] transition-colors">{crumb.label}</Link>
+              <Link href={crumb.href} className="hover:text-[#FE4705] transition-colors">{crumb.label}</Link>
             )}
           </li>
         ))}

@@ -33,7 +33,7 @@ export default function FaqAccordion({ items }: { items: Faq[] }) {
               <span className="text-sm font-bold text-flacron-navy sm:text-base">{item.q}</span>
               <Plus
                 className={cn(
-                  "h-5 w-5 shrink-0 text-[#F97316] transition-transform duration-200",
+                  "h-5 w-5 shrink-0 text-[#FE4705] transition-transform duration-200",
                   isOpen && "rotate-45"
                 )}
               />

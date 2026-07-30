@@ -2,8 +2,8 @@ const SITE_URL = "https://flacronenterprises.com";
 const LOGO_URL = `${SITE_URL}/logo.png`;
 
 const COLORS = {
-  navy: "#0f172a",
-  orange: "#F97316",
+  navy: "#00285C",
+  orange: "#FE4705",
   slate: "#475569",
   muted: "#94a3b8",
   border: "#e2e8f0",

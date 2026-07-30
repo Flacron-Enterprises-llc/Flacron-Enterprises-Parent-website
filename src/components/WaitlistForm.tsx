@@ -38,7 +38,7 @@ export default function WaitlistForm({ appName, appSlug }: WaitlistFormProps) {
     <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
       <div className="mb-6 flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-orange-50">
-          <Mail className="h-5 w-5 text-[#F97316]" />
+          <Mail className="h-5 w-5 text-[#FE4705]" />
         </div>
         <div>
           <p className="text-sm text-slate-500">Get early access</p>
@@ -75,7 +75,7 @@ export default function WaitlistForm({ appName, appSlug }: WaitlistFormProps) {
                 disabled={state === "loading"}
                 className={cn(
                   "w-full rounded-xl border px-4 py-3 text-sm text-flacron-navy placeholder:text-slate-400",
-                  "focus:outline-none focus:ring-2 focus:ring-[#F97316]/30 focus:border-[#F97316]",
+                  "focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]",
                   "transition-colors bg-white",
                   validationError ? "border-red-400" : "border-slate-200"
                 )}
@@ -85,7 +85,7 @@ export default function WaitlistForm({ appName, appSlug }: WaitlistFormProps) {
             <button
               type="submit"
               disabled={state === "loading"}
-              className="shrink-0 rounded-xl bg-[#F97316] px-6 py-3 text-sm font-semibold text-white hover:bg-[#EA580C] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              className="shrink-0 rounded-xl bg-[#FE4705] px-6 py-3 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {state === "loading" ? (
                 <span className="flex items-center gap-2">

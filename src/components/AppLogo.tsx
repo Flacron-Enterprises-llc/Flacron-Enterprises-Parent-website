@@ -4,11 +4,11 @@ interface AppLogoProps {
 }
 
 const gradients: Array<[string, string]> = [
-  ["#F97316", "#EA580C"],
-  ["#FB923C", "#F97316"],
-  ["#F97316", "#FBBF24"],
-  ["#EA580C", "#DC2626"],
-  ["#F97316", "#C2410C"],
+  ["#FE4705", "#D83C04"],
+  ["#FB923C", "#FE4705"],
+  ["#FE4705", "#FBBF24"],
+  ["#D83C04", "#DC2626"],
+  ["#FE4705", "#C2410C"],
   ["#FFFFFF", "#94A3B8"],
 ];
 

@@ -101,6 +101,10 @@ export default function CustomerLoginPage() {
           or{" "}
           <Link href="/custom-order" className="font-semibold text-[#FE4705] hover:underline">Custom Order</Link>.
         </p>
+        <p className="mt-3 text-center text-xs text-slate-400">
+          Looking for API Engine?{" "}
+          <Link href="/ai-engine/login" className="font-semibold text-[#FE4705] hover:underline">Sign in with your API key</Link>
+        </p>
       </form>
     </AuthSplitLayout>
   );

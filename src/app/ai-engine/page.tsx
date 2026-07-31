@@ -86,7 +86,7 @@ export default function AIEnginePage() {
 
           <p className="mt-5 text-xs text-slate-400 sm:text-sm">
             Already have API access?{" "}
-            <Link href="/dashboard/login" className="font-semibold text-[#FE4705] hover:underline">Sign in to your dashboard</Link>
+            <Link href="/ai-engine/login" className="font-semibold text-[#FE4705] hover:underline">Sign in with your API key</Link>
           </p>
 
           {/* Pillar stats */}

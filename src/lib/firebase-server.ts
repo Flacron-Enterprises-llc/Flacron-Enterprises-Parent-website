@@ -17,6 +17,10 @@ function getApp(): App {
     throw new Error("Firebase Admin credentials missing. Set FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY in .env.local");
   }
 
+  if (process.env.FIREBASE_KEY_DEBUG === "1") {
+    console.log("FIREBASE_KEY_DEBUG length=", privateKey.length, "preview=", JSON.stringify(privateKey.slice(0, 40)), "tail=", JSON.stringify(privateKey.slice(-40)));
+  }
+
   app = initializeApp({ credential: cert({ projectId, clientEmail, privateKey }) });
   return app;
 }

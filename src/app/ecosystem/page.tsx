@@ -3,7 +3,7 @@ import { getApps } from "@/lib/apps-data";
 import AppGrid from "@/components/AppGrid";
 import SectionHeader from "@/components/SectionHeader";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Ecosystem — Flacron Enterprises",

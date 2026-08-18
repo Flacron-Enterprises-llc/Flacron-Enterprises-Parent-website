@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getApps } from "@/lib/apps-data";
 import BookDemoForm from "./BookDemoForm";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Book a Demo — Flacron Enterprises",

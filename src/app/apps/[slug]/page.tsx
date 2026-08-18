@@ -5,7 +5,7 @@ import { CheckCircle, ArrowRight, ChevronDown } from "lucide-react";
 import { getApps, getAppBySlug, getAllSlugs } from "@/lib/apps-data";
 import { generateAppMetadata } from "@/lib/seo";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 import AppLogo from "@/components/AppLogo";
 import StatusBadge from "@/components/StatusBadge";
 import GlassCard from "@/components/GlassCard";

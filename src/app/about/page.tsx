@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 import { getApps } from "@/lib/apps-data";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "About — Flacron Enterprises",

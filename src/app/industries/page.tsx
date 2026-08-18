@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Building2, Shield, Briefcase, Lock, Trophy, Leaf } from "lucide-react";
 import { getApps } from "@/lib/apps-data";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 import SectionHeader from "@/components/SectionHeader";
 import AppLogo from "@/components/AppLogo";
 import StatusBadge from "@/components/StatusBadge";

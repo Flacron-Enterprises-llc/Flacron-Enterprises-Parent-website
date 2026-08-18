@@ -14,7 +14,7 @@ import TrackedLink from "@/components/TrackedLink";
 import PartnerBadges from "@/components/PartnerBadges";
 import CountUp from "@/components/CountUp";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 const industries = [
   { name: "Construction",   icon: Building2, desc: "AI estimation, project tracking, and compliance." },

@@ -27,7 +27,15 @@ function getApp(): App {
     throw new Error("Firebase Admin credentials missing. Set FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY (or FIREBASE_PRIVATE_KEY_B64) in .env.local");
   }
 
-  app = initializeApp({ credential: cert({ projectId, clientEmail, privateKey }) });
+  try {
+    app = initializeApp({ credential: cert({ projectId, clientEmail, privateKey }) });
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    const b64raw = process.env.FIREBASE_PRIVATE_KEY_B64 || "";
+    throw new Error(
+      `FKDEBUG b64rawlen=${b64raw.length} b64head=${JSON.stringify(b64raw.slice(0, 30))} decodedlen=${privateKey.length} head=${JSON.stringify(privateKey.slice(0, 40))} tail=${JSON.stringify(privateKey.slice(-40))} orig=${msg}`
+    );
+  }
   return app;
 }
 

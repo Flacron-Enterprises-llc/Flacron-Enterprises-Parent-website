@@ -53,14 +53,6 @@ const footerLinks = {
     { label: "Contact", href: "/contact" },
     { label: "Book a Demo", href: "/book-demo" },
   ],
-  Products: [
-    { label: "FlacronBuild", href: "/apps/flacronbuild" },
-    { label: "FlacronConnect AI", href: "/apps/flacronconnect-ai" },
-    { label: "RapidClaimPro", href: "/apps/rapidclaimpro" },
-    { label: "FlacronSport", href: "/apps/flacronsport" },
-    { label: "Tchitaka Growth", href: "/apps/beingtchitaka" },
-    { label: "FlacronSecure AI", href: "/apps/flacronsecure-ai" },
-  ],
   Explore: [
     { label: "Ecosystem", href: "/ecosystem" },
     { label: "Solutions", href: "/solutions" },
@@ -80,6 +72,12 @@ export const dynamic = "force-dynamic";
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const apps = await getApps();
+  const footerColumns = {
+    Company: footerLinks.Company,
+    Products: apps.map((a) => ({ label: a.name, href: `/apps/${a.slug}` })),
+    Explore: footerLinks.Explore,
+    Legal: footerLinks.Legal,
+  };
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} h-full`}>
       <head>
@@ -150,7 +148,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
                   {/* Links */}
                   <div className="flex-1 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
-                    {Object.entries(footerLinks).map(([group, links]) => (
+                    {Object.entries(footerColumns).map(([group, links]) => (
                       <div key={group}>
                         <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-400">{group}</p>
                         <ul className="space-y-2.5">

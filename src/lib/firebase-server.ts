@@ -17,13 +17,13 @@ function getApp(): App {
     throw new Error("Firebase Admin credentials missing. Set FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY in .env.local");
   }
 
-  console.log("FKDEBUG_ALWAYS len=", privateKey.length, "head=", JSON.stringify(privateKey.slice(0, 50)), "tail=", JSON.stringify(privateKey.slice(-50)));
-
   try {
     app = initializeApp({ credential: cert({ projectId, clientEmail, privateKey }) });
   } catch (e) {
-    console.log("FKDEBUG_CERT_FAIL", e instanceof Error ? e.message : String(e));
-    throw e;
+    const msg = e instanceof Error ? e.message : String(e);
+    throw new Error(
+      `FKDEBUG len=${privateKey.length} head=${JSON.stringify(privateKey.slice(0, 50))} tail=${JSON.stringify(privateKey.slice(-50))} orig=${msg}`
+    );
   }
   return app;
 }

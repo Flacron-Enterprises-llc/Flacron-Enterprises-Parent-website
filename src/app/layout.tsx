@@ -15,6 +15,8 @@ import StickyDemoCTA from "@/components/StickyDemoCTA";
 import LiveChatWidget from "@/components/LiveChatWidget";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import SocialLinks from "@/components/SocialLinks";
+import OrganizationSchema from "@/components/OrganizationSchema";
+import { SITE_URL, SITE_NAME, OG_IMAGE } from "@/lib/site";
 import "./globals.css";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
@@ -31,17 +33,40 @@ export const metadata: Metadata = {
     "Flacron Enterprises builds AI-powered apps that transform business across construction, insurance, sales, cybersecurity, sports, and personal growth.",
   keywords: ["AI", "technology", "construction", "insurance", "cybersecurity", "SaaS", "Flacron"],
   authors: [{ name: "Flacron Enterprises" }],
-  metadataBase: new URL("https://flacron.com"),
+  metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
-    siteName: "Flacron Enterprises",
+    siteName: SITE_NAME,
     title: "Flacron Enterprises — AI Apps for a Smarter World",
     description: "Flacron Enterprises builds AI-powered apps that transform business across construction, insurance, sales, cybersecurity, sports, and personal growth.",
+    url: SITE_URL,
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Flacron Enterprises — AI Apps for a Smarter World",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Flacron Enterprises — AI Apps for a Smarter World",
     description: "AI-powered apps that transform business across construction, insurance, sales, cybersecurity, sports, and personal growth.",
+    images: [OG_IMAGE],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   manifest: "/manifest.json",
 };
@@ -90,6 +115,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         </Script>
       </head>
       <body className="min-h-full flex flex-col bg-white text-flacron-navy antialiased">
+        <OrganizationSchema />
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-5VNG2BZ9"

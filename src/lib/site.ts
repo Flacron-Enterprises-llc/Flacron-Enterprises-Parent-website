@@ -1,4 +1,4 @@
-const DEFAULT_SITE_URL = "https://flacronenterprises.com";
+const DEFAULT_SITE_URL = "https://www.flacronenterprises.com";
 
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
 

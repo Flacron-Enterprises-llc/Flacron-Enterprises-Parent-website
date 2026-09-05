@@ -12,6 +12,7 @@ import GlassCard from "@/components/GlassCard";
 export const metadata: Metadata = {
   title: "Solutions — Flacron Enterprises",
   description: "Explore Flacron Enterprises solutions by business need. Find the right AI-powered tool for your challenge.",
+  alternates: { canonical: "/solutions" },
 };
 
 const solutionCategories = [

@@ -7,6 +7,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Book a Demo — Flacron Enterprises",
   description: "Book a personalised demo with the Flacron Enterprises team. See any of our AI-powered products in action, tailored to your use case.",
+  alternates: { canonical: "/book-demo" },
 };
 
 export default async function BookDemoPage() {

@@ -9,6 +9,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "About — Flacron Enterprises",
   description: "Learn about Flacron Enterprises — our mission, vision, and the team building the next generation of AI-powered business solutions.",
+  alternates: { canonical: "/about" },
 };
 
 const values = [

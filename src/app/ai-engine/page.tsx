@@ -8,6 +8,7 @@ import WaveDivider from "@/components/WaveDivider";
 export const metadata: Metadata = {
   title: "Flacron AI Engine — The Intelligence Behind Every Product",
   description: "Discover the proprietary AI engine powering the entire Flacron Enterprises ecosystem. Built for accuracy, speed, and industry-specific reasoning.",
+  alternates: { canonical: "/ai-engine" },
 };
 
 const capabilities = [

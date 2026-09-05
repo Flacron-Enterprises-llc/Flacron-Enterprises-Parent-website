@@ -5,6 +5,7 @@ import { cookiesPolicy } from "@/lib/legal/cookies";
 export const metadata: Metadata = {
   title: "Cookies Policy — Flacron Enterprises",
   description: "How Flacron Enterprises uses cookies and similar tracking technologies across our websites, applications, and platforms.",
+  alternates: { canonical: "/cookies" },
 };
 
 export default function CookiesPage() {

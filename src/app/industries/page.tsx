@@ -11,6 +11,7 @@ import StatusBadge from "@/components/StatusBadge";
 export const metadata: Metadata = {
   title: "Industries — Flacron Enterprises",
   description: "Flacron Enterprises builds AI solutions for construction, insurance, cybersecurity, sports, business, and personal development.",
+  alternates: { canonical: "/industries" },
 };
 
 const industries = [

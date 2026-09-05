@@ -8,6 +8,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Ecosystem — Flacron Enterprises",
   description: "Explore the full Flacron Enterprises ecosystem of AI-powered products. Filter by industry, category, and status.",
+  alternates: { canonical: "/ecosystem" },
 };
 
 export default async function EcosystemPage() {

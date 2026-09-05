@@ -6,6 +6,7 @@ import SectionHeader from "@/components/SectionHeader";
 export const metadata: Metadata = {
   title: "Partners — Flacron Enterprises",
   description: "Flacron Enterprises partners with Microsoft and IBM to deliver enterprise-grade AI solutions backed by world-class technology.",
+  alternates: { canonical: "/partners" },
 };
 
 const partners = [

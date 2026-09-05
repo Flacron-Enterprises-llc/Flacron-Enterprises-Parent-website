@@ -39,7 +39,6 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: "Flacron Enterprises — AI Apps for a Smarter World",
     description: "Flacron Enterprises builds AI-powered apps that transform business across construction, insurance, sales, cybersecurity, sports, and personal growth.",
-    url: SITE_URL,
     images: [
       {
         url: OG_IMAGE,

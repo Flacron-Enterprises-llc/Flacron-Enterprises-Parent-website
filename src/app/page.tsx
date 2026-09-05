@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle, Search, Rocket, BarChart3, Star, Quote, Building2, Shield, Briefcase, Lock, Trophy, Leaf, Sparkles, MessageSquareText, CalendarCheck } from "lucide-react";
 import { getApps } from "@/lib/apps-data";
+import { SITE_NAME, OG_IMAGE } from "@/lib/site";
 import HeroSection from "@/components/HeroSection";
 import SectionHeader from "@/components/SectionHeader";
 import GlassCard from "@/components/GlassCard";
@@ -20,6 +21,21 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   alternates: {
     canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    title: "Flacron Enterprises — AI Apps for a Smarter World",
+    description: "Flacron Enterprises builds AI-powered apps that transform business across construction, insurance, sales, cybersecurity, sports, and personal growth.",
+    url: "/",
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Flacron Enterprises — AI Apps for a Smarter World",
+      },
+    ],
   },
 };
 

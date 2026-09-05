@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle, Search, Rocket, BarChart3, Star, Quote, Building2, Shield, Briefcase, Lock, Trophy, Leaf, Sparkles, MessageSquareText, CalendarCheck } from "lucide-react";
 import { getApps } from "@/lib/apps-data";
@@ -15,6 +16,12 @@ import PartnerBadges from "@/components/PartnerBadges";
 import CountUp from "@/components/CountUp";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 const industries = [
   { name: "Construction",   icon: Building2, desc: "AI estimation, project tracking, and compliance." },

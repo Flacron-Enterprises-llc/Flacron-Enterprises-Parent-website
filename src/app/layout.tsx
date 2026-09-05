@@ -34,9 +34,6 @@ export const metadata: Metadata = {
   keywords: ["AI", "technology", "construction", "insurance", "cybersecurity", "SaaS", "Flacron"],
   authors: [{ name: "Flacron Enterprises" }],
   metadataBase: new URL(SITE_URL),
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,

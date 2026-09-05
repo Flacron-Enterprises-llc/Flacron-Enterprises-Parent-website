@@ -7,11 +7,18 @@ export const dynamic = "force-dynamic";
 import SectionHeader from "@/components/SectionHeader";
 import AppLogo from "@/components/AppLogo";
 import StatusBadge from "@/components/StatusBadge";
+import { SITE_NAME, OG_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Industries — Flacron Enterprises",
   description: "Flacron Enterprises builds AI solutions for construction, insurance, cybersecurity, sports, business, and personal development.",
   alternates: { canonical: "/industries" },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    url: "/industries",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Industries — Flacron Enterprises" }],
+  },
 };
 
 const industries = [

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getApps } from "@/lib/apps-data";
 import AppGrid from "@/components/AppGrid";
 import SectionHeader from "@/components/SectionHeader";
+import { SITE_NAME, OG_IMAGE } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 
@@ -9,6 +10,12 @@ export const metadata: Metadata = {
   title: "Ecosystem — Flacron Enterprises",
   description: "Explore the full Flacron Enterprises ecosystem of AI-powered products. Filter by industry, category, and status.",
   alternates: { canonical: "/ecosystem" },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    url: "/ecosystem",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Ecosystem — Flacron Enterprises" }],
+  },
 };
 
 export default async function EcosystemPage() {

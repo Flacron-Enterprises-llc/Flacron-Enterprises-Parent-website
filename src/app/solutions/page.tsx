@@ -8,11 +8,18 @@ import SectionHeader from "@/components/SectionHeader";
 import AppLogo from "@/components/AppLogo";
 import StatusBadge from "@/components/StatusBadge";
 import GlassCard from "@/components/GlassCard";
+import { SITE_NAME, OG_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Solutions — Flacron Enterprises",
   description: "Explore Flacron Enterprises solutions by business need. Find the right AI-powered tool for your challenge.",
   alternates: { canonical: "/solutions" },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    url: "/solutions",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Solutions — Flacron Enterprises" }],
+  },
 };
 
 const solutionCategories = [

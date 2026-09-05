@@ -4,11 +4,18 @@ import { ArrowRight, Brain, Zap, Shield, BarChart3, Network, Cpu, Eye, MessageSq
 import SectionHeader from "@/components/SectionHeader";
 import GlassCard from "@/components/GlassCard";
 import WaveDivider from "@/components/WaveDivider";
+import { SITE_NAME, OG_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Flacron AI Engine — The Intelligence Behind Every Product",
   description: "Discover the proprietary AI engine powering the entire Flacron Enterprises ecosystem. Built for accuracy, speed, and industry-specific reasoning.",
   alternates: { canonical: "/ai-engine" },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    url: "/ai-engine",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Flacron AI Engine — The Intelligence Behind Every Product" }],
+  },
 };
 
 const capabilities = [

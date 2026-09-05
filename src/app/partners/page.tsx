@@ -2,11 +2,18 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
+import { SITE_NAME, OG_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Partners — Flacron Enterprises",
   description: "Flacron Enterprises partners with Microsoft and IBM to deliver enterprise-grade AI solutions backed by world-class technology.",
   alternates: { canonical: "/partners" },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    url: "/partners",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Partners — Flacron Enterprises" }],
+  },
 };
 
 const partners = [

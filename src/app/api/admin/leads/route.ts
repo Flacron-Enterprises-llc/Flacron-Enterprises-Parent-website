@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDb, isFirebaseConfigured } from "@/lib/firebase-server";
 import { FieldValue } from "firebase-admin/firestore";
+import { isCentralConfigured, submitToCentral, type CentralFormType } from "@/lib/central";
+
+const CENTRAL_FORM_TYPES: CentralFormType[] = ["contact", "book-demo", "api-access", "white-label", "custom-order"];
 
 export async function GET() {
   if (!isFirebaseConfigured()) {
@@ -25,6 +28,15 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Name and email are required" }, { status: 400 });
     }
 
+    // Flacron Central (the CRM) is now the one place leads land — every submission becomes a Contact + Lead
+    // there automatically. Firebase is only a safety net for when Central can't be reached, and for leads from
+    // before this was connected.
+    const formType = CENTRAL_FORM_TYPES.includes(source) ? (source as CentralFormType) : "contact";
+    const central = isCentralConfigured()
+      ? await submitToCentral(formType, { name, email, company, subject, message, phone, product, team_size: teamSize, page: req.headers.get("referer") ?? undefined })
+      : false;
+    if (central) return NextResponse.json({ ok: true, central: true }, { status: 201 });
+
     const lead = {
       name,
       email,
@@ -43,6 +55,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ id: "demo-" + Date.now(), ...lead }, { status: 201 });
     }
 
+    // Central didn't take it (not configured, or briefly unreachable) — keep it here rather than lose it.
     const db = getDb();
     const ref = await db.collection("leads").add(lead);
     return NextResponse.json({ id: ref.id, ...lead }, { status: 201 });

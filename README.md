@@ -1,6 +1,6 @@
 # Flacron Enterprises — Parent Website
 
-The official marketing and ecosystem hub for [Flacron Enterprises](https://flacron.com). Built with **Next.js 16**, **React 19**, **Tailwind CSS v4**, and **Framer Motion** — featuring a Firebase-backed CMS, a protected admin dashboard, and a full PWA manifest.
+The official marketing and ecosystem hub for [Flacron Enterprises](https://www.flacronenterprises.com). Built with **Next.js 16**, **React 19**, **Tailwind CSS v4**, and **Framer Motion** — featuring a Firebase-backed CMS, a protected admin dashboard, and a full PWA manifest.
 
 ---
 

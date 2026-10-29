@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
-// Old WordPress-style URLs that Search Console reports as 404. "{/}?" matches the path with or without a
-// trailing slash in one rule, so there is no slash-strip hop before the redirect.
+// Old WordPress-style URLs that Search Console reports as 404. Next strips trailing slashes before custom
+// redirects run, so "/about-us/" reaches the destination via "/about-us" (two 308s).
 const legacyRedirects: Array<[string, string]> = [
   ["/home", "/"],
   ["/about-us", "/about"],
@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   async redirects() {
     return legacyRedirects.map(([from, to]) => ({
-      source: `${from}{/}?`,
+      source: from,
       destination: to,
       permanent: true,
     }));

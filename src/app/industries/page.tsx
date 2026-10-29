@@ -10,15 +10,17 @@ import StatusBadge from "@/components/StatusBadge";
 import { SITE_NAME, OG_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Industries — Flacron Enterprises",
+  title: "Industries",
   description: "Flacron Enterprises builds AI solutions for construction, insurance, cybersecurity, sports, business, and personal development.",
   alternates: { canonical: "/industries" },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
+    title: "Industries | Flacron Enterprises",
     url: "/industries",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Industries — Flacron Enterprises" }],
   },
+  twitter: { card: "summary_large_image", title: "Industries | Flacron Enterprises", images: [OG_IMAGE] },
 };
 
 const industries = [

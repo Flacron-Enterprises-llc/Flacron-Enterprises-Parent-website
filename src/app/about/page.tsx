@@ -8,15 +8,17 @@ import { SITE_NAME, OG_IMAGE } from "@/lib/site";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "About — Flacron Enterprises",
+  title: "About",
   description: "Learn about Flacron Enterprises — our mission, vision, and the team building the next generation of AI-powered business solutions.",
   alternates: { canonical: "/about" },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
+    title: "About | Flacron Enterprises",
     url: "/about",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "About — Flacron Enterprises" }],
   },
+  twitter: { card: "summary_large_image", title: "About | Flacron Enterprises", images: [OG_IMAGE] },
 };
 
 const values = [

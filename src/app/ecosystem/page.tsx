@@ -7,15 +7,17 @@ import { SITE_NAME, OG_IMAGE } from "@/lib/site";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Ecosystem — Flacron Enterprises",
+  title: "Ecosystem",
   description: "Explore the full Flacron Enterprises ecosystem of AI-powered products. Filter by industry, category, and status.",
   alternates: { canonical: "/ecosystem" },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
+    title: "Ecosystem | Flacron Enterprises",
     url: "/ecosystem",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Ecosystem — Flacron Enterprises" }],
   },
+  twitter: { card: "summary_large_image", title: "Ecosystem | Flacron Enterprises", images: [OG_IMAGE] },
 };
 
 export default async function EcosystemPage() {

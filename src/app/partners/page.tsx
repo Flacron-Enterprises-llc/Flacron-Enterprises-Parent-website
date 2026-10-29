@@ -5,15 +5,17 @@ import SectionHeader from "@/components/SectionHeader";
 import { SITE_NAME, OG_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Partners — Flacron Enterprises",
+  title: "Partners",
   description: "Flacron Enterprises partners with Microsoft and IBM to deliver enterprise-grade AI solutions backed by world-class technology.",
   alternates: { canonical: "/partners" },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
+    title: "Partners | Flacron Enterprises",
     url: "/partners",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Partners — Flacron Enterprises" }],
   },
+  twitter: { card: "summary_large_image", title: "Partners | Flacron Enterprises", images: [OG_IMAGE] },
 };
 
 const partners = [

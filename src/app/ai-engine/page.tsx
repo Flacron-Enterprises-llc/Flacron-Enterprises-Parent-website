@@ -13,9 +13,11 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
+    title: "Flacron AI Engine — The Intelligence Behind Every Product | Flacron Enterprises",
     url: "/ai-engine",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Flacron AI Engine — The Intelligence Behind Every Product" }],
   },
+  twitter: { card: "summary_large_image", title: "Flacron AI Engine — The Intelligence Behind Every Product | Flacron Enterprises", images: [OG_IMAGE] },
 };
 
 const capabilities = [

@@ -11,15 +11,17 @@ import GlassCard from "@/components/GlassCard";
 import { SITE_NAME, OG_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Solutions — Flacron Enterprises",
+  title: "Solutions",
   description: "Explore Flacron Enterprises solutions by business need. Find the right AI-powered tool for your challenge.",
   alternates: { canonical: "/solutions" },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
+    title: "Solutions | Flacron Enterprises",
     url: "/solutions",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Solutions — Flacron Enterprises" }],
   },
+  twitter: { card: "summary_large_image", title: "Solutions | Flacron Enterprises", images: [OG_IMAGE] },
 };
 
 const solutionCategories = [

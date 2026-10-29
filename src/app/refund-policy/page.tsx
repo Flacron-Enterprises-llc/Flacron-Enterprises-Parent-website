@@ -4,15 +4,17 @@ import { refundPolicy } from "@/lib/legal/refund";
 import { SITE_NAME, OG_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Cancellation and Refund Policy — Flacron Enterprises",
+  title: "Cancellation and Refund Policy",
   description: "How cancellations, refunds, subscription changes, and billing adjustments are handled across Flacron Enterprises products and services.",
   alternates: { canonical: "/refund-policy" },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
+    title: "Cancellation and Refund Policy | Flacron Enterprises",
     url: "/refund-policy",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Cancellation and Refund Policy — Flacron Enterprises" }],
   },
+  twitter: { card: "summary_large_image", title: "Cancellation and Refund Policy | Flacron Enterprises", images: [OG_IMAGE] },
 };
 
 export default function RefundPolicyPage() {

@@ -1,7 +1,32 @@
 import type { NextConfig } from "next";
 
+// Old WordPress-style URLs that Search Console reports as 404. Next strips trailing slashes before custom
+// redirects run, so "/about-us/" reaches the destination via "/about-us" (two 308s).
+const legacyRedirects: Array<[string, string]> = [
+  ["/home", "/"],
+  ["/about-us", "/about"],
+  ["/contact-us", "/contact"],
+  ["/terms-conditions", "/terms"],
+  ["/privacy-policy-2", "/privacy"],
+  ["/flacronbuild", "/apps/flacronbuild"],
+  ["/flacronconnect-ai", "/apps/flacronconnect-ai"],
+  ["/rapidclaimpro", "/apps/rapidclaimpro"],
+  ["/flacronsport", "/apps/flacronsport"],
+  ["/flacronsport-daily", "/apps/flacronsport"],
+  ["/tchitaka-growth", "/apps/beingtchitaka"],
+  ["/cryptopilot-ai", "/apps/cryptopilotai"],
+  ["/flacroncv", "/apps/flacroncv"],
+];
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  async redirects() {
+    return legacyRedirects.map(([from, to]) => ({
+      source: from,
+      destination: to,
+      permanent: true,
+    }));
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     unoptimized: false,

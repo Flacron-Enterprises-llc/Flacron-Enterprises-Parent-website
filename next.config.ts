@@ -21,11 +21,15 @@ const legacyRedirects: Array<[string, string]> = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   async redirects() {
-    return legacyRedirects.map(([from, to]) => ({
-      source: from,
-      destination: to,
-      permanent: true,
-    }));
+    return [
+      ...legacyRedirects.map(([from, to]) => ({
+        source: from,
+        destination: to,
+        permanent: true,
+      })),
+      // Document verification links in the "/verify/CODE" form land on the verify page with the code filled in.
+      { source: "/verify/:code([A-Za-z0-9]{6,32})", destination: "/verify?code=:code", permanent: false },
+    ];
   },
   images: {
     formats: ["image/avif", "image/webp"],

@@ -30,7 +30,7 @@ export default function Breadcrumbs() {
   const crumbs = segments.map((seg, i) => ({
     label: labels[seg] ?? seg.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
     href: "/" + segments.slice(0, i + 1).join("/"),
-  }));
+  })).map((crumb) => (crumb.href === "/apps" ? { ...crumb, href: "/ecosystem" } : crumb));
 
   return (
     <nav aria-label="Breadcrumb" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-2">

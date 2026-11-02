@@ -16,6 +16,7 @@ const legacyRedirects: Array<[string, string]> = [
   ["/tchitaka-growth", "/apps/beingtchitaka"],
   ["/cryptopilot-ai", "/apps/cryptopilotai"],
   ["/flacroncv", "/apps/flacroncv"],
+  ["/apps", "/ecosystem"],
 ];
 
 const nextConfig: NextConfig = {

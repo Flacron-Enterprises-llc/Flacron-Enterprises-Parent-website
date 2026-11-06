@@ -1,4 +1,4 @@
-import { SITE_URL, SITE_NAME, LEGAL_NAME, SITE_DESCRIPTION, SOCIAL_PROFILES, LOGO_PATH, absoluteUrl } from "@/lib/site";
+import { SITE_URL, SITE_NAME, LEGAL_NAME, ALTERNATE_NAME, CONTACT_EMAIL, ORG_DESCRIPTION, SOCIAL_PROFILES, LOGO_PATH, absoluteUrl } from "@/lib/site";
 
 export default function OrganizationSchema() {
   const organization = {
@@ -6,13 +6,15 @@ export default function OrganizationSchema() {
     "@type": "Organization",
     "@id": `${SITE_URL}/#organization`,
     name: SITE_NAME,
+    alternateName: ALTERNATE_NAME,
     legalName: LEGAL_NAME,
     url: SITE_URL,
     logo: {
       "@type": "ImageObject",
       url: absoluteUrl(LOGO_PATH),
     },
-    description: SITE_DESCRIPTION,
+    email: CONTACT_EMAIL,
+    description: ORG_DESCRIPTION,
     sameAs: SOCIAL_PROFILES,
     address: {
       "@type": "PostalAddress",

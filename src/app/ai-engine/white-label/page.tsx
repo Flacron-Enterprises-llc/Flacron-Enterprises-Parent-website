@@ -203,7 +203,7 @@ export default function WhiteLabelPage() {
                   <option>RapidClaimPro (Insurance)</option>
                   <option>FlacronSecure AI (Cybersecurity)</option>
                   <option>FlacronSport (Sports & Media)</option>
-                  <option>Tchitaka Growth (Personal Dev)</option>
+                  <option>Being Tchitaka OS (Personal Dev)</option>
                   <option>Multiple products</option>
                   <option>Custom build (new product)</option>
                 </select>

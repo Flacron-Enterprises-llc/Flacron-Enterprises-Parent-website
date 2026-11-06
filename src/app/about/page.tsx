@@ -3,13 +3,14 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 import { getApps } from "@/lib/apps-data";
-import { SITE_NAME, OG_IMAGE } from "@/lib/site";
+import { SITE_NAME, SITE_URL, OG_IMAGE, absoluteUrl } from "@/lib/site";
+import { productWebsites } from "@/data/product-websites";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Learn about Flacron Enterprises — our mission, vision, and the team building the next generation of AI-powered business solutions.",
+  description: "Flacron Enterprises LLC is a Brooklyn, New York software company that builds AI-powered apps, including FlacronAI, FlacronCV, Flacron Game Zone, Being Tchitaka OS and Flacron API Engine.",
   alternates: { canonical: "/about" },
   openGraph: {
     type: "website",
@@ -21,17 +22,38 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: "About | Flacron Enterprises", images: [OG_IMAGE] },
 };
 
+const STATUS_LABELS: Record<string, string> = { live: "Live", beta: "Beta", "coming-soon": "Coming Soon", internal: "Internal" };
+
 const values = [
   { title: "Industry First", desc: "We build products that solve real, specific industry problems — not generic tools dressed up as AI." },
   { title: "Ecosystem Thinking", desc: "Our products are designed to work together. Each new solution strengthens the whole platform." },
   { title: "Accessible AI", desc: "Enterprise-grade AI shouldn't require a huge team to use. We make powerful technology usable." },
-  { title: "Long-Term Partnership", desc: "We build for the long run. Our clients grow their businesses with us, not just our software." },
+  { title: "Long-Term Partnership", desc: "We build for the long run. We keep improving every product after launch." },
 ];
 
 export default async function AboutPage() {
-  const apps = await getApps();
+  const apps = [...(await getApps())].sort((a, b) => a.name.localeCompare(b.name));
+  const aboutSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": `${SITE_URL}/about#webpage`,
+    url: absoluteUrl("/about"),
+    name: "About Flacron Enterprises",
+    about: { "@id": `${SITE_URL}/#organization` },
+    mainEntity: {
+      "@type": "ItemList",
+      name: "Products by Flacron Enterprises LLC",
+      itemListElement: apps.map((a, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: a.name,
+        url: absoluteUrl(`/apps/${a.slug}`),
+      })),
+    },
+  };
   return (
     <div className="min-h-screen">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }} />
       {/* Hero */}
       <section className="pt-8 pb-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="mx-auto max-w-4xl text-center">
@@ -41,8 +63,35 @@ export default async function AboutPage() {
             <span className="text-[#FE4705]">Many solutions.</span>
           </h1>
           <p className="mt-4 text-base text-slate-500 leading-relaxed max-w-2xl mx-auto sm:mt-6 sm:text-xl">
-            Flacron Enterprises is an AI-powered technology company building intelligent solutions for business growth, automation, industry operations, and digital transformation.
+            Flacron Enterprises LLC is a software company based in Brooklyn, New York. We build and run a family of AI-powered apps for construction, insurance, business, finance, security, sports and personal growth. Every product listed below is made by Flacron Enterprises LLC. Our official website is flacronenterprises.com.
           </p>
+        </div>
+      </section>
+
+      {/* Products */}
+      <section className="py-14 px-4 sm:px-6 lg:px-8 sm:py-20 bg-white">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeader eyebrow="What We Build" title="Our products" centered />
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {apps.map((a) => {
+              const website = productWebsites[a.slug];
+              return (
+                <div key={a.slug} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                  <h3 className="text-lg font-bold text-flacron-navy">{a.name}</h3>
+                  <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                    {a.category} · {STATUS_LABELS[a.status] ?? a.status}
+                  </p>
+                  <p className="mt-3 text-sm text-slate-500 leading-relaxed">{a.shortDescription}</p>
+                  <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
+                    <Link href={`/apps/${a.slug}`} className="text-[#FE4705] hover:text-[#D83C04] transition-colors">Product page</Link>
+                    {website && (
+                      <a href={website} target="_blank" rel="noopener" className="text-[#FE4705] hover:text-[#D83C04] transition-colors">Official website</a>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -61,10 +110,9 @@ export default async function AboutPage() {
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               {[
-                { value: `${apps.length}`, label: "AI Products" },
-                { value: "6+", label: "Industries Served" },
-                { value: "2", label: "Global Technology Partners" },
-                { value: "24/7", label: "Support" },
+                { value: `${apps.length}`, label: "Products" },
+                { value: `${apps.filter((a) => a.status === "live").length}`, label: "Live" },
+                { value: `${new Set(apps.map((a) => a.category)).size}`, label: "Industries" },
               ].map((s) => (
                 <div key={s.label} className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
                   <p className="text-4xl font-black text-[#FE4705]" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>{s.value}</p>

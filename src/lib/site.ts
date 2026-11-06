@@ -6,6 +6,13 @@ export const SITE_NAME = "Flacron Enterprises";
 
 export const LEGAL_NAME = "Flacron Enterprises LLC";
 
+export const ALTERNATE_NAME = "Flacron";
+
+export const CONTACT_EMAIL = "contact@flacronenterprises.com";
+
+export const ORG_DESCRIPTION =
+  "Flacron Enterprises LLC is a software company in Brooklyn, New York that builds AI-powered apps for construction, insurance, business, finance, security, sports and personal growth.";
+
 export const SITE_DESCRIPTION =
   "Flacron Enterprises builds AI-powered apps that transform business across construction, insurance, sales, cybersecurity, sports, and personal growth.";
 

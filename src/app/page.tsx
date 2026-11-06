@@ -240,7 +240,7 @@ export default async function HomePage() {
         <FadeIn>
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-5xl font-black text-white sm:text-6xl lg:text-7xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
-              <CountUp value="9+" /> AI Products. One Ecosystem.
+              <CountUp value={`${apps.length}`} /> AI Products. One Ecosystem.
             </p>
             <p className="mt-3 text-sm text-orange-100 sm:text-base">
               Businesses across six industries already run on Flacron&apos;s AI ecosystem.

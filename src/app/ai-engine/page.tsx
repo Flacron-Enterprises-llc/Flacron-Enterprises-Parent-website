@@ -42,7 +42,7 @@ const products = [
   { name: "RapidClaimPro",      ai: "Fraud detection, document OCR, claims triage",            slug: "rapidclaimpro" },
   { name: "FlacronSecure AI",   ai: "Threat classification, anomaly detection, dark web NLP",  slug: "flacronsecure-ai" },
   { name: "FlacronSport",       ai: "Fan sentiment, AI content generation, performance stats", slug: "flacronsport" },
-  { name: "Tchitaka Growth",    ai: "Behavioural patterns, personalised coaching, habit AI",   slug: "beingtchitaka" },
+  { name: "Being Tchitaka OS",    ai: "Behavioural patterns, personalised coaching, habit AI",   slug: "beingtchitaka" },
 ];
 
 const architecture = [

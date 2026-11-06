@@ -12,6 +12,8 @@ import GlassCard from "@/components/GlassCard";
 import SectionHeader from "@/components/SectionHeader";
 import WaitlistForm from "@/components/WaitlistForm";
 import DynamicIcon from "@/components/DynamicIcon";
+import AppSchema from "@/components/AppSchema";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -37,6 +39,8 @@ export default async function AppPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen">
+      <AppSchema app={app} />
+      <Breadcrumbs lastLabel={app.name} />
       {/* 1. HERO */}
       <section className="relative pt-6 pb-10 px-4 sm:px-6 lg:px-8 overflow-hidden bg-white">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_-10%,rgba(254, 71, 5,0.06)_0%,transparent_70%)]" />
@@ -123,7 +127,7 @@ export default async function AppPage({ params }: PageProps) {
       {/* 4. BENEFITS / OUTCOMES */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 sm:py-20 bg-flacron-navy">
         <div className="mx-auto max-w-7xl">
-          <SectionHeader eyebrow="Benefits" title="Real outcomes, not promises." light />
+          <SectionHeader eyebrow="Benefits" title="Key benefits." light />
           <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {app.benefits.map((b) => (
               <div key={b.title} className="rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5">
@@ -220,7 +224,7 @@ export default async function AppPage({ params }: PageProps) {
                 <p className="mt-4 text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
                   {isBeta
                     ? "Join our beta programme and help shape the product while getting early access."
-                    : `Join the teams already using ${app.name} to transform their workflow.`}
+                    : `Talk to our team to see if ${app.name} fits your workflow.`}
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
                   <Link href={app.primaryCTA.href}

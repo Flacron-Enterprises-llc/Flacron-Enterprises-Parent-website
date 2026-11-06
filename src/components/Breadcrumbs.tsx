@@ -19,11 +19,18 @@ const labels: Record<string, string> = {
   rapidclaimpro: "RapidClaimPro",
   "flacronsecure-ai": "FlacronSecure AI",
   flacronsport: "FlacronSport",
+  flacronapi: "Flacron API Engine",
+  flacronpay: "FlacronPay",
   beingtchitaka: "Tchitaka Growth",
 };
 
-export default function Breadcrumbs() {
+/**
+ * `lastLabel` overrides the final crumb (app pages pass the app's real name). The layout instance skips /apps/*
+ * so those pages render their own, with the name available server-side.
+ */
+export default function Breadcrumbs({ lastLabel }: { lastLabel?: string } = {}) {
   const pathname = usePathname();
+  if (!lastLabel && pathname.startsWith("/apps/")) return null;
   if (pathname === "/" || pathname.startsWith("/admin") || pathname.startsWith("/dashboard")) return null;
 
   const segments = pathname.split("/").filter(Boolean);
@@ -31,6 +38,7 @@ export default function Breadcrumbs() {
     label: labels[seg] ?? seg.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
     href: "/" + segments.slice(0, i + 1).join("/"),
   })).map((crumb) => (crumb.href === "/apps" ? { ...crumb, href: "/ecosystem" } : crumb));
+  if (lastLabel && crumbs.length) crumbs[crumbs.length - 1].label = lastLabel;
 
   return (
     <nav aria-label="Breadcrumb" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-2">

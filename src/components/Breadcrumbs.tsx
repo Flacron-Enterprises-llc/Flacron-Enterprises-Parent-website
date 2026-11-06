@@ -21,7 +21,7 @@ const labels: Record<string, string> = {
   flacronsport: "FlacronSport",
   flacronapi: "Flacron API Engine",
   flacronpay: "FlacronPay",
-  beingtchitaka: "Tchitaka Growth",
+  beingtchitaka: "Being Tchitaka OS",
 };
 
 /**

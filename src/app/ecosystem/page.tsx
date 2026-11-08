@@ -42,7 +42,7 @@ export default async function EcosystemPage() {
             { value: `${apps.filter(a => a.status === "live").length}`, label: "Live Now" },
             { value: `${apps.filter(a => a.status === "beta").length}`, label: "Beta" },
             { value: `${apps.filter(a => a.status === "coming-soon").length}`, label: "Coming Soon" },
-            { value: "6+", label: "Industries" },
+            { value: `${new Set(apps.map((a) => a.category)).size}`, label: "Industries" },
           ].map((s) => (
             <div key={s.label} className="rounded-2xl border border-slate-100 bg-slate-50 px-3 py-4 text-center">
               <p className="text-2xl font-black text-[#FE4705] sm:text-3xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>{s.value}</p>

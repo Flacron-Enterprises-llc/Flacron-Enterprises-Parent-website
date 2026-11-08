@@ -107,7 +107,10 @@ export default async function HomePage() {
 
   return (
     <>
-      <HeroSection />
+      <HeroSection
+        productCount={apps.length}
+        industryCount={new Set(apps.map((a) => a.category)).size}
+      />
 
       {/* ── Ask Flacron — interactive hook ── */}
       <section className="relative overflow-hidden bg-black py-12 px-4 sm:px-6 lg:px-8 sm:py-16">

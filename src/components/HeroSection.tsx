@@ -17,14 +17,22 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
-const stats = [
-  { value: "9+", label: "AI Products" },
-  { value: "6", label: "Industries" },
+const staticStats = [
   { value: "99.9%", label: "Uptime SLA" },
   { value: "2×", label: "Faster Ops" },
 ];
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  productCount: number;
+  industryCount: number;
+}
+
+export default function HeroSection({ productCount, industryCount }: HeroSectionProps) {
+  const stats = [
+    { value: `${productCount}`, label: "AI Products" },
+    { value: `${industryCount}`, label: "Industries" },
+    ...staticStats,
+  ];
   const { scrollY } = useScroll();
   const graphicY = useTransform(scrollY, [0, 600], [0, -60]);
   const graphicOpacity = useTransform(scrollY, [0, 500], [1, 0.3]);

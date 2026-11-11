@@ -8,13 +8,14 @@ import { cn } from "@/lib/utils";
 export default function BrandLogo({ className, inverse = false }: { className?: string; inverse?: boolean }) {
   return (
     <Link href="/" aria-label="Flacron Enterprises — home" className={cn("group flex shrink-0 items-center gap-2.5", className)}>
-      {/* eslint-disable @next/next/no-img-element -- tiny local SVGs; next/image adds nothing here */}
+      {/* eslint-disable @next/next/no-img-element -- tiny local images; next/image adds nothing here */}
+      {/* The official FE mark (cut from /logo.png); the dark variant has the navy strokes in white. */}
       {inverse ? (
-        <img src="/logo-mark-dark.svg" alt="" width={34} height={34} className="h-[34px] w-[34px]" />
+        <img src="/brand/fe-mark-dark-128.png" alt="" width={32} height={35} className="h-[35px] w-auto" />
       ) : (
         <>
-          <img src="/logo-mark.svg" alt="" width={34} height={34} className="h-[34px] w-[34px] dark:hidden" />
-          <img src="/logo-mark-dark.svg" alt="" width={34} height={34} className="hidden h-[34px] w-[34px] dark:block" />
+          <img src="/brand/fe-mark-128.png" alt="" width={32} height={35} className="h-[35px] w-auto dark:hidden" />
+          <img src="/brand/fe-mark-dark-128.png" alt="" width={32} height={35} className="hidden h-[35px] w-auto dark:block" />
         </>
       )}
       {/* eslint-enable @next/next/no-img-element */}

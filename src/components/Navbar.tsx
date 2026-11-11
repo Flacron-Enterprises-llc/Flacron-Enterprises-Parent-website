@@ -102,7 +102,7 @@ export default function Navbar({ apps }: { apps: AppDefinition[] }) {
       <header
         // Always a solid bar (like Flacron Intel): it sits over navy bands as well as page backgrounds.
         className={cn(
-          "fixed inset-x-0 top-0 z-50 border-b border-border bg-bg/95 backdrop-blur-xl backdrop-saturate-150 transition-shadow duration-300",
+          "fixed inset-x-0 top-0 z-50 border-b border-border bg-surface/[0.97] backdrop-blur-xl backdrop-saturate-150 transition-shadow duration-300",
           (scrolled || megaOpen) && "shadow-sm"
         )}
       >

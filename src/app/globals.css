@@ -2,8 +2,178 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/*
+ * Flacron Enterprises design system.
+ * Semantic tokens live on :root (light) and [data-theme='dark'] (deep navy). The theme attribute is set on <html>
+ * by an inline script before first paint (see src/lib/theme.ts). Anything that must always render light (the admin
+ * and the API customer portal) sits inside an element with data-theme="light", which re-declares the light tokens.
+ */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *):not(:where([data-theme='light'], [data-theme='light'] *)));
+
+:root,
+[data-theme='light'] {
+  /* Brand primitives (constant across themes) */
+  --brand-orange: #fe4705;
+  --brand-orange-hover: #d83c04;
+  --brand-navy: #002961;
+  --brand-navy-deep: #011c49;
+
+  /* Surfaces */
+  --bg: #f5f7fa;
+  --surface: #ffffff;
+  --surface-muted: #eef2f7;
+  --surface-raised: #ffffff;
+  --surface-sunken: #e6ebf2;
+  --border: #d6dde7;
+  --border-strong: #b4c0d0;
+
+  /* Text */
+  --text: #0a1a33;
+  --text-secondary: #3a4b66;
+  --text-muted: #5c6b82;
+
+  /* Accent (orange). accent = decorative / large; accent-text = AA small text on surfaces;
+     cta = the brand orange button fill with navy text on it (AA, same as Flacron Intel) */
+  --accent: #fe4705;
+  --accent-text: #c23a00;
+  --accent-soft: #ffede5;
+  --accent-border: #ffc9b0;
+  --cta: #fe4705;
+  --cta-hover: #ff5c1a;
+  --on-cta: #0a1a33;
+  --focus: #fe4705;
+
+  /* Navy band (hero accents, footer, emphasis sections) */
+  --band: #001a3f;
+  --band-text: #ffffff;
+  --band-muted: #b9c6dc;
+
+  /* Status */
+  --success: #15803d;
+  --success-soft: #ecfdf3;
+  --warning: #9a6200;
+  --warning-soft: #fff7e6;
+  --danger: #b4232c;
+  --danger-soft: #fdeeee;
+  --info: #1e5bb8;
+  --info-soft: #eaf1fc;
+
+  --shadow-sm: 0 1px 2px rgb(10 26 51 / 0.06);
+  --shadow-md: 0 1px 2px rgb(10 26 51 / 0.05), 0 6px 18px -6px rgb(10 26 51 / 0.12);
+  --shadow-lg: 0 2px 4px rgb(10 26 51 / 0.04), 0 22px 48px -18px rgb(0 41 97 / 0.28);
+  --shadow-cta: 0 1px 0 rgb(255 255 255 / 0.25) inset, 0 1px 2px rgb(10 26 51 / 0.18), 0 6px 16px -6px rgb(254 75 1 / 0.55);
+  --ring-soft: 0 0 0 4px rgb(254 75 1 / 0.14);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --grid-line: rgb(10 26 51 / 0.06);
+  --logo-tile: #f5f7fa;
+
+  /* shadcn compatibility (maps onto the semantic tokens) */
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card: var(--surface);
+  --card-foreground: var(--text);
+  --popover: var(--surface-raised);
+  --popover-foreground: var(--text);
+  --primary: var(--cta);
+  --primary-foreground: var(--on-cta);
+  --secondary: var(--surface-muted);
+  --secondary-foreground: var(--text);
+  --muted: var(--surface-muted);
+  --muted-foreground: var(--text-muted);
+  --accent-foreground: var(--text);
+  --destructive: var(--danger);
+  --input: var(--border);
+  --ring: var(--focus);
+  --radius: 0.75rem;
+  --sidebar: var(--surface-muted);
+  --sidebar-foreground: var(--text);
+  --sidebar-primary: var(--cta);
+  --sidebar-primary-foreground: var(--on-cta);
+  --sidebar-accent: var(--surface-muted);
+  --sidebar-accent-foreground: var(--text);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--focus);
+
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --bg: #050d1c;
+  --surface: #0b1729;
+  --surface-muted: #112038;
+  --surface-raised: #0f1d33;
+  --surface-sunken: #030914;
+  --border: #1e3150;
+  --border-strong: #2c4469;
+
+  --text: #f3f6fb;
+  --text-secondary: #bac6d9;
+  --text-muted: #8a9ab4;
+
+  --accent: #fe6a2a;
+  --accent-text: #ff8a55;
+  --accent-soft: rgb(254 106 42 / 0.12);
+  --accent-border: rgb(254 106 42 / 0.32);
+  --cta: #fe6a2a;
+  --cta-hover: #ff7a40;
+  --focus: #ff8a55;
+
+  --band: #001a3f;
+  --band-text: #ffffff;
+  --band-muted: #9fb0cb;
+
+  --success: #4acb82;
+  --success-soft: rgb(74 203 130 / 0.12);
+  --warning: #f0b44c;
+  --warning-soft: rgb(240 180 76 / 0.12);
+  --danger: #f17a82;
+  --danger-soft: rgb(241 122 130 / 0.12);
+  --info: #7fa9ee;
+  --info-soft: rgb(127 169 238 / 0.12);
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 1px 2px rgb(0 0 0 / 0.35), 0 8px 24px -8px rgb(0 0 0 / 0.55);
+  --shadow-lg: 0 2px 4px rgb(0 0 0 / 0.3), 0 24px 56px -20px rgb(0 0 0 / 0.75);
+  --shadow-cta: 0 1px 0 rgb(255 255 255 / 0.25) inset, 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 20px -8px rgb(254 106 42 / 0.5);
+  --ring-soft: 0 0 0 4px rgb(255 138 85 / 0.2);
+  --grid-line: rgb(255 255 255 / 0.05);
+  --logo-tile: #eef2f8;
+
+  color-scheme: dark;
+}
+
 @theme inline {
-  /* Brand tokens (exact logo colors) */
+  /* Semantic colours — use these on public pages */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-border: var(--accent-border);
+  --color-cta: var(--cta);
+  --color-cta-hover: var(--cta-hover);
+  --color-on-cta: var(--on-cta);
+  --color-band: var(--band);
+  --color-band-text: var(--band-text);
+  --color-band-muted: var(--band-muted);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+
+  /* Brand tokens (exact logo colours) — still used by the admin and customer portal */
   --color-flacron-orange: #FE4705;
   --color-flacron-orange-dark: #D83C04;
   --color-flacron-orange-light: #FFF3EC;
@@ -11,7 +181,7 @@
   --color-flacron-navy-mid: #0A3D75;
   --color-flacron-blue: #2563EB;
 
-  /* Shadcn tokens */
+  /* shadcn tokens */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -24,10 +194,8 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
-  --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -39,8 +207,14 @@
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
 
-  --font-sans: var(--font-inter);
-  --font-heading: var(--font-space-grotesk);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --ease-brand: var(--ease);
 
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -49,79 +223,275 @@
   --radius-2xl: calc(var(--radius) * 1.8);
 }
 
-:root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.1 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.1 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.1 0 0);
-  --primary: #FE4705;
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.2 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.2 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.91 0 0);
-  --input: oklch(0.91 0 0);
-  --ring: #FE4705;
-  --radius: 0.75rem;
-  --sidebar: oklch(0.98 0 0);
-  --sidebar-foreground: oklch(0.2 0 0);
-  --sidebar-primary: #FE4705;
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.2 0 0);
-  --sidebar-border: oklch(0.91 0 0);
-  --sidebar-ring: #FE4705;
-}
-
 @layer base {
   * {
     @apply border-border;
   }
   html {
-    overflow-x: hidden;
-    max-width: 100vw;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 88px;
   }
   body {
-    @apply bg-white text-flacron-navy antialiased;
-    overflow-x: hidden;
-    max-width: 100vw;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    overflow-x: clip;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  button:not(:disabled), [role='button'], summary, label[for] { cursor: pointer; }
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  ::selection { background: rgb(254 71 5 / 0.22); }
+  /* Theme switches cross-fade colours instead of snapping (disabled for reduced motion below). */
+  html.theme-transition,
+  html.theme-transition *,
+  html.theme-transition *::before,
+  html.theme-transition *::after {
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, fill 0.25s ease !important;
   }
 }
 
-/* ─── Custom Scrollbar ─── */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #FE4705;
-  border-radius: 999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #D83C04;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
-/* ─── Shimmer ─── */
+/* ─── Reusable component classes ─── */
+@layer components {
+  .container-page {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 80rem;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) { .container-page { padding-inline: 1.5rem; } }
+  @media (min-width: 1024px) { .container-page { padding-inline: 2rem; } }
+
+  .section { padding-block: 4rem; }
+  @media (min-width: 640px) { .section { padding-block: 5rem; } }
+  @media (min-width: 1024px) { .section { padding-block: 6.5rem; } }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 10px;
+    height: 2.5rem;
+    padding: 0 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.2s ease, transform 0.15s var(--ease);
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .btn-sm { height: 2rem; padding: 0 0.75rem; font-size: 0.8125rem; border-radius: 8px; }
+  .btn-lg { height: 3rem; padding: 0 1.5rem; font-size: 0.9375rem; }
+  .btn-primary {
+    background: var(--cta);
+    color: var(--on-cta);
+    box-shadow: var(--shadow-cta);
+  }
+  .btn-primary:hover { background: var(--cta-hover); }
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    box-shadow: var(--shadow-sm);
+  }
+  .btn-secondary:hover { border-color: var(--text-muted); background: var(--surface-muted); }
+  .btn-ghost { color: var(--text-secondary); }
+  .btn-ghost:hover { background: var(--surface-muted); color: var(--text); }
+  /* On the navy band */
+  .btn-on-band {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgb(255 255 255 / 0.25);
+  }
+  .btn-on-band:hover { background: rgb(255 255 255 / 0.1); border-color: rgb(255 255 255 / 0.45); }
+
+  .card {
+    border-radius: 1rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+  }
+  .card-interactive {
+    transition: border-color 0.2s ease, box-shadow 0.25s var(--ease), transform 0.25s var(--ease);
+  }
+  .card-interactive:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .link-accent {
+    color: var(--accent-text);
+    font-weight: 600;
+    text-underline-offset: 4px;
+  }
+  .link-accent:hover { text-decoration: underline; }
+
+  /* Form controls */
+  .field-label {
+    display: block;
+    margin-bottom: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .field {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text);
+    padding: 0.6875rem 0.875rem;
+    font-size: 0.9375rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .field::placeholder { color: var(--text-muted); opacity: 0.85; }
+  .field:focus { outline: none; border-color: var(--accent); box-shadow: var(--ring-soft); }
+  select.field { appearance: auto; }
+
+  /* Navy band: deep navy with a faint survey grid and one soft beam of light. */
+  .band {
+    position: relative;
+    isolation: isolate;
+    background:
+      radial-gradient(60% 80% at 85% 0%, rgb(30 91 184 / 0.35), transparent 60%),
+      radial-gradient(40% 50% at 10% 100%, rgb(254 75 1 / 0.12), transparent 70%),
+      var(--band);
+    color: var(--band-text);
+  }
+  /* Concentric rings + slow radar sweep (the Flacron Intel signature), used on navy bands. */
+  .rings {
+    border-radius: 9999px;
+    background: radial-gradient(circle, transparent 0 22%, rgb(255 255 255 / 0.07) 22.2% 22.6%, transparent 22.8% 44%, rgb(255 255 255 / 0.07) 44.2% 44.6%, transparent 44.8% 66%, rgb(255 255 255 / 0.07) 66.2% 66.6%, transparent 66.8%);
+  }
+  .radar {
+    border-radius: 9999px;
+    background: conic-gradient(from 0deg, rgb(254 75 1 / 0) 0deg, rgb(254 75 1 / 0) 300deg, rgb(254 75 1 / 0.28) 360deg);
+    animation: radar-spin 9s linear infinite;
+  }
+  /* Animated underline for text links. */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1.5px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 280ms var(--ease), color 160ms;
+    padding-bottom: 1px;
+  }
+  .link-underline:hover, .link-underline:focus-visible { background-size: 100% 1.5px; }
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 35%, #000 25%, transparent 80%);
+  }
+  .band .grid-lines {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  }
+
+  /* Soft logo tile for product marks — light in both themes so any transparent logo stays legible. */
+  .logo-tile {
+    background: var(--logo-tile);
+    box-shadow: inset 0 0 0 1px rgb(10 26 51 / 0.08);
+  }
+
+  .prose-legal h2 { font-size: 1.25rem; font-weight: 600; color: var(--text); }
+
+  /* ─── Cursor-follow glow ─── */
+  .cursor-glow {
+    position: relative;
+    isolation: isolate;
+  }
+  .cursor-glow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle 180px at var(--mx, 50%) var(--my, 50%), rgb(254 71 5 / 0.10), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .cursor-glow:hover::before {
+    opacity: 1;
+  }
+}
+
+@keyframes radar-spin { to { transform: rotate(360deg); } }
+
+/* ─── Reveal on scroll (FadeIn) — hidden only once JS runs, so content never depends on JS ─── */
+.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 600ms var(--ease), transform 700ms var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js-reveal [data-reveal].is-visible { opacity: 1; transform: none; }
+
+/* ─── Page-load rise (hero) — pure CSS so SSR markup is final ─── */
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.rise { animation: rise 640ms var(--ease) both; animation-delay: calc(var(--i, 0) * 80ms); }
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal [data-reveal] { opacity: 1; transform: none; }
+  .radar { animation: none; }
+}
+
+/* ─── Shimmer (loading skeletons) ─── */
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
 .shimmer {
-  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background: linear-gradient(90deg, var(--surface-muted) 25%, var(--surface-sunken) 50%, var(--surface-muted) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
 
-/* ─── Animated Aurora Gradient ─── */
+/* ─── Hero glow: the one signature motion on the homepage ─── */
 @keyframes aurora-shift {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
@@ -130,22 +500,32 @@
 .hero-aurora {
   background: linear-gradient(
     135deg,
-    rgba(254, 71, 5,0.13) 0%,
-    rgba(37,99,235,0.09) 25%,
-    rgba(254, 71, 5,0.06) 50%,
-    rgba(37,99,235,0.11) 75%,
-    rgba(254, 71, 5,0.10) 100%
+    rgb(254 71 5 / 0.10) 0%,
+    rgb(37 99 235 / 0.07) 30%,
+    transparent 55%,
+    rgb(37 99 235 / 0.08) 80%,
+    rgb(254 71 5 / 0.08) 100%
   );
   background-size: 400% 400%;
-  animation: aurora-shift 10s ease infinite;
+  animation: aurora-shift 14s ease infinite;
+}
+[data-theme='dark'] .hero-aurora {
+  background: linear-gradient(
+    135deg,
+    rgb(254 71 5 / 0.14) 0%,
+    rgb(37 99 235 / 0.16) 30%,
+    transparent 55%,
+    rgb(37 99 235 / 0.14) 80%,
+    rgb(254 71 5 / 0.10) 100%
+  );
+  background-size: 400% 400%;
 }
 
-/* ─── Particle / Dot Grid ─── */
+/* ─── Dot grid ─── */
 .particle-grid {
-  background-image: radial-gradient(circle, rgba(254, 71, 5,0.12) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgb(254 71 5 / 0.14) 1px, transparent 1px);
   background-size: 36px 36px;
 }
-
 
 /* ─── Hide scrollbar utility ─── */
 .scrollbar-none {
@@ -156,45 +536,10 @@
   display: none;
 }
 
-/* ─── Button Ripple ─── */
+/* ─── Button ripple (kept for existing callers) ─── */
 .ripple-btn {
   position: relative;
   overflow: hidden;
-}
-.ripple-btn::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.35);
-  transform: scale(0);
-  animation: ripple-anim 0.5s linear;
-  pointer-events: none;
-}
-@keyframes ripple-anim {
-  to {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-
-/* ─── Cursor-follow glow ─── */
-.cursor-glow {
-  position: relative;
-  isolation: isolate;
-}
-.cursor-glow::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(circle 160px at var(--mx, 50%) var(--my, 50%), rgba(254, 71, 5,0.25), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.25s ease;
-  pointer-events: none;
-  z-index: 0;
-}
-.cursor-glow:hover::before {
-  opacity: 1;
 }
 
 /* Admin shell — let invoice/print views escape the fixed-position app chrome */

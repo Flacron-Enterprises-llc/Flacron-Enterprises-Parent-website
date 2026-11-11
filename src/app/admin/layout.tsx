@@ -107,7 +107,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   );
 
   return (
-    <div className="app-shell" style={{ position: "fixed", inset: 0, zIndex: 9999, display: "flex", background: "#f8fafc", overflow: "hidden" }}>
+    <div data-theme="light" className="app-shell" style={{ position: "fixed", inset: 0, zIndex: 9999, display: "flex", background: "#f8fafc", overflow: "hidden" }}>
 
       {/* Mobile backdrop */}
       {sidebarOpen && (

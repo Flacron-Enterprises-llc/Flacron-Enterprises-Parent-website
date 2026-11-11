@@ -1,183 +1,159 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { ChevronDown, Search, X } from "lucide-react";
 import type { AppDefinition } from "@/data/apps";
-import GlassCard from "./GlassCard";
-import AppLogo from "./AppLogo";
-import StatusBadge from "./StatusBadge";
+import ProductCard from "./ProductCard";
+import { categoriesIn, STATUS_LABELS } from "@/lib/app-display";
 import { cn } from "@/lib/utils";
 
-type Category = AppDefinition["category"];
 type Status = AppDefinition["status"];
 
-const ALL_CATEGORIES: Category[] = ["Construction", "Business", "Growth", "Security", "Sports", "Insurance"];
-const ALL_STATUSES: Status[] = ["live", "beta", "coming-soon"];
-const statusLabel: Record<Status, string> = {
-  live: "Live",
-  beta: "Beta",
-  "coming-soon": "Coming Soon",
-  internal: "Internal",
-};
-
-const INITIAL_COUNT = 6;
+const STATUS_ORDER: Status[] = ["live", "beta", "coming-soon"];
+const INITIAL_COUNT = 9;
 
 interface AppGridProps {
   apps: AppDefinition[];
   mode?: "full" | "preview";
 }
 
+function FilterChip({ active, onClick, children, count }: { active: boolean; onClick: () => void; children: React.ReactNode; count?: number }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={active}
+      className={cn(
+        "inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3.5 py-2 text-sm font-medium transition-colors",
+        active
+          ? "border-transparent bg-text text-bg"
+          : "border-border bg-surface text-text-secondary hover:border-border-strong hover:text-text"
+      )}
+    >
+      {children}
+      {typeof count === "number" && <span className={cn("tabular-nums text-xs", active ? "opacity-70" : "text-text-muted")}>{count}</span>}
+    </button>
+  );
+}
+
+/** Filterable product grid. Categories and statuses come from the data itself — nothing is hardcoded. */
 export default function AppGrid({ apps, mode = "full" }: AppGridProps) {
-  const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedStatuses, setSelectedStatuses] = useState<Status[]>([]);
+  const [query, setQuery] = useState("");
   const [showAll, setShowAll] = useState(false);
+  const reduce = useReducedMotion();
+
+  const categories = useMemo(() => categoriesIn(apps), [apps]);
+  const statuses = useMemo(() => STATUS_ORDER.filter((s) => apps.some((a) => a.status === s)), [apps]);
 
   const filteredApps = useMemo(() => {
     if (mode === "preview") return apps.slice(0, 3);
+    const q = query.trim().toLowerCase();
     return apps.filter((app) => {
       const catOk = selectedCategories.length === 0 || selectedCategories.includes(app.category);
       const statusOk = selectedStatuses.length === 0 || selectedStatuses.includes(app.status);
-      return catOk && statusOk;
+      const qOk =
+        !q ||
+        [app.name, app.tagline, app.category, app.shortDescription, ...(app.industries ?? [])]
+          .filter(Boolean)
+          .some((t) => t.toLowerCase().includes(q));
+      return catOk && statusOk && qOk;
     });
-  }, [apps, mode, selectedCategories, selectedStatuses]);
+  }, [apps, mode, selectedCategories, selectedStatuses, query]);
 
-  // Reset show-all when filters change
-  const displayedApps = useMemo(() => {
-    if (mode === "preview" || showAll) return filteredApps;
-    return filteredApps.slice(0, INITIAL_COUNT);
-  }, [filteredApps, mode, showAll]);
-
+  const displayedApps = mode === "preview" || showAll ? filteredApps : filteredApps.slice(0, INITIAL_COUNT);
   const hasMore = mode === "full" && !showAll && filteredApps.length > INITIAL_COUNT;
   const hiddenCount = filteredApps.length - INITIAL_COUNT;
 
-  const toggleCategory = (c: Category) => {
+  const toggleCategory = (c: string) => {
     setShowAll(false);
-    setSelectedCategories((p) => p.includes(c) ? p.filter((x) => x !== c) : [...p, c]);
+    setSelectedCategories((p) => (p.includes(c) ? p.filter((x) => x !== c) : [...p, c]));
   };
   const toggleStatus = (s: Status) => {
     setShowAll(false);
-    setSelectedStatuses((p) => p.includes(s) ? p.filter((x) => x !== s) : [...p, s]);
+    setSelectedStatuses((p) => (p.includes(s) ? p.filter((x) => x !== s) : [...p, s]));
   };
-  const hasFilters = selectedCategories.length > 0 || selectedStatuses.length > 0;
+  const hasFilters = selectedCategories.length > 0 || selectedStatuses.length > 0 || query.trim() !== "";
+  const clear = () => { setSelectedCategories([]); setSelectedStatuses([]); setQuery(""); setShowAll(false); };
 
   return (
     <div>
       {mode === "full" && (
-        <div className="mb-6 sm:mb-8">
-          {/* Horizontally scrollable on mobile */}
-          <div className="flex gap-2 overflow-x-auto pb-2 sm:flex-wrap sm:overflow-visible sm:pb-0 scrollbar-none">
-            {ALL_CATEGORIES.map((cat) => {
-              const active = selectedCategories.includes(cat);
-              return (
-                <button
-                  key={cat}
-                  onClick={() => toggleCategory(cat)}
-                  className={cn(
-                    "shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors border whitespace-nowrap",
-                    active
-                      ? "bg-[#FE4705] text-white border-[#FE4705]"
-                      : "bg-white text-slate-600 border-slate-200 hover:border-[#FE4705] hover:text-[#FE4705]"
-                  )}
-                >
-                  {cat}
-                </button>
-              );
-            })}
-            <span className="shrink-0 hidden sm:block h-4 w-px bg-slate-200 self-center" />
-            {ALL_STATUSES.map((s) => {
-              const active = selectedStatuses.includes(s);
-              return (
-                <button
-                  key={s}
-                  onClick={() => toggleStatus(s)}
-                  className={cn(
-                    "shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors border whitespace-nowrap",
-                    active
-                      ? "bg-[#FE4705] text-white border-[#FE4705]"
-                      : "bg-white text-slate-600 border-slate-200 hover:border-[#FE4705] hover:text-[#FE4705]"
-                  )}
-                >
-                  {statusLabel[s]}
-                </button>
-              );
-            })}
+        <div className="mb-8 space-y-4">
+          <div className="relative max-w-md">
+            <Search aria-hidden className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" />
+            <label htmlFor="ecosystem-search" className="sr-only">Search products</label>
+            <input
+              id="ecosystem-search"
+              type="search"
+              value={query}
+              onChange={(e) => { setQuery(e.target.value); setShowAll(false); }}
+              placeholder="Search by name, industry or problem"
+              className="field pl-10"
+            />
+          </div>
+          <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 scrollbar-none sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0" role="group" aria-label="Filter products">
+            <FilterChip active={!hasFilters} onClick={clear} count={apps.length}>All</FilterChip>
+            {categories.map((cat) => (
+              <FilterChip key={cat} active={selectedCategories.includes(cat)} onClick={() => toggleCategory(cat)} count={apps.filter((a) => a.category === cat).length}>
+                {cat}
+              </FilterChip>
+            ))}
+            {statuses.length > 1 && <span aria-hidden className="mx-1 hidden h-5 w-px self-center bg-border sm:block" />}
+            {statuses.length > 1 && statuses.map((s) => (
+              <FilterChip key={s} active={selectedStatuses.includes(s)} onClick={() => toggleStatus(s)}>
+                {STATUS_LABELS[s]}
+              </FilterChip>
+            ))}
             {hasFilters && (
               <button
-                onClick={() => { setSelectedCategories([]); setSelectedStatuses([]); setShowAll(false); }}
-                className="shrink-0 rounded-full px-3 py-1.5 text-xs font-medium text-slate-400 hover:text-slate-600 transition-colors border border-transparent hover:border-slate-200 whitespace-nowrap"
+                type="button"
+                onClick={clear}
+                className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium text-text-secondary hover:text-text"
               >
-                Clear ×
+                <X aria-hidden className="h-3.5 w-3.5" /> Clear
               </button>
             )}
           </div>
+          <p className="text-sm text-text-muted" aria-live="polite">
+            Showing {displayedApps.length} of {filteredApps.length} {filteredApps.length === 1 ? "product" : "products"}
+          </p>
         </div>
       )}
 
-      <div className={cn(
-        "grid gap-4 sm:gap-5",
-        mode === "preview"
-          ? "grid-cols-1 sm:grid-cols-3"
-          : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-      )}>
-        <AnimatePresence mode="popLayout">
+      <div className={cn("grid gap-5", mode === "preview" ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3")}>
+        <AnimatePresence mode="popLayout" initial={false}>
           {displayedApps.map((app) => (
             <motion.div
               key={app.slug}
-              layout
-              initial={{ opacity: 0, y: 12 }}
+              layout={!reduce}
+              initial={reduce ? false : { opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96 }}
+              exit={reduce ? undefined : { opacity: 0, scale: 0.98 }}
               transition={{ duration: 0.2 }}
+              className="h-full"
             >
-              <GlassCard className="h-full flex flex-col p-5 sm:p-6">
-                <div className="mb-3 sm:mb-4 flex items-start justify-between">
-                  <AppLogo name={app.name} size={40} />
-                  <StatusBadge status={app.status} />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-sm font-bold text-flacron-navy sm:text-base">{app.name}</h3>
-                  <p className="mt-0.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wide sm:text-[11px]">{app.category}</p>
-                  <p className="mt-2 text-xs text-slate-500 leading-relaxed line-clamp-3 sm:mt-3 sm:text-sm">{app.shortDescription}</p>
-                </div>
-                <div className="mt-3 flex flex-wrap gap-1 sm:mt-4 sm:gap-1.5">
-                  {app.techStack.slice(0, 3).map((tech) => (
-                    <span key={tech} className="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] text-slate-500 sm:text-xs">{tech}</span>
-                  ))}
-                  {app.techStack.length > 3 && (
-                    <span className="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] text-slate-400 sm:text-xs">+{app.techStack.length - 3}</span>
-                  )}
-                </div>
-                <div className="mt-3 pt-3 border-t border-slate-100 sm:mt-4 sm:pt-4">
-                  <Link
-                    href={`/apps/${app.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#FE4705] hover:text-[#D83C04] transition-colors sm:text-sm"
-                  >
-                    Learn More <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
-                  </Link>
-                </div>
-              </GlassCard>
+              <ProductCard app={app} showStack />
             </motion.div>
           ))}
         </AnimatePresence>
 
         {filteredApps.length === 0 && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="col-span-full py-16 text-center text-slate-400 text-sm">
-            No apps match the selected filters.
-          </motion.div>
+          <div className="col-span-full rounded-2xl border border-dashed border-border-strong px-6 py-16 text-center">
+            <p className="font-display text-lg font-semibold text-text">No products match these filters.</p>
+            <p className="mt-1 text-sm text-text-secondary">Try another category, or clear the filters to see everything.</p>
+            <button type="button" onClick={clear} className="btn btn-secondary btn-sm mt-5">Clear filters</button>
+          </div>
         )}
       </div>
 
-      {/* Show More button */}
       {hasMore && (
-        <div className="mt-8 text-center">
-          <button
-            onClick={() => setShowAll(true)}
-            className="inline-flex items-center gap-2 rounded-xl border-2 border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 hover:border-[#FE4705] hover:text-[#FE4705] transition-colors"
-          >
-            Show {hiddenCount} more {hiddenCount === 1 ? "app" : "apps"}
-            <ChevronDown className="h-4 w-4" />
+        <div className="mt-10 text-center">
+          <button type="button" onClick={() => setShowAll(true)} className="btn btn-secondary">
+            Show {hiddenCount} more {hiddenCount === 1 ? "product" : "products"}
+            <ChevronDown aria-hidden className="h-4 w-4" />
           </button>
         </div>
       )}

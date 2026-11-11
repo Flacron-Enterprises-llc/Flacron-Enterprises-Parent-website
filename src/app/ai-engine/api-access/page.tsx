@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Check, Zap, Code2, BarChart3, Lock, ArrowRight } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
+import { cn } from "@/lib/utils";
 
 type State = "idle" | "loading" | "success";
 
@@ -23,7 +24,7 @@ const tiers = [
     per: "/month",
     calls: "250,000 API calls/mo",
     desc: "For growing businesses that need reliable AI at scale.",
-    features: ["All 12 AI model endpoints", "Priority inference (<200ms)", "Streaming + webhook output", "Slack & email support", "99.9% uptime SLA", "Custom prompt tuning"],
+    features: ["All 12 AI model endpoints", "Priority inference", "Streaming + webhook output", "Slack & email support", "99.9% uptime SLA", "Custom prompt tuning"],
     highlight: true,
   },
   {
@@ -39,7 +40,7 @@ const tiers = [
 
 const capabilities = [
   { icon: Code2,    title: "REST API",           desc: "Simple JSON API — integrate in minutes with any stack." },
-  { icon: Zap,      title: "Real-time Inference", desc: "Sub-200ms responses for completions, classification, scoring." },
+  { icon: Zap,      title: "Real-time Inference", desc: "Fast responses for completions, classification, scoring." },
   { icon: BarChart3, title: "Industry Models",    desc: "Construction, insurance, cybersecurity, and sales models." },
   { icon: Lock,     title: "Zero Retention",      desc: "Payloads never stored or used to train shared models." },
 ];
@@ -72,38 +73,37 @@ export default function APIAccessPage() {
     setState("success");
   }
 
-  const inputClass = "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-flacron-navy placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705] transition-colors";
-
   return (
     <div className="min-h-screen">
 
       {/* ── Hero ── */}
-      <section className="bg-flacron-navy px-4 pt-20 pb-12 sm:px-6 sm:pt-24 sm:pb-16 lg:px-8 relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 particle-grid opacity-10" />
-        <div className="relative z-10 mx-auto max-w-5xl">
-          <Link href="/ai-engine" className="flex w-fit items-center gap-2 text-slate-400 hover:text-white text-sm mb-6 transition-colors sm:mb-8">
-            <ArrowLeft className="h-4 w-4" /> Back to AI Engine
+      <section className="band mt-4 overflow-hidden">
+        <div aria-hidden className="grid-lines pointer-events-none absolute inset-0 -z-10" />
+        <div className="container-page pb-14 pt-10 sm:pb-20 sm:pt-14">
+          <Link href="/ai-engine" className="mb-8 inline-flex w-fit items-center gap-2 rounded-md text-sm text-band-muted transition-colors hover:text-white">
+            <ArrowLeft aria-hidden className="h-4 w-4" /> Back to AI Engine
           </Link>
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1.5 text-xs font-semibold text-[#FE4705] mb-5 sm:px-4 sm:text-sm sm:mb-6">
-            <Code2 className="h-3.5 w-3.5" />
-            Option 2 — API Platform Access
+          <div className="max-w-4xl">
+            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3.5 py-1.5 text-sm font-medium text-[#ffb08a]">
+              <Code2 aria-hidden className="h-4 w-4" />
+              Option 2 — API Platform Access
+            </p>
+            <h1 className="font-display text-[2.375rem] font-semibold leading-[1.04] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
+              Add AI to your product. Without building it.
+            </h1>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-band-muted">
+              Call our AI endpoints directly from your codebase. Industry-trained models for language, vision, prediction, and scoring — all via a simple REST API. You ship the feature, we run the intelligence.
+            </p>
           </div>
-          <h1 className="text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-            Add AI to your product.<br />
-            <span className="text-[#FE4705]">Without building it.</span>
-          </h1>
-          <p className="mt-4 max-w-2xl text-sm text-slate-300 leading-relaxed sm:mt-5 sm:text-base lg:text-lg">
-            Call our AI endpoints directly from your codebase. Industry-trained models for language, vision, prediction, and scoring — all via a simple REST API. You ship the feature, we run the intelligence.
-          </p>
 
           {/* Capability cards */}
-          <div className="mt-6 grid grid-cols-1 gap-3 sm:mt-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {capabilities.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 sm:flex-col sm:items-start">
-                <Icon className="h-5 w-5 text-[#FE4705] shrink-0 sm:mb-2" />
+              <div key={title} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:flex-col">
+                <Icon aria-hidden className="h-5 w-5 shrink-0 text-[#ff8a55]" />
                 <div>
-                  <p className="text-sm font-bold text-white">{title}</p>
-                  <p className="text-xs text-slate-400 leading-snug mt-0.5">{desc}</p>
+                  <p className="font-display text-[15px] font-semibold text-white">{title}</p>
+                  <p className="mt-1 text-sm leading-snug text-band-muted">{desc}</p>
                 </div>
               </div>
             ))}
@@ -112,35 +112,33 @@ export default function APIAccessPage() {
       </section>
 
       {/* ── Pricing tiers ── */}
-      <section className="py-10 px-4 sm:px-6 sm:py-16 lg:px-8 lg:py-20 bg-slate-50 border-b border-slate-100">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeader eyebrow="Pricing" title="Pick the plan that fits." centered />
-          <div className="grid gap-4 sm:grid-cols-3 sm:gap-5">
+      <section className="section border-b border-border bg-surface-muted">
+        <div className="container-page">
+          <SectionHeader eyebrow="Pricing" title="Pick the plan that fits." />
+          <div className="grid gap-5 md:grid-cols-3">
             {tiers.map((tier) => (
               <div
                 key={tier.name}
-                className={`flex flex-col rounded-2xl border p-5 sm:p-6 ${
-                  tier.highlight
-                    ? "bg-[#FE4705] border-[#FE4705] shadow-[0_8px_32px_rgba(254, 71, 5,0.3)]"
-                    : "bg-white border-slate-200"
-                }`}
+                className={cn(
+                  "card relative flex flex-col p-6 sm:p-7",
+                  tier.highlight && "border-accent shadow-lg ring-1 ring-accent"
+                )}
               >
-                <p className={`text-xs font-semibold uppercase tracking-widest mb-1 ${tier.highlight ? "text-orange-100" : "text-[#FE4705]"}`}>
-                  {tier.name}
-                </p>
-                <div className="flex items-end gap-1 mb-1">
-                  <p className={`text-3xl font-black sm:text-4xl ${tier.highlight ? "text-white" : "text-flacron-navy"}`} style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                    {tier.price}
-                  </p>
-                  {tier.per && <p className={`text-sm mb-1 ${tier.highlight ? "text-orange-100" : "text-slate-400"}`}>{tier.per}</p>}
+                {tier.highlight && (
+                  <span className="absolute -top-3 left-6 rounded-full bg-cta px-3 py-1 text-xs font-semibold text-on-cta">Most popular</span>
+                )}
+                <p className="font-display text-lg font-semibold text-text">{tier.name}</p>
+                <div className="mt-3 flex items-end gap-1">
+                  <p className="font-display text-4xl font-semibold tracking-[-0.03em] text-text">{tier.price}</p>
+                  {tier.per && <p className="mb-1 text-sm text-text-muted">{tier.per}</p>}
                 </div>
-                <p className={`text-xs font-semibold mb-2 ${tier.highlight ? "text-orange-100" : "text-[#FE4705]"}`}>{tier.calls}</p>
-                <p className={`text-sm mb-4 leading-relaxed ${tier.highlight ? "text-orange-50" : "text-slate-500"}`}>{tier.desc}</p>
-                <ul className="space-y-2 flex-1">
+                <p className="mt-1 text-sm font-semibold text-accent-text">{tier.calls}</p>
+                <p className="mb-5 mt-3 text-[15px] leading-relaxed text-text-secondary">{tier.desc}</p>
+                <ul className="flex-1 space-y-2.5 border-t border-border pt-5">
                   {tier.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm">
-                      <Check className={`h-4 w-4 shrink-0 mt-0.5 ${tier.highlight ? "text-orange-100" : "text-[#FE4705]"}`} />
-                      <span className={tier.highlight ? "text-white" : "text-slate-600"}>{f}</span>
+                    <li key={f} className="flex items-start gap-2.5 text-sm text-text">
+                      <Check aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-accent-text" />
+                      <span>{f}</span>
                     </li>
                   ))}
                 </ul>
@@ -151,51 +149,50 @@ export default function APIAccessPage() {
       </section>
 
       {/* ── Application form ── */}
-      <section className="py-10 px-4 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-        <div className="mx-auto max-w-2xl">
+      <section className="section">
+        <div className="container-page max-w-2xl">
           <SectionHeader
-            eyebrow="Request Access"
+            eyebrow="Request access"
             title="Apply for API access."
             description="Fill in your details and we'll get you set up with credentials and docs within 1 business day."
-            centered
           />
 
           {state === "success" ? (
-            <div className="flex flex-col items-center justify-center rounded-2xl border border-emerald-200 bg-emerald-50 p-8 text-center sm:p-12">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 mb-4 sm:h-16 sm:w-16">
-                <Check className="h-7 w-7 text-emerald-600 sm:h-8 sm:w-8" />
+            <div role="status" className="card flex flex-col items-center justify-center p-8 text-center sm:p-12">
+              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-success-soft sm:h-16 sm:w-16">
+                <Check aria-hidden className="h-7 w-7 text-success sm:h-8 sm:w-8" />
               </div>
-              <h3 className="text-lg font-bold text-flacron-navy mb-2 sm:text-xl">Application received!</h3>
-              <p className="text-slate-500 text-sm">We&apos;ll reach out within 1 business day with your API credentials and onboarding guide.</p>
-              <Link href="/ai-engine" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#FE4705] hover:text-[#D83C04]">
-                Back to AI Engine <ArrowRight className="h-3.5 w-3.5" />
+              <h3 className="mb-2 font-display text-xl font-semibold text-text">Application received!</h3>
+              <p className="text-[15px] text-text-secondary">We&apos;ll reach out within 1 business day with your API credentials and onboarding guide.</p>
+              <Link href="/ai-engine" className="link-accent mt-5 inline-flex items-center gap-2 text-sm">
+                Back to AI Engine <ArrowRight aria-hidden className="h-3.5 w-3.5" />
               </Link>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-4 sm:p-8">
-              <div className="grid gap-4 sm:grid-cols-2">
+            <form onSubmit={handleSubmit} className="card space-y-5 p-5 sm:p-8">
+              <div className="grid gap-5 sm:grid-cols-2">
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-flacron-navy">Full Name *</label>
-                  <input required name="name" value={form.name} onChange={handleChange} placeholder="Jane Smith" className={inputClass} />
+                  <label htmlFor="api-name" className="field-label">Full Name *</label>
+                  <input id="api-name" required name="name" autoComplete="name" value={form.name} onChange={handleChange} placeholder="Jane Smith" className="field" />
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-flacron-navy">Work Email *</label>
-                  <input required type="email" name="email" value={form.email} onChange={handleChange} placeholder="jane@company.com" className={inputClass} />
+                  <label htmlFor="api-email" className="field-label">Work Email *</label>
+                  <input id="api-email" required type="email" name="email" autoComplete="email" value={form.email} onChange={handleChange} placeholder="jane@company.com" className="field" />
                 </div>
               </div>
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-5 sm:grid-cols-2">
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-flacron-navy">Company *</label>
-                  <input required name="company" value={form.company} onChange={handleChange} placeholder="Your company" className={inputClass} />
+                  <label htmlFor="api-company" className="field-label">Company *</label>
+                  <input id="api-company" required name="company" autoComplete="organization" value={form.company} onChange={handleChange} placeholder="Your company" className="field" />
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-flacron-navy">Your Role</label>
-                  <input name="role" value={form.role} onChange={handleChange} placeholder="CTO, Developer, Product Lead…" className={inputClass} />
+                  <label htmlFor="api-role" className="field-label">Your Role</label>
+                  <input id="api-role" name="role" autoComplete="organization-title" value={form.role} onChange={handleChange} placeholder="CTO, Developer, Product Lead…" className="field" />
                 </div>
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-flacron-navy">Plan you&apos;re interested in *</label>
-                <select required name="tier" value={form.tier} onChange={handleChange} className={inputClass}>
+                <label htmlFor="api-tier" className="field-label">Plan you&apos;re interested in *</label>
+                <select id="api-tier" required name="tier" value={form.tier} onChange={handleChange} className="field">
                   <option value="">Select a plan…</option>
                   <option>Starter — $299/mo</option>
                   <option>Growth — $999/mo</option>
@@ -204,8 +201,8 @@ export default function APIAccessPage() {
                 </select>
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-flacron-navy">What will you use the API for? *</label>
-                <select required name="useCase" value={form.useCase} onChange={handleChange} className={inputClass}>
+                <label htmlFor="api-usecase" className="field-label">What will you use the API for? *</label>
+                <select id="api-usecase" required name="useCase" value={form.useCase} onChange={handleChange} className="field">
                   <option value="">Select your use case…</option>
                   <option>Document analysis / OCR</option>
                   <option>Lead scoring / enrichment</option>
@@ -217,8 +214,8 @@ export default function APIAccessPage() {
                 </select>
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-flacron-navy">Expected monthly call volume</label>
-                <select name="callVolume" value={form.callVolume} onChange={handleChange} className={inputClass}>
+                <label htmlFor="api-volume" className="field-label">Expected monthly call volume</label>
+                <select id="api-volume" name="callVolume" value={form.callVolume} onChange={handleChange} className="field">
                   <option value="">Select volume…</option>
                   <option>Under 10,000</option>
                   <option>10,000 – 50,000</option>
@@ -228,14 +225,13 @@ export default function APIAccessPage() {
                 </select>
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-flacron-navy">Anything else we should know?</label>
-                <textarea name="message" value={form.message} onChange={handleChange} rows={3} placeholder="Tech stack, integration needs, timeline…" className={inputClass + " resize-none"} />
+                <label htmlFor="api-message" className="field-label">Anything else we should know?</label>
+                <textarea id="api-message" name="message" value={form.message} onChange={handleChange} rows={3} placeholder="Tech stack, integration needs, timeline…" className="field resize-none" />
               </div>
-              <button type="submit" disabled={state === "loading"}
-                className="w-full rounded-xl bg-[#FE4705] py-3.5 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors disabled:opacity-60 shadow-[0_4px_16px_rgba(254, 71, 5,0.25)]">
+              <button type="submit" disabled={state === "loading"} className="btn btn-primary btn-lg w-full">
                 {state === "loading" ? "Submitting…" : "Apply for API Access"}
               </button>
-              <p className="text-center text-xs text-slate-400">No commitment. We&apos;ll respond within 1 business day.</p>
+              <p className="text-center text-sm text-text-muted">No commitment. We&apos;ll respond within 1 business day.</p>
             </form>
           )}
         </div>

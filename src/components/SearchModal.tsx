@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, X, ArrowRight, Layers, Lightbulb, Building2, Handshake, Info, Mail, Bot } from "lucide-react";
 import type { AppDefinition } from "@/data/apps";
+import AppLogo from "./AppLogo";
 
 const staticLinks = [
   { label: "Ecosystem", href: "/ecosystem", icon: Layers, desc: "Browse all products" },
@@ -27,8 +28,17 @@ export default function SearchModal({ open, onClose, apps }: SearchModalProps) {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // Fresh query each time the modal opens (adjusted during render rather than in an effect).
+  const [wasOpen, setWasOpen] = useState(open);
+  if (wasOpen !== open) {
+    setWasOpen(open);
+    if (open) setQuery("");
+  }
+
   useEffect(() => {
-    if (open) { setQuery(""); setTimeout(() => inputRef.current?.focus(), 80); }
+    if (!open) return;
+    const t = setTimeout(() => inputRef.current?.focus(), 80);
+    return () => clearTimeout(t);
   }, [open]);
 
   useEffect(() => {
@@ -60,7 +70,7 @@ export default function SearchModal({ open, onClose, apps }: SearchModalProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-0 z-[70] bg-black/40 backdrop-blur-sm"
+            className="fixed inset-0 z-[70] bg-[#020817]/50 backdrop-blur-sm"
             onClick={onClose}
           />
           <motion.div
@@ -68,42 +78,44 @@ export default function SearchModal({ open, onClose, apps }: SearchModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: -12 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="search-modal fixed inset-x-4 top-20 z-[71] mx-auto max-w-xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Search"
+            className="search-modal fixed inset-x-4 top-20 z-[71] mx-auto max-w-xl overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-lg"
           >
             {/* Input */}
-            <div className="flex items-center gap-3 border-b border-slate-100 px-4 py-3">
-              <Search className="h-4 w-4 text-slate-400 shrink-0" />
+            <div className="flex items-center gap-3 border-b border-border px-4 py-3">
+              <Search className="h-4 w-4 text-text-muted shrink-0" />
               <input
                 ref={inputRef}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search products, pages, features…"
-                className="flex-1 bg-transparent text-sm text-flacron-navy placeholder:text-slate-400 focus:outline-none"
+                aria-label="Search the site"
+                className="flex-1 bg-transparent text-[15px] text-text placeholder:text-text-muted focus:outline-none"
               />
               {query && (
-                <button onClick={() => setQuery("")} className="text-slate-400 hover:text-slate-600">
+                <button type="button" aria-label="Clear search" onClick={() => setQuery("")} className="text-text-muted hover:text-text">
                   <X className="h-4 w-4" />
                 </button>
               )}
-              <kbd className="hidden rounded border border-slate-200 bg-slate-50 px-1.5 py-0.5 text-xs text-slate-400 sm:block">ESC</kbd>
+              <kbd className="hidden rounded border border-border bg-surface-muted px-1.5 py-0.5 text-xs text-text-muted sm:block">ESC</kbd>
             </div>
 
             <div className="max-h-[420px] overflow-y-auto p-2">
               {/* Apps */}
               {filteredApps.length > 0 && (
                 <div className="mb-2">
-                  <p className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-slate-400">Products</p>
+                  <p className="px-3 py-1.5 text-xs font-semibold text-text-muted">Products</p>
                   {filteredApps.map((app) => (
-                    <button key={app.id} onClick={() => go(`/apps/${app.slug}`)}
-                      className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left hover:bg-slate-50 transition-colors">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-50 text-xs font-bold text-[#FE4705]">
-                        {app.name.slice(0, 2).toUpperCase()}
-                      </div>
+                    <button type="button" key={app.id} onClick={() => go(`/apps/${app.slug}`)}
+                      className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left hover:bg-surface-muted focus-visible:bg-surface-muted transition-colors">
+                      <AppLogo name={app.name} logoUrl={app.logoUrl} size={32} />
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-semibold text-flacron-navy truncate">{app.name}</p>
-                        <p className="text-xs text-slate-500 truncate">{app.tagline}</p>
+                        <p className="text-sm font-semibold text-text truncate">{app.name}</p>
+                        <p className="text-xs text-text-muted truncate">{app.tagline}</p>
                       </div>
-                      <ArrowRight className="h-3.5 w-3.5 text-slate-300 shrink-0" />
+                      <ArrowRight className="h-3.5 w-3.5 text-text-muted shrink-0" />
                     </button>
                   ))}
                 </div>
@@ -112,25 +124,25 @@ export default function SearchModal({ open, onClose, apps }: SearchModalProps) {
               {/* Pages */}
               {filteredLinks.length > 0 && (
                 <div>
-                  <p className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-slate-400">Pages</p>
+                  <p className="px-3 py-1.5 text-xs font-semibold text-text-muted">Pages</p>
                   {filteredLinks.map(({ label, href, icon: Icon, desc }) => (
-                    <button key={href} onClick={() => go(href)}
-                      className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left hover:bg-slate-50 transition-colors">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-100">
-                        <Icon className="h-4 w-4 text-slate-500" />
+                    <button type="button" key={href} onClick={() => go(href)}
+                      className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left hover:bg-surface-muted focus-visible:bg-surface-muted transition-colors">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface-muted">
+                        <Icon className="h-4 w-4 text-text-secondary" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-semibold text-flacron-navy">{label}</p>
-                        <p className="text-xs text-slate-500">{desc}</p>
+                        <p className="text-sm font-semibold text-text">{label}</p>
+                        <p className="text-xs text-text-muted">{desc}</p>
                       </div>
-                      <ArrowRight className="h-3.5 w-3.5 text-slate-300 shrink-0" />
+                      <ArrowRight className="h-3.5 w-3.5 text-text-muted shrink-0" />
                     </button>
                   ))}
                 </div>
               )}
 
               {q && filteredApps.length === 0 && filteredLinks.length === 0 && (
-                <p className="px-4 py-8 text-center text-sm text-slate-400">No results for &ldquo;{query}&rdquo;</p>
+                <p className="px-4 py-8 text-center text-sm text-text-muted">No results for &ldquo;{query}&rdquo;</p>
               )}
             </div>
           </motion.div>

@@ -1,189 +1,135 @@
-"use client";
-
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import type { AppDefinition } from "@/data/apps";
 import TrackedLink from "@/components/TrackedLink";
-import CountUp from "@/components/CountUp";
-import HeroAIGraphic from "@/components/HeroAIGraphic";
-
-const customers = ["BuildRight Ltd", "NovaSales", "TrustLayer Inc", "Apex Fieldworks", "Coverline Insurance"];
-
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
-};
-const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
-};
-
-const staticStats = [
-  { value: "99.9%", label: "Uptime SLA" },
-  { value: "2×", label: "Faster Ops" },
-];
+import AppLogo from "@/components/AppLogo";
+import StatusBadge from "@/components/StatusBadge";
+import { categoriesIn } from "@/lib/app-display";
 
 interface HeroSectionProps {
-  productCount: number;
-  industryCount: number;
+  apps: AppDefinition[];
 }
 
-export default function HeroSection({ productCount, industryCount }: HeroSectionProps) {
+/**
+ * Homepage hero. Left: the promise and the two primary actions. Right: the signature element — a live directory of
+ * the ecosystem, rendered from the same catalog as the rest of the site, so it is always true.
+ */
+export default function HeroSection({ apps }: HeroSectionProps) {
+  const categories = categoriesIn(apps);
+  const liveCount = apps.filter((a) => a.status === "live").length;
+  const ordered = [...apps].sort((a, b) => Number(b.status === "live") - Number(a.status === "live"));
+
   const stats = [
-    { value: `${productCount}`, label: "AI Products" },
-    { value: `${industryCount}`, label: "Industries" },
-    ...staticStats,
+    { value: apps.length, label: apps.length === 1 ? "AI product" : "AI products" },
+    { value: liveCount, label: "Live now" },
+    { value: categories.length, label: categories.length === 1 ? "Industry" : "Industries" },
   ];
-  const { scrollY } = useScroll();
-  const graphicY = useTransform(scrollY, [0, 600], [0, -60]);
-  const graphicOpacity = useTransform(scrollY, [0, 500], [1, 0.3]);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-white px-4">
+    <section className="band overflow-hidden" aria-labelledby="hero-title">
+      <div aria-hidden className="grid-lines pointer-events-none absolute inset-0 -z-10" />
 
-      {/* Animated aurora layer */}
-      <div className="pointer-events-none absolute inset-0 hero-aurora" />
+      <div className="container-page grid grid-cols-1 items-center gap-14 pb-20 pt-28 sm:pt-32 lg:min-h-[min(100svh,880px)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16 lg:pb-28 lg:pt-32">
+        {/* Left — promise */}
+        <div>
+          <p style={{ ["--i" as string]: 0 }} className="rise inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3 py-1 text-[13px] text-white/80">
+            <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-[#fe4705]" />
+            AI Apps for a Smarter World
+          </p>
 
-      {/* Particle dot grid */}
-      <div className="pointer-events-none absolute inset-0 particle-grid opacity-30" />
-
-      {/* Soft vignette — very subtle so particles stay visible */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_50%,transparent_50%,rgba(255,255,255,0.6)_100%)]" />
-
-      {/* Blue accent */}
-      <div className="pointer-events-none absolute top-0 right-0 h-[500px] w-[500px] bg-[radial-gradient(circle_at_80%_10%,rgba(37,99,235,0.07)_0%,transparent_65%)]" />
-
-      {/* Content — pt clears the fixed navbar */}
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center pt-20 pb-12 sm:pt-24 sm:pb-16">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-
-          {/* Left — content */}
-          <motion.div
-            variants={container}
-            initial="hidden"
-            animate="show"
-            className="w-full text-center lg:text-left"
+          <h1 style={{ ["--i" as string]: 1 }}
+            id="hero-title"
+            className="rise mt-7 font-display text-[2.5rem] font-semibold leading-[1.04] tracking-[-0.035em] text-white sm:text-[3.4rem] lg:text-[3.9rem]"
           >
-            {/* Eyebrow */}
-            <motion.div variants={item} className="mb-6 inline-flex items-center gap-2 sm:mb-8">
-              <span className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-1.5 text-xs sm:text-sm font-semibold text-[#FE4705]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#FE4705] animate-pulse" />
-                AI Apps for a Smarter World
-              </span>
-            </motion.div>
+            One ecosystem. Multiple AI&#8209;powered solutions.
+          </h1>
 
-            {/* H1 */}
-            <motion.h1
-              variants={item}
-              className="text-4xl font-black leading-[1.05] tracking-tight text-flacron-navy sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl"
-              style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
-            >
-              One Ecosystem.{" "}
-              <span className="text-[#FE4705]">Multiple</span>{" "}
-              <br className="hidden sm:block" />
-              AI-Powered{" "}
-              <span className="text-[#FE4705]">Solutions.</span>
-            </motion.h1>
+          <p style={{ ["--i" as string]: 2 }} className="rise mt-7 max-w-xl text-lg leading-8 text-white/75">
+            Discover Flacron Enterprises&apos; ecosystem of intelligent applications for
+            construction, insurance, lead generation, cybersecurity, sports, and personal growth.
+          </p>
 
-            {/* Subtext */}
-            <motion.p
-              variants={item}
-              className="mx-auto mt-5 max-w-2xl text-base text-slate-600 leading-relaxed sm:mt-6 sm:text-lg md:text-xl lg:mx-0"
-            >
-              Discover Flacron Enterprises&apos; ecosystem of intelligent applications for
-              construction, insurance, lead generation, cybersecurity, sports, and personal growth.
-            </motion.p>
+          <div style={{ ["--i" as string]: 3 }} className="rise mt-10 flex flex-col gap-3 sm:flex-row">
+            <TrackedLink href="/ecosystem" event="cta_explore_ecosystem_hero" className="btn btn-primary btn-lg">
+              Explore the ecosystem <ArrowRight aria-hidden className="h-4 w-4" />
+            </TrackedLink>
+            <TrackedLink href="/book-demo" event="cta_book_demo_hero" className="btn btn-on-band btn-lg">
+              Book a demo
+            </TrackedLink>
+          </div>
 
-            {/* CTAs */}
-            <motion.div
-              variants={item}
-              className="mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center lg:justify-start"
-            >
-              <TrackedLink
-                href="/ecosystem"
-                event="cta_explore_ecosystem_hero"
-                className="ripple-btn inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#FE4705] px-8 py-4 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors shadow-[0_4px_20px_rgba(254, 71, 5,0.3)] sm:w-auto sm:text-base"
-              >
-                Explore Ecosystem <ArrowRight className="h-4 w-4" />
-              </TrackedLink>
-              <TrackedLink
-                href="/book-demo"
-                event="cta_book_demo_hero"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-slate-200 bg-white/80 backdrop-blur-sm px-8 py-4 text-sm font-semibold text-flacron-navy hover:border-[#FE4705] hover:text-[#FE4705] transition-colors sm:w-auto sm:text-base"
-              >
-                Book a Demo
-              </TrackedLink>
-            </motion.div>
-
-            {/* Customer logos — above the fold social proof */}
-            <motion.div variants={item} className="mt-7 sm:mt-8">
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 sm:text-xs">Trusted by teams at</p>
-              <div className="mt-3 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 lg:justify-start">
-                {customers.map((c) => (
-                  <span key={c} className="text-sm font-bold text-slate-400 sm:text-base">{c}</span>
-                ))}
+          <dl style={{ ["--i" as string]: 4 }} className="rise mt-12 grid max-w-md grid-cols-3 divide-x divide-white/10 border-y border-white/10">
+            {stats.map((s) => (
+              <div key={s.label} className="px-4 py-4 first:pl-0">
+                <dt className="text-[13px] text-white/65">{s.label}</dt>
+                <dd className="mt-1 font-display text-3xl font-semibold tabular-nums tracking-[-0.03em] text-white">{s.value}</dd>
               </div>
-            </motion.div>
+            ))}
+          </dl>
 
-            {/* Stats strip */}
-            <motion.div
-              variants={item}
-              className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:mt-12"
-            >
-              {stats.map((s) => (
-                <div
-                  key={s.label}
-                  className="rounded-2xl border border-slate-200 bg-white/80 backdrop-blur-sm px-4 py-3 shadow-sm"
-                >
-                  <CountUp
-                    value={s.value}
-                    className="block text-xl font-black text-[#FE4705] sm:text-2xl"
-                  />
-                  <p className="text-xs font-medium text-slate-500">{s.label}</p>
-                </div>
-              ))}
-            </motion.div>
-
-            {/* Social proof */}
-            <motion.div
-              variants={item}
-              className="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs text-slate-400 sm:gap-6 sm:text-sm lg:justify-start"
-            >
-              {["Microsoft Partner", "IBM Certified", "ISO 27001 Aligned", "Enterprise Ready"].map((badge) => (
-                <span key={badge} className="flex items-center gap-1.5">
-                  <span className="h-1 w-1 rounded-full bg-[#FE4705]" />
-                  {badge}
-                </span>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Right — abstract AI graphic */}
-          <motion.div
-            style={{ y: graphicY, opacity: graphicOpacity }}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="hidden lg:block"
-          >
-            <HeroAIGraphic />
-          </motion.div>
+          <ul style={{ ["--i" as string]: 5 }} className="rise mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/70">
+            {["Microsoft Partner", "IBM Certified", "ISO 27001 Aligned", "Enterprise Ready"].map((badge) => (
+              <li key={badge} className="flex items-center gap-2">
+                <span aria-hidden className="h-1 w-1 rounded-full bg-[#fe4705]" />
+                {badge}
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* Scroll indicator — only on tall viewports */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.6 }}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden sm:block"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.6 }}
-            className="text-slate-300"
-          >
-            <ChevronDown className="h-6 w-6" />
-          </motion.div>
-        </motion.div>
+        {/* Right — live ecosystem directory */}
+        <div className="rise relative" style={{ ["--i" as string]: 2 }}>
+          <div aria-hidden className="pointer-events-none absolute -inset-16 -z-10 hidden lg:block">
+            <div className="rings absolute inset-0" />
+            <div className="radar absolute inset-[12%] opacity-60" />
+          </div>
+          <div className="relative overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-lg">
+            <div className="flex items-center justify-between gap-4 border-b border-border px-5 py-4 sm:px-6">
+              <div>
+                <p className="font-display text-base font-semibold text-text">The Flacron ecosystem</p>
+                <p className="text-[13px] text-text-muted">Every product shares one infrastructure and one team.</p>
+              </div>
+              <span className="hidden shrink-0 items-center gap-1.5 rounded-full bg-success-soft px-2.5 py-1 text-xs font-semibold text-success sm:inline-flex">
+                <span aria-hidden className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-60 motion-reduce:hidden" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-success" />
+                </span>
+                {liveCount} live
+              </span>
+            </div>
+
+            <ul className="divide-y divide-border">
+              {ordered.slice(0, 5).map((app) => (
+                <li key={app.id}>
+                  <Link
+                    href={`/apps/${app.slug}`}
+                    className="group flex items-center gap-4 px-5 py-3.5 transition-colors hover:bg-surface-muted focus-visible:bg-surface-muted sm:px-6"
+                  >
+                    <AppLogo name={app.name} logoUrl={app.logoUrl} size={44} />
+                    <span className="min-w-0 flex-1">
+                      <span className="flex items-center gap-2">
+                        <span className="truncate text-[15px] font-semibold text-text">{app.name}</span>
+                        <span className="hidden text-[13px] text-text-muted sm:inline">{app.category}</span>
+                      </span>
+                      <span className="mt-0.5 block truncate text-[13px] text-text-secondary">{app.tagline}</span>
+                    </span>
+                    <StatusBadge status={app.status} compact className="hidden sm:inline-flex" />
+                    <ArrowUpRight aria-hidden className="h-4 w-4 shrink-0 text-text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent-text" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex flex-wrap items-center gap-2 border-t border-border bg-surface-muted px-5 py-4 sm:px-6">
+              {categories.slice(0, 6).map((c) => (
+                <span key={c} className="chip">{c}</span>
+              ))}
+              <Link href="/ecosystem" className="link-accent ml-auto inline-flex items-center gap-1 text-sm">
+                {apps.length > 5 ? `All ${apps.length} products` : "View all"} <ArrowRight aria-hidden className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

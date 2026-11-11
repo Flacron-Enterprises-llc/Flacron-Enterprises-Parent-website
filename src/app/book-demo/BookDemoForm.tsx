@@ -3,10 +3,18 @@
 import { useState } from "react";
 import { Check, Calendar } from "lucide-react";
 import type { AppDefinition } from "@/data/apps";
-import SectionHeader from "@/components/SectionHeader";
+import PageHero from "@/components/PageHero";
 import CalendarEmbed from "@/components/CalendarEmbed";
+import { fcgeFormSubmitted, fcgeTrack } from "@/lib/growth-engine";
 
 type State = "idle" | "loading" | "success";
+
+const promises = [
+  { title: "Personalised to your use case", desc: "We tailor every demo to your industry, team size, and specific challenges." },
+  { title: "30-minute focused session", desc: "No fluff. You'll see exactly what matters to you in a focused, efficient session." },
+  { title: "Q&A with our team", desc: "Bring your questions — our product specialists will answer every one." },
+  { title: "No commitment required", desc: "A demo is just a conversation. There's no pressure or obligation." },
+];
 
 export default function BookDemoForm({ apps }: { apps: AppDefinition[] }) {
   const [state, setState] = useState<State>("idle");
@@ -20,99 +28,99 @@ export default function BookDemoForm({ apps }: { apps: AppDefinition[] }) {
     e.preventDefault();
     setState("loading");
     try {
-      await fetch("/api/admin/leads", {
+      const res = await fetch("/api/admin/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, source: "book-demo" }),
       });
+      if (res.ok) {
+        fcgeFormSubmitted("book_demo", { email: form.email, name: form.name, company: form.company, phone: form.phone });
+        fcgeTrack("demo_requested", { form: "book_demo" });
+      }
     } catch {
       // silent — don't block UX if Firestore is down
     }
     setState("success");
   }
 
-  const inputClass = "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-flacron-navy placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705] transition-colors";
-
   return (
-    <div className="min-h-screen pt-6 pb-24 px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid gap-16 lg:grid-cols-2 items-start">
-          {/* Left */}
-          <div>
-            <SectionHeader
-              eyebrow="Book a Demo"
-              title="See Flacron in action."
-              description="Get a personalised walkthrough of any product in our ecosystem. Our team will tailor the demo to your specific use case."
-            />
-            <div className="space-y-4">
-              {[
-                { title: "Personalised to your use case", desc: "We tailor every demo to your industry, team size, and specific challenges." },
-                { title: "30-minute focused session", desc: "No fluff. You'll see exactly what matters to you in a focused, efficient session." },
-                { title: "Q&A with our team", desc: "Bring your questions — our product specialists will answer every one." },
-                { title: "No commitment required", desc: "A demo is just a conversation. There's no pressure or obligation." },
-              ].map((item) => (
-                <div key={item.title} className="flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50 p-4">
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FE4705]">
-                    <Check className="h-3.5 w-3.5 text-white" />
-                  </div>
+    <>
+      <PageHero
+        eyebrow="Book a demo"
+        title="See Flacron in action."
+        description="Get a personalised walkthrough of any product in our ecosystem. Our team will tailor the demo to your specific use case."
+      />
+
+      <section className="container-page pb-20 sm:pb-28">
+        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] lg:gap-16">
+          {/* What to expect */}
+          <div className="lg:sticky lg:top-24">
+            <h2 className="font-display text-xl font-semibold text-text">What to expect</h2>
+            <ul className="mt-5 space-y-5">
+              {promises.map((item) => (
+                <li key={item.title} className="flex items-start gap-3.5">
+                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent-soft">
+                    <Check aria-hidden className="h-3.5 w-3.5 text-accent-text" />
+                  </span>
                   <div>
-                    <p className="text-sm font-bold text-flacron-navy">{item.title}</p>
-                    <p className="text-sm text-slate-500">{item.desc}</p>
+                    <p className="text-[15px] font-semibold text-text">{item.title}</p>
+                    <p className="mt-0.5 text-[15px] leading-relaxed text-text-secondary">{item.desc}</p>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
-            <div className="mt-8 flex items-center gap-3 rounded-2xl border border-orange-100 bg-orange-50 p-5">
-              <Calendar className="h-8 w-8 shrink-0 text-[#FE4705]" />
+            </ul>
+            <div className="mt-8 flex items-center gap-4 rounded-[1.25rem] border border-border bg-surface-muted p-5">
+              <Calendar aria-hidden className="h-7 w-7 shrink-0 text-accent-text" />
               <div>
-                <p className="text-sm font-bold text-flacron-navy">Average response time: under 24 hours</p>
-                <p className="text-xs text-slate-500">We confirm every demo request within one business day.</p>
+                <p className="text-[15px] font-semibold text-text">Average response time: under 24 hours</p>
+                <p className="text-sm text-text-secondary">We confirm every demo request within one business day.</p>
               </div>
             </div>
           </div>
 
-          {/* Calendar + Form */}
+          {/* Calendar + form */}
           <div>
-            <p className="mb-3 text-sm font-bold text-flacron-navy">Pick a time that works for you</p>
+            <h2 className="mb-4 font-display text-xl font-semibold text-text">Pick a time that works for you</h2>
             <CalendarEmbed />
-            <div className="my-6 flex items-center gap-3">
-              <span className="h-px flex-1 bg-slate-200" />
-              <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">or send a request</span>
-              <span className="h-px flex-1 bg-slate-200" />
+            <div className="my-8 flex items-center gap-3" aria-hidden>
+              <span className="h-px flex-1 bg-border" />
+              <span className="text-sm text-text-muted">or send a request</span>
+              <span className="h-px flex-1 bg-border" />
             </div>
+
             {state === "success" ? (
-              <div className="flex flex-col items-center justify-center rounded-2xl border border-green-200 bg-green-50 p-8 sm:p-16 text-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-100 mb-4">
-                  <Check className="h-8 w-8 text-green-600" />
-                </div>
-                <h3 className="text-xl font-bold text-flacron-navy mb-2">Demo request received!</h3>
-                <p className="text-slate-500">{"Our team will reach out within 24 hours to schedule your session."}</p>
+              <div role="status" className="flex flex-col items-center justify-center rounded-[1.25rem] border border-border bg-success-soft p-8 text-center sm:p-14">
+                <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-surface">
+                  <Check aria-hidden className="h-7 w-7 text-success" />
+                </span>
+                <h3 className="font-display text-xl font-semibold text-text">Demo request received!</h3>
+                <p className="mt-2 text-text-secondary">Our team will reach out within 24 hours to schedule your session.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-8 shadow-sm space-y-5">
+              <form onSubmit={handleSubmit} className="card space-y-5 p-5 sm:p-8" aria-label="Demo request form">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
-                    <label className="mb-1.5 block text-sm font-medium text-flacron-navy">Full Name *</label>
-                    <input required name="name" value={form.name} onChange={handleChange} placeholder="John Smith" className={inputClass} />
+                    <label htmlFor="demo-name" className="field-label">Full name <span className="text-accent-text">*</span></label>
+                    <input id="demo-name" required name="name" autoComplete="name" value={form.name} onChange={handleChange} placeholder="John Smith" className="field" />
                   </div>
                   <div>
-                    <label className="mb-1.5 block text-sm font-medium text-flacron-navy">Work Email *</label>
-                    <input required type="email" name="email" value={form.email} onChange={handleChange} placeholder="john@company.com" className={inputClass} />
+                    <label htmlFor="demo-email" className="field-label">Work email <span className="text-accent-text">*</span></label>
+                    <input id="demo-email" required type="email" name="email" autoComplete="email" value={form.email} onChange={handleChange} placeholder="john@company.com" className="field" />
                   </div>
                 </div>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
-                    <label className="mb-1.5 block text-sm font-medium text-flacron-navy">Company *</label>
-                    <input required name="company" value={form.company} onChange={handleChange} placeholder="Your company" className={inputClass} />
+                    <label htmlFor="demo-company" className="field-label">Company <span className="text-accent-text">*</span></label>
+                    <input id="demo-company" required name="company" autoComplete="organization" value={form.company} onChange={handleChange} placeholder="Your company" className="field" />
                   </div>
                   <div>
-                    <label className="mb-1.5 block text-sm font-medium text-flacron-navy">Phone</label>
-                    <input name="phone" value={form.phone} onChange={handleChange} placeholder="+1 555 000 0000" className={inputClass} />
+                    <label htmlFor="demo-phone" className="field-label">Phone</label>
+                    <input id="demo-phone" type="tel" name="phone" autoComplete="tel" value={form.phone} onChange={handleChange} placeholder="+1 555 000 0000" className="field" />
                   </div>
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-flacron-navy">Which product interests you? *</label>
-                  <select required name="product" value={form.product} onChange={handleChange} className={inputClass}>
+                  <label htmlFor="demo-product" className="field-label">Which product interests you? <span className="text-accent-text">*</span></label>
+                  <select id="demo-product" required name="product" value={form.product} onChange={handleChange} className="field">
                     <option value="">Select a product...</option>
                     {apps.map((a) => <option key={a.id || a.slug} value={a.slug}>{a.name}</option>)}
                     <option value="multiple">Multiple products</option>
@@ -120,8 +128,8 @@ export default function BookDemoForm({ apps }: { apps: AppDefinition[] }) {
                   </select>
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-flacron-navy">Team size</label>
-                  <select name="teamSize" value={form.teamSize} onChange={handleChange} className={inputClass}>
+                  <label htmlFor="demo-team" className="field-label">Team size</label>
+                  <select id="demo-team" name="teamSize" value={form.teamSize} onChange={handleChange} className="field">
                     <option value="">Select team size...</option>
                     <option>Just me</option>
                     <option>2–10</option>
@@ -131,19 +139,18 @@ export default function BookDemoForm({ apps }: { apps: AppDefinition[] }) {
                   </select>
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-flacron-navy">Anything specific you want to see?</label>
-                  <textarea name="message" value={form.message} onChange={handleChange} rows={3} placeholder="Tell us about your use case or specific questions..." className={inputClass + " resize-none"} />
+                  <label htmlFor="demo-message" className="field-label">Anything specific you want to see?</label>
+                  <textarea id="demo-message" name="message" value={form.message} onChange={handleChange} rows={4} placeholder="Tell us about your use case or specific questions..." className="field resize-y" />
                 </div>
-                <button type="submit" disabled={state === "loading"}
-                  className="w-full rounded-xl bg-[#FE4705] py-4 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors disabled:opacity-60 shadow-[0_4px_16px_rgba(254, 71, 5,0.25)]">
-                  {state === "loading" ? "Submitting..." : "Request My Demo"}
+                <button type="submit" disabled={state === "loading"} className="btn btn-primary btn-lg w-full">
+                  {state === "loading" ? "Submitting..." : "Request my demo"}
                 </button>
-                <p className="text-center text-xs text-slate-400">No spam. No commitment. Just a conversation.</p>
+                <p className="text-center text-sm text-text-muted">No spam. No commitment. Just a conversation.</p>
               </form>
             )}
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }

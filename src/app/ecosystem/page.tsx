@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { getApps } from "@/lib/apps-data";
 import AppGrid from "@/components/AppGrid";
-import SectionHeader from "@/components/SectionHeader";
+import Link from "next/link";
+import PageHero from "@/components/PageHero";
+import TrackedLink from "@/components/TrackedLink";
 import { SITE_NAME, OG_IMAGE } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
@@ -22,52 +24,55 @@ export const metadata: Metadata = {
 
 export default async function EcosystemPage() {
   const apps = await getApps();
+  const stats = [
+    { value: apps.length, label: "Products" },
+    { value: apps.filter((a) => a.status === "live").length, label: "Live now" },
+    { value: apps.filter((a) => a.status === "beta").length, label: "Beta" },
+    { value: apps.filter((a) => a.status === "coming-soon").length, label: "Coming soon" },
+    { value: new Set(apps.map((a) => a.category)).size, label: "Industries" },
+  ].filter((s) => s.value > 0);
+
   return (
-    <div className="min-h-screen pt-6 pb-24 px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        {/* Hero */}
-        <div className="mb-8 sm:mb-16 text-center">
-          <SectionHeader
-            eyebrow="Full Ecosystem"
-            title="Every product. One mission."
-            description="Browse the complete suite of Flacron Enterprises AI products. New solutions are added continuously — this is where you find them all."
-            centered
-          />
-        </div>
+    <>
+      <PageHero
+        eyebrow="Full ecosystem"
+        title="Every product. One mission."
+        description="Browse the complete suite of Flacron Enterprises AI products. New solutions are added continuously — this is where you find them all."
+        aside={
+          <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3 lg:grid-cols-2">
+            {stats.map((s) => (
+              <div key={s.label} className="bg-surface px-5 py-4">
+                <dt className="text-[13px] text-text-muted">{s.label}</dt>
+                <dd className="mt-1 font-display text-3xl font-semibold tabular-nums tracking-[-0.03em] text-text">{s.value}</dd>
+              </div>
+            ))}
+          </dl>
+        }
+      />
 
-        {/* Stats */}
-        <div className="mb-6 sm:mb-12 grid grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-5">
-          {[
-            { value: `${apps.length}`, label: "Products" },
-            { value: `${apps.filter(a => a.status === "live").length}`, label: "Live Now" },
-            { value: `${apps.filter(a => a.status === "beta").length}`, label: "Beta" },
-            { value: `${apps.filter(a => a.status === "coming-soon").length}`, label: "Coming Soon" },
-            { value: `${new Set(apps.map((a) => a.category)).size}`, label: "Industries" },
-          ].map((s) => (
-            <div key={s.label} className="rounded-2xl border border-slate-100 bg-slate-50 px-3 py-4 text-center">
-              <p className="text-2xl font-black text-[#FE4705] sm:text-3xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>{s.value}</p>
-              <p className="mt-0.5 text-xs font-medium text-slate-500 sm:text-sm">{s.label}</p>
-            </div>
-          ))}
-        </div>
-
+      <section className="container-page pb-16 sm:pb-24">
         <AppGrid apps={apps} mode="full" />
 
-        {/* More coming */}
-        <div className="mt-10 sm:mt-20 rounded-2xl bg-orange-50 border border-orange-100 p-6 sm:p-10 text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-[#FE4705] mb-2">Growing Ecosystem</p>
-          <h3 className="text-2xl font-black text-flacron-navy" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
-            More solutions are on the way.
-          </h3>
-          <p className="mt-3 text-slate-500 max-w-lg mx-auto text-sm">
-            We are continuously building and launching new AI-powered products. Want to be first to know?
-          </p>
-          <a href="/contact"
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#FE4705] px-6 py-3 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors">
-            Stay in the Loop
-          </a>
+        <div className="band mt-16 overflow-hidden rounded-[1.75rem] px-6 py-10 sm:mt-24 sm:px-12 sm:py-14">
+          <div aria-hidden className="grid-lines pointer-events-none absolute inset-0 -z-10" />
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-xl">
+              <h2 className="font-display text-2xl font-semibold tracking-[-0.03em] text-white sm:text-3xl">More solutions are on the way.</h2>
+              <p className="mt-3 text-base leading-relaxed text-band-muted">
+                We are continuously building and launching new AI-powered products. Want to be first to know?
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <TrackedLink href="/contact" event="cta_stay_updated" className="btn btn-primary btn-lg">
+                Stay in the loop
+              </TrackedLink>
+              <Link href="/custom-order" className="btn btn-on-band btn-lg">
+                Order a custom build
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }

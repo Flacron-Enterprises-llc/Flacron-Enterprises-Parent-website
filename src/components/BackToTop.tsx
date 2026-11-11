@@ -1,28 +1,37 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    function onScroll() { setVisible(window.scrollY > 400); }
+    function onScroll() { setVisible(window.scrollY > 600); }
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  if (pathname?.startsWith("/admin") || pathname?.startsWith("/dashboard")) return null;
 
   return (
     <AnimatePresence>
       {visible && (
         <motion.button
-          initial={{ opacity: 0, scale: 0.8 }}
+          type="button"
+          initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          transition={{ duration: 0.2 }}
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-8 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-[#FE4705] text-white shadow-[0_4px_20px_rgba(254, 71, 5,0.4)] hover:bg-[#D83C04] transition-colors"
+          exit={{ opacity: 0, scale: 0.85 }}
+          transition={{ duration: 0.18 }}
+          onClick={() => {
+            const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+          }}
+          /* Bottom-left so it never collides with the Growth Engine chat launcher (bottom-right). */
+          className="fixed bottom-6 left-4 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface-raised text-text shadow-md transition-colors hover:border-accent hover:text-accent-text sm:left-6"
           aria-label="Back to top"
         >
           <ArrowUp className="h-5 w-5" />

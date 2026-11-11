@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, CheckCircle } from "lucide-react";
+import { ArrowRight, CheckCircle, ShieldCheck } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
+import PageHero from "@/components/PageHero";
 import { SITE_NAME, OG_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -26,8 +27,6 @@ const partners = [
     type: "Technology Partner",
     description: "Flacron Enterprises is a Microsoft Partner, building on Azure's world-class cloud infrastructure, AI services, and security frameworks. Our products leverage Microsoft Copilot integrations, Azure OpenAI, and enterprise compliance tools.",
     benefits: ["Azure cloud infrastructure", "Microsoft 365 integrations", "Azure AI & Copilot capabilities", "Enterprise security compliance", "Microsoft Teams connectivity"],
-    color: "border-blue-200 bg-blue-50",
-    badge: "bg-blue-100 text-blue-700",
   },
   {
     name: "IBM",
@@ -36,8 +35,6 @@ const partners = [
     type: "Innovation Partner",
     description: "Through our IBM partnership, Flacron Enterprises accesses industry-leading AI research, enterprise consulting frameworks, and IBM's global network of technology innovation. Our platforms benefit from IBM Watson AI capabilities and enterprise integration tools.",
     benefits: ["IBM Watson AI integration", "Enterprise consulting frameworks", "Global technology network", "Industry-specific AI models", "Hybrid cloud deployment"],
-    color: "border-indigo-200 bg-indigo-50",
-    badge: "bg-indigo-100 text-indigo-700",
   },
 ];
 
@@ -50,71 +47,77 @@ const certifications = [
 
 export default function PartnersPage() {
   return (
-    <div className="min-h-screen pt-6 pb-24 px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <SectionHeader
-          eyebrow="Partners & Credentials"
-          title="Built on world-class technology."
-          description="Flacron Enterprises partners with the world's leading technology companies to ensure every product is enterprise-ready, secure, and backed by cutting-edge AI infrastructure."
-          centered
-        />
+    <div>
+      <PageHero
+        eyebrow="Partners & credentials"
+        title="Built on world-class technology."
+        description="Flacron Enterprises partners with the world's leading technology companies to ensure every product is enterprise-ready, secure, and backed by cutting-edge AI infrastructure."
+      />
 
-        {/* Partners */}
-        <div className="grid gap-6 lg:grid-cols-2 mb-16">
+      {/* Partners */}
+      <section className="section border-t border-border bg-surface-muted">
+        <div className="container-page grid gap-6 lg:grid-cols-2">
           {partners.map((p) => (
-            <div key={p.name} className={`rounded-2xl border p-5 sm:p-8 ${p.color}`}>
-              <div className="flex items-center gap-4 mb-5">
-                <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${p.logoBg}`}>
-                  <span className="text-sm font-black text-white tracking-tight">{p.logoInitial}</span>
-                </div>
+            <article key={p.name} className="card flex flex-col p-6 sm:p-9">
+              <div className="mb-6 flex items-center gap-4">
+                <span className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl ${p.logoBg}`}>
+                  <span aria-hidden className="text-sm font-black tracking-tight text-white">{p.logoInitial}</span>
+                </span>
                 <div>
-                  <h2 className="text-2xl font-black text-flacron-navy">{p.name}</h2>
-                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${p.badge}`}>{p.type}</span>
+                  <h2 className="font-display text-2xl font-semibold tracking-[-0.02em] text-text">{p.name}</h2>
+                  <span className="mt-1 inline-block rounded-full bg-info-soft px-2.5 py-0.5 text-xs font-semibold text-info">{p.type}</span>
                 </div>
               </div>
-              <p className="text-slate-600 leading-relaxed mb-6">{p.description}</p>
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">What This Means for You</p>
-                <ul className="space-y-2">
+              <p className="text-base leading-relaxed text-text-secondary">{p.description}</p>
+              <div className="mt-7 border-t border-border pt-6">
+                <h3 className="mb-3 text-sm font-semibold text-text">What this means for you</h3>
+                <ul className="grid gap-2.5 sm:grid-cols-2">
                   {p.benefits.map((b) => (
-                    <li key={b} className="flex items-center gap-2 text-sm text-slate-600">
-                      <CheckCircle className="h-4 w-4 shrink-0 text-[#FE4705]" />{b}
+                    <li key={b} className="flex items-start gap-2 text-[15px] text-text-secondary">
+                      <CheckCircle aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-accent-text" />
+                      {b}
                     </li>
                   ))}
                 </ul>
               </div>
-            </div>
+            </article>
           ))}
         </div>
+      </section>
 
-        {/* Certifications */}
-        <div className="rounded-2xl bg-flacron-navy p-6 sm:p-10">
-          <p className="text-center text-sm font-semibold uppercase tracking-widest text-[#FE4705] mb-8">Security & Compliance</p>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Certifications */}
+      <section className="band section overflow-hidden">
+        <div aria-hidden className="grid-lines pointer-events-none absolute inset-0 -z-10" />
+        <div className="container-page">
+          <SectionHeader eyebrow="Security & compliance" title="Enterprise standards in every product." light />
+          <ul className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
             {certifications.map((c) => (
-              <div key={c.name} className="rounded-xl border border-white/10 bg-white/5 p-5 text-center">
-                <CheckCircle className="mx-auto mb-3 h-6 w-6 text-[#FE4705]" />
-                <p className="text-sm font-bold text-white">{c.name}</p>
-                <p className="mt-1 text-xs text-slate-400">{c.desc}</p>
-              </div>
+              <li key={c.name} className="bg-band p-6">
+                <ShieldCheck aria-hidden className="mb-4 h-6 w-6 text-[#ff8a55]" />
+                <p className="font-display text-base font-semibold text-white">{c.name}</p>
+                <p className="mt-1 text-sm text-band-muted">{c.desc}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
+      </section>
 
-        {/* Partnership interest CTA */}
-        <div className="mt-16 text-center">
-          <h3 className="text-2xl font-black text-flacron-navy mb-3" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
-            Interested in partnering with Flacron?
-          </h3>
-          <p className="text-slate-500 mb-6 max-w-lg mx-auto">
-            We welcome strategic partnerships, technology integrations, and channel partner opportunities.
-          </p>
-          <Link href="/contact"
-            className="inline-flex items-center gap-2 rounded-xl bg-[#FE4705] px-7 py-3.5 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors">
-            Get In Touch <ArrowRight className="h-4 w-4" />
+      {/* Partnership interest CTA */}
+      <section className="section">
+        <div className="container-page flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+          <div className="max-w-2xl">
+            <h2 className="font-display text-3xl font-semibold tracking-[-0.03em] text-text sm:text-4xl">
+              Interested in partnering with Flacron?
+            </h2>
+            <p className="mt-4 text-base text-text-secondary sm:text-lg">
+              We welcome strategic partnerships, technology integrations, and channel partner opportunities.
+            </p>
+          </div>
+          <Link href="/contact" className="btn btn-primary btn-lg w-full sm:w-auto">
+            Get In Touch <ArrowRight aria-hidden className="h-4 w-4" />
           </Link>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

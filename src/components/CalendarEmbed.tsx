@@ -19,18 +19,22 @@ function buildEmbedUrl(link: string): string {
 export default function CalendarEmbed() {
   if (!CAL_LINK) {
     return (
-      <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-10 text-center">
-        <CalendarClock className="h-8 w-8 text-slate-400" />
-        <p className="text-sm font-semibold text-flacron-navy">Instant calendar booking is almost here.</p>
-        <p className="max-w-sm text-sm text-slate-500">
-          For now, fill out the form below and our team will personally reach out within 24 hours to find a time that works.
-        </p>
+      <div className="flex flex-col items-start gap-3 rounded-[1.25rem] border border-dashed border-border-strong bg-surface-muted p-6 sm:flex-row sm:items-center sm:gap-4">
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-surface">
+          <CalendarClock aria-hidden className="h-5 w-5 text-accent-text" />
+        </span>
+        <div>
+          <p className="text-[15px] font-semibold text-text">Instant calendar booking is almost here.</p>
+          <p className="mt-1 text-sm leading-relaxed text-text-secondary">
+            For now, fill out the form below and our team will personally reach out within 24 hours to find a time that works.
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
+    <div className="overflow-hidden rounded-[1.25rem] border border-border bg-surface shadow-sm">
       <iframe
         src={buildEmbedUrl(CAL_LINK)}
         className="h-[680px] w-full"

@@ -12,7 +12,7 @@ interface TrackedLinkProps extends ComponentProps<typeof Link> {
   glow?: boolean;
 }
 
-export default function TrackedLink({ event, eventData, onClick, glow = true, className, ...props }: TrackedLinkProps) {
+export default function TrackedLink({ event, eventData, onClick, glow = false, className, ...props }: TrackedLinkProps) {
   return (
     <Link
       {...props}

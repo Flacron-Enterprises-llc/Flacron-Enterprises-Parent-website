@@ -18,28 +18,23 @@ export default function AiEngineLoginPage() {
     window.location.href = `https://flacronapi.com/login?key=${encodeURIComponent(trimmed)}`;
   }
 
-  const inputClass =
-    "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 pr-11 text-sm font-mono text-flacron-navy placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705] transition-colors";
-
   return (
     <AuthSplitLayout>
-      <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-[#FE4705]">API Engine</p>
-      <h2
-        className="mb-8 text-2xl font-black text-flacron-navy"
-        style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
-      >
+      <p className="mb-2 text-sm font-semibold text-accent-text">API Engine</p>
+      <h2 className="mb-8 font-display text-2xl font-semibold tracking-[-0.02em] text-text sm:text-3xl">
         Sign in with your API key
       </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-flacron-navy">API key</label>
+          <label htmlFor="api-key" className="field-label">API key</label>
           <div className="relative">
             <input
+              id="api-key"
               type={showKey ? "text" : "password"}
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
-              className={inputClass}
+              className="field pr-11 font-mono text-sm"
               placeholder="flcr-••••••••••••••••••••••••••••••••"
               autoComplete="current-password"
               spellCheck={false}
@@ -48,7 +43,7 @@ export default function AiEngineLoginPage() {
             <button
               type="button"
               onClick={() => setShowKey((v) => !v)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+              className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md text-text-muted hover:text-text"
               aria-label={showKey ? "Hide key" : "Show key"}
             >
               {showKey ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -56,23 +51,19 @@ export default function AiEngineLoginPage() {
           </div>
         </div>
 
-        <button
-          type="submit"
-          disabled={submitting || !apiKey.trim()}
-          className="ripple-btn flex w-full items-center justify-center gap-2 rounded-xl bg-[#FE4705] py-3.5 text-sm font-semibold text-white hover:bg-[#D83C04] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-        >
+        <button type="submit" disabled={submitting || !apiKey.trim()} className="btn btn-primary btn-lg w-full">
           {submitting ? "Connecting…" : "Connect"}
-          {!submitting && <ArrowRight className="h-4 w-4" />}
+          {!submitting && <ArrowRight aria-hidden className="h-4 w-4" />}
         </button>
 
-        <p className="flex items-center justify-center gap-1.5 text-center text-[11px] text-slate-400">
-          <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
+        <p className="flex items-center justify-center gap-1.5 text-center text-xs text-text-muted">
+          <ShieldCheck aria-hidden className="h-3.5 w-3.5 text-success" />
           Your key is verified directly by the API Engine gateway
         </p>
 
-        <p className="text-center text-xs text-slate-400 pt-2 border-t border-slate-100">
+        <p className="border-t border-border pt-4 text-center text-sm text-text-muted">
           Don&apos;t have an API key yet?{" "}
-          <Link href="/ai-engine/api-access" className="font-semibold text-[#FE4705] hover:underline">
+          <Link href="/ai-engine/api-access" className="link-accent">
             Request access
           </Link>
         </p>

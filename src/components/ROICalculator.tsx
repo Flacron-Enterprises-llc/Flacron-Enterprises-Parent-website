@@ -31,78 +31,85 @@ export default function ROICalculator() {
   }
 
   return (
-    <div className="mx-auto max-w-4xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
-      <div className="mb-6 flex items-center gap-3 sm:mb-8">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#FE4705]/10">
-          <Calculator className="h-5 w-5 text-[#FE4705]" />
-        </div>
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#FE4705]">Estimate Your ROI</p>
-          <h3 className="text-lg font-bold text-flacron-navy sm:text-xl">See what AI could save your team.</h3>
-        </div>
-      </div>
-
-      <div className="grid gap-8 sm:grid-cols-2">
+    <div className="card overflow-hidden">
+      <div className="grid lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
         {/* Inputs */}
-        <div className="space-y-6">
-          <div>
-            <div className="mb-2 flex items-center justify-between">
-              <label className="text-sm font-medium text-flacron-navy">Team size</label>
-              <span className="text-sm font-bold text-[#FE4705]">{teamSize} people</span>
+        <div className="p-6 sm:p-10">
+          <div className="mb-8 flex items-center gap-3">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-soft">
+              <Calculator aria-hidden className="h-5 w-5 text-accent-text" />
+            </span>
+            <div>
+              <p className="text-sm font-semibold text-accent-text">Estimate your ROI</p>
+              <h3 className="font-display text-lg font-semibold text-text sm:text-xl">See what AI could save your team.</h3>
             </div>
-            <input
-              type="range"
-              min={1}
-              max={200}
-              value={teamSize}
-              onChange={(e) => { setTeamSize(Number(e.target.value)); handleSlide(); }}
-              className="w-full accent-[#FE4705]"
-            />
           </div>
-          <div>
-            <div className="mb-2 flex items-center justify-between">
-              <label className="text-sm font-medium text-flacron-navy">Hours/week on manual work (per person)</label>
-              <span className="text-sm font-bold text-[#FE4705]">{hoursPerWeek}h</span>
+
+          <div className="space-y-8">
+            <div>
+              <div className="mb-3 flex items-baseline justify-between gap-4">
+                <label htmlFor="roi-team" className="text-sm font-medium text-text">Team size</label>
+                <output htmlFor="roi-team" className="font-display text-base font-semibold tabular-nums text-text">{teamSize} people</output>
+              </div>
+              <input
+                id="roi-team"
+                type="range"
+                min={1}
+                max={200}
+                value={teamSize}
+                onChange={(e) => { setTeamSize(Number(e.target.value)); handleSlide(); }}
+                className="w-full cursor-pointer accent-[var(--cta)]"
+              />
             </div>
-            <input
-              type="range"
-              min={1}
-              max={30}
-              value={hoursPerWeek}
-              onChange={(e) => { setHoursPerWeek(Number(e.target.value)); handleSlide(); }}
-              className="w-full accent-[#FE4705]"
-            />
+            <div>
+              <div className="mb-3 flex items-baseline justify-between gap-4">
+                <label htmlFor="roi-hours" className="text-sm font-medium text-text">Hours/week on manual work (per person)</label>
+                <output htmlFor="roi-hours" className="font-display text-base font-semibold tabular-nums text-text">{hoursPerWeek}h</output>
+              </div>
+              <input
+                id="roi-hours"
+                type="range"
+                min={1}
+                max={30}
+                value={hoursPerWeek}
+                onChange={(e) => { setHoursPerWeek(Number(e.target.value)); handleSlide(); }}
+                className="w-full cursor-pointer accent-[var(--cta)]"
+              />
+            </div>
           </div>
         </div>
 
         {/* Output */}
-        <div className="rounded-2xl bg-black p-6 text-center sm:p-7">
-          <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">Estimated monthly savings</p>
-          <p className="mt-2 text-4xl font-black text-[#FE4705] sm:text-5xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
-            ${monthlySavings.toLocaleString()}
-          </p>
-          <div className="mt-4 grid grid-cols-2 gap-3 border-t border-white/10 pt-4">
-            <div>
-              <p className="text-lg font-bold text-white">{hoursSavedPerWeek}h</p>
-              <p className="text-xs text-slate-400">saved / week</p>
-            </div>
-            <div>
-              <p className="text-lg font-bold text-white">{hoursSavedPerYear.toLocaleString()}h</p>
-              <p className="text-xs text-slate-400">saved / year</p>
-            </div>
+        <div className="band flex flex-col justify-between p-6 sm:p-10" aria-live="polite">
+          <div>
+            <p className="text-sm font-medium text-band-muted">Estimated monthly savings</p>
+            <p className="mt-2 font-display text-5xl font-semibold tabular-nums tracking-[-0.03em] text-white sm:text-6xl">
+              ${monthlySavings.toLocaleString()}
+            </p>
           </div>
+          <dl className="mt-8 grid grid-cols-2 gap-4 border-t border-white/10 pt-6">
+            <div className="flex flex-col-reverse">
+              <dt className="text-sm text-band-muted">saved / week</dt>
+              <dd className="font-display text-2xl font-semibold tabular-nums text-white">{hoursSavedPerWeek}h</dd>
+            </div>
+            <div className="flex flex-col-reverse">
+              <dt className="text-sm text-band-muted">saved / year</dt>
+              <dd className="font-display text-2xl font-semibold tabular-nums text-white">{hoursSavedPerYear.toLocaleString()}h</dd>
+            </div>
+          </dl>
+          <TrackedLink
+            href="/book-demo"
+            event="cta_roi_calculator"
+            eventData={{ teamSize, hoursPerWeek, monthlySavings }}
+            className="btn btn-primary btn-lg mt-8 w-full"
+          >
+            Get My Personalized Plan <ArrowRight aria-hidden className="h-4 w-4" />
+          </TrackedLink>
         </div>
       </div>
-
-      <TrackedLink
-        href="/book-demo"
-        event="cta_roi_calculator"
-        eventData={{ teamSize, hoursPerWeek, monthlySavings }}
-        className="mt-7 flex w-full items-center justify-center gap-2 rounded-xl bg-[#FE4705] px-6 py-3.5 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors sm:w-auto sm:mx-auto"
-      >
-        Get My Personalized Plan <ArrowRight className="h-4 w-4" />
-      </TrackedLink>
-      <p className="mt-3 text-center text-xs text-slate-400">Estimate only — based on average automation impact across Flacron customers.</p>
+      <p className="border-t border-border px-6 py-4 text-center text-[13px] text-text-muted sm:px-10">
+        Estimate only — based on average automation impact across Flacron customers.
+      </p>
     </div>
   );
 }

@@ -19,8 +19,9 @@ export const metadata: Metadata = {
 
 export default function VerifyPage() {
   return (
-    <div className="min-h-screen px-4 pt-6 pb-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-2xl pt-4">
+    <div className="relative isolate">
+      <div aria-hidden className="grid-lines pointer-events-none absolute inset-x-0 top-0 -z-10 h-[420px]" />
+      <div className="container-page max-w-2xl pb-24 pt-8 sm:pt-12">
         {/* The code arrives as ?code=… from the link printed on every document. */}
         <Suspense fallback={null}>
           <VerifyDocument />

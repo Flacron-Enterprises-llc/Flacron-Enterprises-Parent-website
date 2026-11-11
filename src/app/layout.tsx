@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
-import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import Navbar from "@/components/Navbar";
@@ -10,19 +9,27 @@ import { ToastProvider } from "@/components/ToastProvider";
 import ScrollProgress from "@/components/ScrollProgress";
 import BackToTop from "@/components/BackToTop";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import LeadCapturePopup from "@/components/LeadCapturePopup";
 import StickyDemoCTA from "@/components/StickyDemoCTA";
-import LiveChatWidget from "@/components/LiveChatWidget";
+import GrowthEngine from "@/components/GrowthEngine";
+import BrandLogo from "@/components/BrandLogo";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import SocialLinks from "@/components/SocialLinks";
 import OrganizationSchema from "@/components/OrganizationSchema";
 import { SITE_URL, SITE_NAME, OG_IMAGE } from "@/lib/site";
+import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap", preload: true });
 const spaceGrotesk = Space_Grotesk({ variable: "--font-space-grotesk", subsets: ["latin"], display: "swap", preload: true });
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#050d1c" },
+  ],
+};
 
 export const metadata: Metadata = {
   title: {
@@ -98,8 +105,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     Legal: footerLinks.Legal,
   };
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} h-full`}>
+    <html lang="en" data-theme="light" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable} h-full`}>
       <head>
+        {/* Applies the saved or system theme before first paint (no flash). Must stay the first thing in <head>. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <Script id="oaiq-pixel" strategy="beforeInteractive">
           {`!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"Mj8SzpYToZ9K41QXQgB4pg",debug:true});`}
         </Script>
@@ -111,7 +120,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             })(window,document,'script','dataLayer','GTM-5VNG2BZ9');`}
         </Script>
       </head>
-      <body className="min-h-full flex flex-col bg-white text-flacron-navy antialiased">
+      <body className="flex min-h-full flex-col bg-bg text-text antialiased">
         <OrganizationSchema />
         <noscript>
           <iframe
@@ -137,59 +146,58 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             <ScrollProgress />
             <Navbar apps={apps} />
             <Breadcrumbs />
-            <main className="flex-1">{children}</main>
+            <main id="main" className="flex-1">{children}</main>
             <BackToTop />
             <StickyDemoCTA />
-            <LeadCapturePopup />
-            <LiveChatWidget />
+            <GrowthEngine />
 
-            <footer className="bg-flacron-navy text-white">
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-                {/* Top */}
-                <div className="flex flex-col gap-12 lg:flex-row">
-                  {/* Brand */}
-                  <div className="lg:w-64 shrink-0">
-                    <Link href="/" className="flex items-center">
-                      <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-white p-1.5">
-                        <Image src="/logo.png" alt="Flacron Enterprises" width={48} height={48} className="h-full w-full object-contain" />
-                      </span>
-                    </Link>
-                    <p className="mt-4 text-sm text-slate-400 leading-relaxed">
+            <footer className="band overflow-hidden">
+              <div aria-hidden className="grid-lines pointer-events-none absolute inset-0 -z-10 opacity-70" />
+              <div className="container-page pb-10 pt-16 sm:pt-20">
+                <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,2fr)] lg:gap-16">
+                  {/* Brand + newsletter */}
+                  <div className="max-w-md">
+                    <BrandLogo inverse />
+                    <p className="mt-5 text-[15px] leading-relaxed text-band-muted">
                       AI Apps for a Smarter World. Building intelligent solutions for business growth, automation, and digital transformation.
                     </p>
-                    <p className="mt-4 text-xs text-slate-500">410 E 95th St, Brooklyn, NY 11212</p>
-                    <p className="mt-1 text-xs text-slate-500">929-444-1275 · Contact@flacronenterprises.com</p>
-                    <SocialLinks className="mt-5" />
+                    <address className="mt-5 space-y-1 text-sm not-italic text-band-muted">
+                      <p>410 E 95th St, Brooklyn, NY 11212</p>
+                      <p>
+                        <a href="tel:+19294441275" className="hover:text-white">929-444-1275</a>
+                        <span aria-hidden className="mx-2 opacity-50">/</span>
+                        <a href="mailto:Contact@flacronenterprises.com" className="hover:text-white">Contact@flacronenterprises.com</a>
+                      </p>
+                    </address>
+                    <SocialLinks className="mt-6" />
+
+                    <div className="mt-10 rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+                      <p className="font-display text-base font-semibold text-white">Stay in the loop</p>
+                      <p className="mb-4 mt-1 text-sm leading-relaxed text-band-muted">Product updates and new AI launches, straight to your inbox.</p>
+                      <NewsletterSignup />
+                    </div>
                   </div>
 
-                  {/* Newsletter */}
-                  <div className="lg:w-72 shrink-0">
-                    <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Stay in the loop</p>
-                    <p className="mb-3 text-sm text-slate-400 leading-relaxed">Product updates and new AI launches, straight to your inbox.</p>
-                    <NewsletterSignup />
-                  </div>
-
-                  {/* Links */}
-                  <div className="flex-1 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
+                  {/* Link columns */}
+                  <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4">
                     {Object.entries(footerColumns).map(([group, links]) => (
-                      <div key={group}>
-                        <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-400">{group}</p>
+                      <nav key={group} aria-label={group}>
+                        <p className="mb-4 text-sm font-semibold text-white">{group}</p>
                         <ul className="space-y-2.5">
                           {links.map(({ label, href }) => (
-                            <li key={label}>
-                              <Link href={href} className="text-sm text-slate-400 hover:text-white transition-colors">{label}</Link>
+                            <li key={`${group}-${href}`}>
+                              <Link href={href} className="text-sm text-band-muted transition-colors hover:text-white">{label}</Link>
                             </li>
                           ))}
                         </ul>
-                      </div>
+                      </nav>
                     ))}
                   </div>
                 </div>
 
-                {/* Bottom */}
-                <div className="mt-12 border-t border-white/10 pt-8 flex flex-col items-center justify-between gap-4 sm:flex-row">
-                  <p className="text-sm text-slate-500">© 2026 Flacron Enterprises LLC. All rights reserved.</p>
-                  <p className="text-xs text-slate-600">Microsoft Partner · IBM Certified · ISO 27001 Aligned</p>
+                <div className="mt-14 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-8 text-sm text-band-muted sm:flex-row sm:items-center">
+                  <p>© 2026 Flacron Enterprises LLC. All rights reserved.</p>
+                  <p>Microsoft Partner · IBM Certified · ISO 27001 Aligned</p>
                 </div>
               </div>
             </footer>

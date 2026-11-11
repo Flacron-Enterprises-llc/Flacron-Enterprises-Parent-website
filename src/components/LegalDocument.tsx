@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 
 export type LegalBlock =
   | { type: "p"; text: string }
@@ -18,20 +19,30 @@ export type LegalDocumentData = {
   footerSummary: LegalBlock[];
 };
 
+function sectionId(index: number, heading: string): string {
+  const slug = heading
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60);
+  return `${index + 1}-${slug || "section"}`;
+}
+
 function Blocks({ blocks }: { blocks: LegalBlock[] }) {
   return (
     <>
       {blocks.map((block, i) =>
         block.type === "p" ? (
-          <p key={i} className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base first:mt-0">
+          <p key={i} className="mt-4 text-[15px] leading-[1.75] text-text-secondary first:mt-0 sm:text-base">
             {block.text}
           </p>
         ) : (
-          <ul key={i} className="mt-3 space-y-1.5">
+          <ul key={i} className="mt-4 space-y-2">
             {block.items.map((item, j) => (
-              <li key={j} className="flex gap-2 text-sm leading-relaxed text-slate-600 sm:text-base">
-                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#FE4705]" />
-                {item}
+              <li key={j} className="flex gap-3 text-[15px] leading-[1.7] text-text-secondary sm:text-base">
+                <span aria-hidden className="mt-[0.7em] h-1 w-1 shrink-0 rounded-full bg-accent" />
+                <span className="min-w-0">{item}</span>
               </li>
             ))}
           </ul>
@@ -41,56 +52,113 @@ function Blocks({ blocks }: { blocks: LegalBlock[] }) {
   );
 }
 
-export default function LegalDocument({ data }: { data: LegalDocumentData }) {
+function TocLinks({ sections }: { sections: LegalSection[] }) {
   return (
-    <div className="min-h-screen bg-white">
-      <section className="border-b border-slate-100 bg-slate-50 px-4 pt-8 pb-10 sm:px-6 sm:pt-12 sm:pb-14 lg:px-8">
-        <div className="mx-auto max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#FE4705]">Legal</p>
-          <h1
-            className="mt-2 text-3xl font-black leading-tight text-flacron-navy sm:text-4xl"
-            style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
+    <ol className="space-y-0.5">
+      {sections.map((section, i) => (
+        <li key={i}>
+          <a
+            href={`#${sectionId(i, section.heading)}`}
+            className="flex gap-2.5 rounded-lg px-3 py-1.5 text-sm leading-snug text-text-secondary transition-colors hover:bg-surface-muted hover:text-text"
           >
+            <span className="w-5 shrink-0 tabular-nums text-text-muted">{i + 1}.</span>
+            <span>{section.heading}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+const legalLinks = [
+  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/terms", label: "Terms & Conditions" },
+  { href: "/refund-policy", label: "Cancellation & Refund Policy" },
+  { href: "/disclaimer", label: "Disclaimer" },
+  { href: "/cookies", label: "Cookies Policy" },
+];
+
+export default function LegalDocument({ data }: { data: LegalDocumentData }) {
+  const hasToc = data.sections.length > 1;
+  return (
+    <div className="relative isolate">
+      {/* Header */}
+      <section className="relative overflow-hidden border-b border-border">
+        <div aria-hidden className="grid-lines pointer-events-none absolute inset-0 -z-10" />
+        <div className="container-page pb-10 pt-8 sm:pb-14 sm:pt-12">
+          <p className="mb-4 inline-flex items-center gap-2 text-sm font-semibold text-accent-text">
+            <span aria-hidden className="h-px w-6 bg-accent" />
+            Legal
+          </p>
+          <h1 className="max-w-3xl font-display text-[2.25rem] font-semibold leading-[1.05] tracking-[-0.035em] text-text sm:text-5xl">
             {data.title}
           </h1>
-          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-400 sm:text-sm">
-            <span>Effective Date: {data.effectiveDate}</span>
-            <span>Last Updated: {data.lastUpdated}</span>
-          </div>
+          <dl className="mt-5 flex flex-wrap gap-x-6 gap-y-1.5 text-sm text-text-muted">
+            <div className="flex gap-1.5">
+              <dt>Effective date:</dt>
+              <dd className="font-medium text-text-secondary">{data.effectiveDate}</dd>
+            </div>
+            <div className="flex gap-1.5">
+              <dt>Last updated:</dt>
+              <dd className="font-medium text-text-secondary">{data.lastUpdated}</dd>
+            </div>
+          </dl>
         </div>
       </section>
 
-      <section className="px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
-        <div className="mx-auto max-w-3xl">
-          <div className="mb-8">
+      <div className={hasToc ? "container-page grid gap-10 py-10 sm:py-14 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-16" : "container-page py-10 sm:py-14"}>
+        {hasToc && (
+          <nav aria-label="On this page" className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:self-start lg:overflow-y-auto">
+            {/* Mobile: collapsible */}
+            <details className="group card lg:hidden">
+              <summary className="flex list-none items-center justify-between gap-3 px-4 py-3.5 text-[15px] font-semibold text-text [&::-webkit-details-marker]:hidden">
+                On this page
+                <ChevronDown aria-hidden className="h-4 w-4 text-text-muted transition-transform group-open:rotate-180" />
+              </summary>
+              <div className="border-t border-border px-1 py-2">
+                <TocLinks sections={data.sections} />
+              </div>
+            </details>
+            {/* Desktop: sticky list */}
+            <div className="hidden lg:block">
+              <p className="mb-2 px-3 text-sm font-semibold text-text">On this page</p>
+              <TocLinks sections={data.sections} />
+            </div>
+          </nav>
+        )}
+
+        <article className="min-w-0 max-w-[70ch]">
+          <div className="mb-10">
             <Blocks blocks={data.intro} />
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-10">
             {data.sections.map((section, i) => (
-              <div key={i} className="scroll-mt-24">
-                <h2 className="text-lg font-bold text-flacron-navy sm:text-xl">
-                  {i + 1}. {section.heading}
+              <section key={i} id={sectionId(i, section.heading)} className="scroll-mt-24 border-t border-border pt-8 first:border-t-0 first:pt-0">
+                <h2 className="mb-4 font-display text-xl font-semibold tracking-[-0.02em] text-text sm:text-2xl">
+                  <span className="mr-2 tabular-nums text-text-muted">{i + 1}.</span>
+                  {section.heading}
                 </h2>
                 <Blocks blocks={section.blocks} />
-              </div>
+              </section>
             ))}
           </div>
 
-          <div className="mt-12 rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-6">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-slate-400">Summary</p>
+          <aside className="mt-14 rounded-[1.25rem] border border-border bg-surface-muted p-5 sm:p-7" aria-label="Summary">
+            <h2 className="mb-3 font-display text-lg font-semibold text-text">Summary</h2>
             <Blocks blocks={data.footerSummary} />
-            <p className="mt-4 text-xs text-slate-400">
+            <p className="mt-5 border-t border-border pt-4 text-sm leading-relaxed text-text-muted">
               Questions? See our{" "}
-              <Link href="/privacy" className="font-medium text-[#FE4705] hover:underline">Privacy Policy</Link>,{" "}
-              <Link href="/terms" className="font-medium text-[#FE4705] hover:underline">Terms &amp; Conditions</Link>,{" "}
-              <Link href="/refund-policy" className="font-medium text-[#FE4705] hover:underline">Cancellation &amp; Refund Policy</Link>,{" "}
-              <Link href="/disclaimer" className="font-medium text-[#FE4705] hover:underline">Disclaimer</Link>, or{" "}
-              <Link href="/cookies" className="font-medium text-[#FE4705] hover:underline">Cookies Policy</Link>.
+              {legalLinks.map((l, i) => (
+                <span key={l.href}>
+                  <Link href={l.href} className="font-medium text-accent-text underline-offset-4 hover:underline">{l.label}</Link>
+                  {i < legalLinks.length - 2 ? ", " : i === legalLinks.length - 2 ? ", or " : "."}
+                </span>
+              ))}
             </p>
-          </div>
-        </div>
-      </section>
+          </aside>
+        </article>
+      </div>
     </div>
   );
 }

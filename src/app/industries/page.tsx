@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Building2, Shield, Briefcase, Lock, Trophy, Leaf } from "lucide-react";
+import { ArrowRight, Building2, Shield, Briefcase, Lock, Trophy, Leaf, type LucideIcon } from "lucide-react";
 import { getApps } from "@/lib/apps-data";
-
-export const dynamic = "force-dynamic";
-import SectionHeader from "@/components/SectionHeader";
+import type { AppDefinition } from "@/data/apps";
+import PageHero from "@/components/PageHero";
 import AppLogo from "@/components/AppLogo";
 import StatusBadge from "@/components/StatusBadge";
+import { categoriesIn, categoryIcon } from "@/lib/app-display";
 import { SITE_NAME, OG_IMAGE } from "@/lib/site";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Industries",
@@ -23,116 +25,163 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: "Industries | Flacron Enterprises", images: [OG_IMAGE] },
 };
 
-const industries = [
+type Match = { categories: string[]; industries: string[] };
+
+/**
+ * Industry stories. Products are attached from their catalog data (category, or an exact industry tag), never by
+ * slug, so new products land in the right place automatically. Categories none of these cover get their own section.
+ */
+const industries: Array<{ name: string; icon: LucideIcon; description: string; challenges: string[]; match: Match }> = [
   {
     name: "Construction & Property",
     icon: Building2,
     description: "The construction industry loses billions annually to inaccurate estimates, poor communication, and compliance failures. Our AI platforms bring precision, automation, and real-time visibility to every project.",
     challenges: ["Manual and inaccurate cost estimation", "Disconnected stakeholder communication", "Compliance and permit management overhead", "Slow insurance claim resolution"],
-    apps: ["flacronbuild", "rapidclaimpro"],
+    match: { categories: ["Construction"], industries: ["Construction"] },
   },
   {
     name: "Insurance",
     icon: Shield,
     description: "Insurance operations are burdened by paper-heavy processes, rising fraud, and policyholder expectations for instant digital experiences. We digitise and automate the full claims lifecycle.",
     challenges: ["Slow and manual claims processing", "Rising fraudulent claim rates", "High cost per claim", "Poor policyholder experience"],
-    apps: ["rapidclaimpro", "flacronbuild"],
+    match: { categories: ["Insurance"], industries: ["Insurance"] },
   },
   {
     name: "Business & Sales",
     icon: Briefcase,
     description: "Growing businesses struggle with inconsistent follow-up, underused CRM tools, and sales teams spending too much time on admin. Our AI growth platform automates the journey from lead to close.",
     challenges: ["Inconsistent lead follow-up", "Low CRM adoption", "Sales admin overhead", "Unpredictable revenue forecasting"],
-    apps: ["flacronconnect-ai"],
+    match: { categories: ["Business", "Marketing"], industries: [] },
   },
   {
     name: "Cybersecurity",
     icon: Lock,
     description: "Cyber threats evolve faster than most security teams can respond. We give organisations the AI intelligence and automation to detect, respond, and stay compliant — without burning out their team.",
     challenges: ["Alert fatigue from too many signals", "Manual compliance reporting", "Slow incident detection and response", "Dark web exposure monitoring"],
-    apps: ["flacronsecure-ai"],
+    match: { categories: ["Security"], industries: ["Cybersecurity"] },
   },
   {
     name: "Sports & Media",
     icon: Trophy,
     description: "Sports organisations struggle to keep fans engaged beyond matchdays while athletes lack tools for direct-to-fan relationships. We build the infrastructure for modern sports engagement.",
     challenges: ["Low fan engagement between events", "Manual content production costs", "Limited athlete monetisation tools", "Fragmented fan community management"],
-    apps: ["flacronsport"],
+    match: { categories: ["Sports"], industries: ["Sports"] },
   },
   {
     name: "Personal Development",
     icon: Leaf,
     description: "The personal development industry is full of content but short on structured, accountable transformation. We combine AI, coaching frameworks, and community to drive real change.",
     challenges: ["Lack of structure and accountability", "Fragmented tools and coaches", "Low habit formation success rates", "Missing peer community support"],
-    apps: ["beingtchitaka"],
+    match: { categories: ["Growth", "Community"], industries: ["Personal Development"] },
   },
 ];
 
+function matches(app: AppDefinition, match: Match) {
+  if (match.categories.includes(app.category)) return true;
+  const tags = (app.industries ?? []).map((i) => i.toLowerCase());
+  return match.industries.some((i) => tags.includes(i.toLowerCase()));
+}
+
+function slugify(name: string) {
+  return name.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
 export default async function IndustriesPage() {
   const apps = await getApps();
-  return (
-    <div className="min-h-screen pt-6 pb-24 px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <SectionHeader
-          eyebrow="Industries"
-          title="Solving real problems in the right industries."
-          description="Every Flacron product is built around deep industry understanding — not generic software adapted to fit."
-          centered
-        />
+  const covered = new Set(industries.flatMap((i) => i.match.categories));
+  const sections = [
+    ...industries.map((ind) => ({ ...ind, relatedApps: apps.filter((a) => matches(a, ind.match)) })),
+    ...categoriesIn(apps)
+      .filter((c) => !covered.has(c))
+      .map((category) => ({
+        name: category,
+        icon: categoryIcon(category),
+        description: "",
+        challenges: [] as string[],
+        relatedApps: apps.filter((a) => a.category === category),
+      })),
+  ];
 
-        <div className="space-y-5">
-          {industries.map((ind) => {
-            const relatedApps = apps.filter((a) => ind.apps.includes(a.slug));
+  return (
+    <div>
+      <PageHero
+        eyebrow="Industries"
+        title="Solving real problems in the right industries."
+        description="Every Flacron product is built around deep industry understanding — not generic software adapted to fit."
+      >
+        <nav aria-label="Industries on this page" className="mt-8 flex flex-wrap gap-2">
+          {sections.map((s) => (
+            <a key={s.name} href={`#${slugify(s.name)}`} className="chip transition-colors hover:border-accent-border hover:text-text">
+              {s.name}
+            </a>
+          ))}
+        </nav>
+      </PageHero>
+
+      <section className="section border-t border-border bg-surface-muted">
+        <div className="container-page space-y-5">
+          {sections.map((ind) => {
             const Icon = ind.icon;
             return (
-              <div key={ind.name} className="rounded-2xl border border-slate-200 bg-white overflow-hidden">
-                <div className="grid grid-cols-1 lg:grid-cols-3">
-                  {/* Left info */}
-                  <div className="p-5 sm:p-8 lg:col-span-2 border-b border-slate-100 lg:border-b-0 lg:border-r">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FE4705]/10">
-                        <Icon className="h-5 w-5 text-[#FE4705]" />
-                      </div>
-                      <h2 className="text-xl font-bold text-flacron-navy">{ind.name}</h2>
+              <article key={ind.name} id={slugify(ind.name)} className="card scroll-mt-24 overflow-hidden">
+                <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+                  <div className="border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r">
+                    <div className="mb-4 flex items-center gap-3">
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-soft">
+                        <Icon aria-hidden className="h-5 w-5 text-accent-text" />
+                      </span>
+                      <h2 className="font-display text-2xl font-semibold tracking-[-0.02em] text-text">{ind.name}</h2>
                     </div>
-                    <p className="text-slate-500 leading-relaxed mb-6">{ind.description}</p>
-                    <div>
-                      <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Key Challenges We Address</p>
-                      <ul className="grid gap-2 sm:grid-cols-2">
-                        {ind.challenges.map((c) => (
-                          <li key={c} className="flex items-start gap-2 text-sm text-slate-600">
-                            <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[#FE4705]" />{c}
+                    {ind.description && <p className="max-w-2xl text-base leading-relaxed text-text-secondary">{ind.description}</p>}
+                    {ind.challenges.length > 0 && (
+                      <div className="mt-6">
+                        <h3 className="mb-3 text-sm font-semibold text-text">Key challenges we address</h3>
+                        <ul className="grid gap-2.5 sm:grid-cols-2">
+                          {ind.challenges.map((c) => (
+                            <li key={c} className="flex items-start gap-2.5 text-[15px] text-text-secondary">
+                              <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                              {c}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                  <div className="bg-surface-muted/60 p-6 sm:p-8">
+                    <h3 className="mb-4 text-sm font-semibold text-text">Relevant products</h3>
+                    {ind.relatedApps.length > 0 ? (
+                      <ul className="space-y-2.5">
+                        {ind.relatedApps.map((app) => (
+                          <li key={app.id}>
+                            <Link
+                              href={`/apps/${app.slug}`}
+                              className="group flex items-center gap-3 rounded-xl border border-border bg-surface p-3 transition-colors hover:border-accent-border"
+                            >
+                              <AppLogo name={app.name} logoUrl={app.logoUrl} size={38} />
+                              <span className="min-w-0 flex-1">
+                                <span className="flex flex-wrap items-center gap-1.5">
+                                  <span className="truncate text-sm font-semibold text-text group-hover:text-accent-text">{app.name}</span>
+                                  <StatusBadge status={app.status} compact />
+                                </span>
+                                <span className="block truncate text-[13px] text-text-muted">{app.tagline}</span>
+                              </span>
+                              <ArrowRight aria-hidden className="h-4 w-4 shrink-0 text-text-muted transition-colors group-hover:text-accent-text" />
+                            </Link>
                           </li>
                         ))}
                       </ul>
-                    </div>
-                  </div>
-                  {/* Right apps */}
-                  <div className="p-5 sm:p-8">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4">Relevant Products</p>
-                    <div className="space-y-3">
-                      {relatedApps.map((app) => (
-                        <Link key={app.id} href={`/apps/${app.slug}`}
-                          className="flex items-center gap-3 rounded-xl border border-slate-100 p-3 hover:border-[#FE4705]/30 hover:bg-orange-50/50 transition-all group">
-                          <AppLogo name={app.name} size={36} />
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2">
-                              <p className="text-sm font-bold text-flacron-navy truncate">{app.name}</p>
-                              <StatusBadge status={app.status} />
-                            </div>
-                            <p className="text-xs text-slate-400 truncate">{app.tagline}</p>
-                          </div>
-                          <ArrowRight className="h-4 w-4 text-slate-300 group-hover:text-[#FE4705] transition-colors shrink-0" />
-                        </Link>
-                      ))}
-                    </div>
+                    ) : (
+                      <p className="text-sm text-text-secondary">
+                        <Link href="/contact" className="link-accent">Talk to our team</Link> about solutions for this industry.
+                      </p>
+                    )}
                   </div>
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>
-      </div>
+      </section>
     </div>
   );
 }

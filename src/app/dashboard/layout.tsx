@@ -101,7 +101,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   );
 
   return (
-    <div className="app-shell" style={{ position: "fixed", inset: 0, zIndex: 9999, display: "flex", background: "#f8fafc", overflow: "hidden" }}>
+    <div data-theme="light" className="app-shell" style={{ position: "fixed", inset: 0, zIndex: 9999, display: "flex", background: "#f8fafc", overflow: "hidden" }}>
       {sidebarOpen && (
         <div className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={() => setSidebarOpen(false)} />
       )}

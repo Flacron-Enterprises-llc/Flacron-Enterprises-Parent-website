@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, Trash2, Save, ArrowLeft, Loader2 } from "lucide-react";
-import type { AppDefinition, AppFeature, AppFAQ } from "@/data/apps";
+import { APP_CATEGORIES, type AppDefinition, type AppFeature, type AppFAQ } from "@/data/apps";
 
-const CATEGORIES = ["Construction", "Business", "Finance", "Growth", "Security", "Sports", "Insurance"] as const;
+const CATEGORIES = APP_CATEGORIES;
 const STATUSES = [
   { value: "live", label: "Live", color: "text-emerald-600" },
   { value: "beta", label: "Beta", color: "text-blue-600" },
@@ -473,6 +473,24 @@ export default function AppForm({ initial, isNew = false }: Props) {
                 onChange={(e) => set("demoURL", e.target.value)}
                 className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
                 placeholder="https://demo.yourapp.com or /book-demo"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Website URL (optional)</label>
+              <input
+                value={app.websiteUrl || ""}
+                onChange={(e) => set("websiteUrl", e.target.value)}
+                className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
+                placeholder="https://yourproduct.com"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Logo URL (optional, transparent https image)</label>
+              <input
+                value={app.logoUrl || ""}
+                onChange={(e) => set("logoUrl", e.target.value)}
+                className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FE4705]/30 focus:border-[#FE4705]"
+                placeholder="https://yourproduct.com/logo-mark.svg"
               />
             </div>
           </>

@@ -77,6 +77,7 @@ export const cookiesPolicy: LegalDocumentData = {
         { type: "p", text: "We may use analytics tools to understand how users interact with our websites, applications, platforms, dashboards, and services. Analytics tools may collect information such as:" },
         { type: "ul", items: ["IP address", "Device type", "Browser type", "Operating system", "Pages viewed", "Referral sources", "Session duration", "Click behavior", "Approximate location", "Technical performance data", "App usage data", "Feature engagement", "Error logs", "Conversion activity"] },
         { type: "p", text: "This information helps us improve our websites, applications, products, customer experience, and service performance." },
+        { type: "p", text: "Flacron Growth Engine — Flacron's own analytics, email and support-chat service, operated by Flacron Enterprises LLC. On our websites it stores first-party visitor and session identifiers in your browser's local storage to measure page visits and form submissions, to connect enquiries you send us (for example through the contact, demo request or newsletter forms) to your visit, and to run the support chat." },
       ],
     },
     {

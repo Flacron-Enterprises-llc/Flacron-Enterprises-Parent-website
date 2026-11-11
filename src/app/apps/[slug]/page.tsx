@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { CheckCircle, ArrowRight, ChevronDown } from "lucide-react";
+import { CheckCircle2, ArrowRight, ArrowUpRight, ChevronDown, AlertTriangle, Sparkles } from "lucide-react";
 import { getApps, getAppBySlug, getAllSlugs } from "@/lib/apps-data";
 import { generateAppMetadata } from "@/lib/seo";
+import { getAppWebsite, websiteHost } from "@/lib/app-display";
 
 export const dynamic = "force-dynamic";
 import AppLogo from "@/components/AppLogo";
 import StatusBadge from "@/components/StatusBadge";
-import GlassCard from "@/components/GlassCard";
 import SectionHeader from "@/components/SectionHeader";
 import WaitlistForm from "@/components/WaitlistForm";
 import DynamicIcon from "@/components/DynamicIcon";
 import AppSchema from "@/components/AppSchema";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import ProductCard from "@/components/ProductCard";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -36,213 +37,280 @@ export default async function AppPage({ params }: PageProps) {
 
   const isComingSoon = app.status === "coming-soon";
   const isBeta = app.status === "beta";
+  const website = getAppWebsite(app);
+
+  // Related products: same category first, then the rest of the catalog, whatever the data source returns.
+  const allApps = await getApps();
+  const others = allApps.filter((a) => a.slug !== app.slug);
+  const related = [...others.filter((a) => a.category === app.category), ...others.filter((a) => a.category !== app.category)].slice(0, 3);
+
+  const websiteLink = website ? (
+    <a
+      href={website}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="btn btn-ghost btn-lg"
+      aria-label={`Visit ${app.name} website (${websiteHost(website)}, opens in a new tab)`}
+    >
+      Visit {websiteHost(website)} <ArrowUpRight aria-hidden className="h-4 w-4" />
+    </a>
+  ) : null;
 
   return (
     <div className="min-h-screen">
       <AppSchema app={app} />
       <Breadcrumbs lastLabel={app.name} />
+
       {/* 1. HERO */}
-      <section className="relative pt-6 pb-10 px-4 sm:px-6 lg:px-8 overflow-hidden bg-white">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_-10%,rgba(254, 71, 5,0.06)_0%,transparent_70%)]" />
-        <div className="mx-auto max-w-7xl relative z-10">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex-1 max-w-2xl">
-              <div className="flex items-center gap-3 mb-4">
-                <AppLogo name={app.name} size={52} />
-                <StatusBadge status={app.status} />
+      <section className="relative isolate overflow-hidden">
+        <div aria-hidden className="grid-lines pointer-events-none absolute inset-0 -z-10" />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-40 right-[-10%] -z-10 h-[420px] w-[620px] rounded-full opacity-60 blur-3xl"
+          style={{ background: "radial-gradient(closest-side, rgb(254 71 5 / 0.14), transparent)" }}
+        />
+        <div className="container-page pb-14 pt-8 sm:pb-20 sm:pt-12">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:items-end lg:gap-16">
+            <div className="max-w-3xl">
+              <div className="flex flex-wrap items-center gap-4">
+                <AppLogo name={app.name} logoUrl={app.logoUrl} size={72} className="shadow-sm" />
+                <div className="flex flex-col gap-1.5">
+                  <StatusBadge status={app.status} className="self-start" />
+                  <span className="text-sm font-medium text-text-muted">{app.category}</span>
+                </div>
               </div>
-              <span className="text-xs font-semibold uppercase tracking-widest text-[#FE4705] mb-2 block">{app.category}</span>
-              <h1 className="text-3xl font-black text-flacron-navy leading-tight sm:text-4xl md:text-5xl lg:text-6xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
+              <h1 className="mt-6 font-display text-[2.5rem] font-semibold leading-[1.02] tracking-[-0.035em] text-text sm:text-5xl lg:text-6xl">
                 {app.name}
               </h1>
-              <p className="mt-3 text-base text-slate-500 leading-relaxed sm:text-lg sm:mt-4">{app.tagline}</p>
+              <p className="mt-4 max-w-2xl text-lg leading-relaxed text-text-secondary sm:text-xl">{app.tagline}</p>
+
               {!isComingSoon && (
-                <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                  <Link href={app.primaryCTA.href}
-                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#FE4705] px-6 py-3 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors shadow-[0_4px_16px_rgba(254, 71, 5,0.25)] sm:px-7 sm:py-3.5 sm:text-base">
-                    {app.primaryCTA.label} <ArrowRight className="h-4 w-4" />
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                  <Link href={app.primaryCTA.href} className="btn btn-primary btn-lg">
+                    {app.primaryCTA.label} <ArrowRight aria-hidden className="h-4 w-4" />
                   </Link>
                   {app.secondaryCTA && (
-                    <Link href={app.secondaryCTA.href}
-                      className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-flacron-navy hover:border-[#FE4705] hover:text-[#FE4705] transition-colors sm:px-7 sm:py-3.5 sm:text-base">
+                    <Link href={app.secondaryCTA.href} className="btn btn-secondary btn-lg">
                       {app.secondaryCTA.label}
                     </Link>
                   )}
+                  {websiteLink}
                 </div>
               )}
               {isComingSoon && (
-                <div className="mt-5 flex flex-wrap items-center gap-2 rounded-xl bg-orange-50 border border-orange-200 px-4 py-3">
-                  <span className="text-sm font-medium text-orange-700">This product is launching soon.</span>
-                  <a href="#waitlist" className="text-sm font-bold text-[#FE4705] hover:underline whitespace-nowrap">Join the waitlist ↓</a>
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-xl border border-accent-border bg-accent-soft px-4 py-3">
+                    <span className="text-sm font-medium text-text">This product is launching soon.</span>
+                    <a href="#waitlist" className="link-accent whitespace-nowrap text-sm">Join the waitlist</a>
+                  </div>
+                  {websiteLink}
                 </div>
               )}
             </div>
-            {/* Metrics */}
+
+            {/* Metric */}
             {app.metrics && (
-              <div className="w-full sm:w-56 lg:w-56 xl:w-64">
-                <GlassCard priority="featured" className="p-5 sm:p-8 text-center">
-                  <p className="text-4xl sm:text-5xl font-black text-[#FE4705]" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>{app.metrics.value}</p>
-                  <p className="mt-2 text-sm font-medium text-slate-500">{app.metrics.label}</p>
-                </GlassCard>
+              <div className="card relative overflow-hidden p-6 sm:p-8">
+                <div aria-hidden className="absolute inset-x-0 top-0 h-1 bg-accent" />
+                <p className="font-display text-5xl font-semibold tracking-[-0.03em] text-accent-text sm:text-6xl">{app.metrics.value}</p>
+                <p className="mt-2 text-sm font-medium text-text-secondary">{app.metrics.label}</p>
               </div>
             )}
           </div>
         </div>
       </section>
 
-      {/* 2. PROBLEM / SOLUTION */}
-      <section className="pt-10 pb-16 px-4 sm:px-6 lg:px-8 sm:pb-20 bg-slate-50">
-        <div className="mx-auto max-w-7xl">
+      {/* 2. OVERVIEW + PROBLEM / SOLUTION */}
+      <section className="section border-y border-border bg-surface-muted">
+        <div className="container-page">
+          {app.longDescription && (
+            <p className="mb-10 max-w-3xl text-lg leading-relaxed text-text-secondary sm:mb-14">{app.longDescription}</p>
+          )}
           <div className="grid gap-5 lg:grid-cols-2">
-            <div className="rounded-2xl border border-red-100 bg-white p-5 sm:p-8">
-              <p className="mb-4 text-xs font-bold uppercase tracking-wider text-red-400">The Problem</p>
-              <p className="text-slate-600 leading-relaxed">{app.problem}</p>
+            <div className="card p-6 sm:p-8">
+              <p className="mb-4 inline-flex items-center gap-2 text-sm font-semibold text-danger">
+                <AlertTriangle aria-hidden className="h-4 w-4" /> The problem
+              </p>
+              <p className="leading-relaxed text-text-secondary">{app.problem}</p>
             </div>
-            <div className="rounded-2xl border border-green-100 bg-white p-5 sm:p-8">
-              <p className="mb-4 text-xs font-bold uppercase tracking-wider text-green-500">Our Solution</p>
-              <p className="text-slate-600 leading-relaxed">{app.solution}</p>
+            <div className="card p-6 sm:p-8">
+              <p className="mb-4 inline-flex items-center gap-2 text-sm font-semibold text-success">
+                <Sparkles aria-hidden className="h-4 w-4" /> Our solution
+              </p>
+              <p className="leading-relaxed text-text-secondary">{app.solution}</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* 3. FEATURES */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 sm:py-20">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeader eyebrow="Features" title={`What ${app.name} does.`} description="Purpose-built tools for your exact workflow." />
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {app.features.map((f) => (
-              <GlassCard key={f.title} className="p-5 sm:p-6">
-                <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-orange-50 text-[#FE4705]">
-                  <DynamicIcon iconName={f.icon} className="h-5 w-5" />
+      {app.features.length > 0 && (
+        <section className="section">
+          <div className="container-page">
+            <SectionHeader eyebrow="Features" title={`What ${app.name} does.`} description="Purpose-built tools for your exact workflow." />
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {app.features.map((f) => (
+                <div key={f.title} className="card p-6">
+                  <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-soft text-accent-text">
+                    <DynamicIcon iconName={f.icon} className="h-5 w-5" />
+                  </div>
+                  <h3 className="font-display text-base font-semibold text-text">{f.title}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-text-secondary">{f.description}</p>
                 </div>
-                <h3 className="text-sm font-bold text-flacron-navy mb-2">{f.title}</h3>
-                <p className="text-sm text-slate-500 leading-relaxed">{f.description}</p>
-              </GlassCard>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* 4. BENEFITS / OUTCOMES */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 sm:py-20 bg-flacron-navy">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeader eyebrow="Benefits" title="Key benefits." light />
-          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            {app.benefits.map((b) => (
-              <div key={b.title} className="rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5">
-                <CheckCircle className="mb-3 h-6 w-6 text-[#FE4705]" />
-                <h3 className="text-sm font-bold text-white mb-1">{b.title}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">{b.description}</p>
-              </div>
-            ))}
+      {/* 4. BENEFITS */}
+      {app.benefits.length > 0 && (
+        <section className="section band">
+          <div aria-hidden className="grid-lines pointer-events-none absolute inset-0 -z-10" />
+          <div className="container-page">
+            <SectionHeader eyebrow="Benefits" title="Key benefits." light />
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {app.benefits.map((b) => (
+                <div key={b.title} className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:p-6">
+                  <CheckCircle2 aria-hidden className="mb-4 h-6 w-6 text-[#ff8a55]" />
+                  <h3 className="font-display text-base font-semibold text-white">{b.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-band-muted">{b.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* 5. WHO IT'S FOR */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 sm:py-20">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeader eyebrow="Built For" title="Who uses it." description="Designed around the people who do this work every day." />
-          <div className="flex flex-wrap gap-3">
-            {app.targetAudience.map((a) => (
-              <span key={a} className="rounded-full border-2 border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 hover:border-[#FE4705] hover:text-[#FE4705] transition-colors">
-                {a}
-              </span>
-            ))}
+      {app.targetAudience.length > 0 && (
+        <section className="section">
+          <div className="container-page">
+            <SectionHeader eyebrow="Built for" title="Who uses it." description="Designed around the people who do this work every day." />
+            <ul className="flex flex-wrap gap-2.5">
+              {app.targetAudience.map((a) => (
+                <li key={a} className="rounded-full border border-border-strong bg-surface px-4 py-2 text-sm font-medium text-text">
+                  {a}
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* 6. USE CASES */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 sm:py-20 bg-slate-50">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeader eyebrow="Use Cases" title="Where it applies." description={`Real scenarios where ${app.name} delivers value.`} />
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {app.useCases.map((uc, i) => (
-              <div key={i} className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 sm:p-5 shadow-sm">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#FE4705] text-xs font-black text-white">
-                  {i + 1}
-                </span>
-                <p className="text-sm font-medium text-slate-700">{uc}</p>
-              </div>
-            ))}
+      {app.useCases.length > 0 && (
+        <section className="section border-y border-border bg-surface-muted">
+          <div className="container-page">
+            <SectionHeader eyebrow="Use cases" title="Where it applies." description={`Real scenarios where ${app.name} delivers value.`} />
+            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {app.useCases.map((uc, i) => (
+                <li key={i} className="card flex items-start gap-3 p-5">
+                  <CheckCircle2 aria-hidden className="mt-0.5 h-5 w-5 shrink-0 text-accent-text" />
+                  <p className="text-[15px] font-medium text-text">{uc}</p>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* 7. TECH STACK */}
-      <section className="py-14 px-4 sm:px-6 lg:px-8 sm:py-16">
-        <div className="mx-auto max-w-7xl">
-          <p className="mb-4 text-xs font-bold uppercase tracking-wider text-slate-400">Tech Stack</p>
-          <div className="flex flex-wrap gap-3">
-            {app.techStack.map((t) => (
-              <span key={t} className="rounded-full border border-orange-200 bg-orange-50 px-5 py-2 text-sm font-semibold text-[#FE4705]">{t}</span>
-            ))}
+      {app.techStack.length > 0 && (
+        <section className="py-14 sm:py-16">
+          <div className="container-page">
+            <h2 className="mb-4 font-display text-lg font-semibold text-text">Tech stack</h2>
+            <ul className="flex flex-wrap gap-2">
+              {app.techStack.map((t) => (
+                <li key={t} className="chip px-4 py-1.5 text-sm">{t}</li>
+              ))}
+            </ul>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* 8. FAQ */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 sm:py-20 bg-slate-50">
-        <div className="mx-auto max-w-3xl">
-          <SectionHeader eyebrow="FAQ" title="Common questions." centered />
-          <div className="space-y-4">
-            {app.faqs.map((faq) => (
-              <details key={faq.question} className="group rounded-2xl border border-slate-200 bg-white shadow-sm">
-                <summary className="flex cursor-pointer items-center justify-between p-5 sm:p-6 text-sm font-bold text-flacron-navy list-none">
-                  {faq.question}
-                  <ChevronDown className="h-4 w-4 text-slate-400 transition-transform group-open:rotate-180 shrink-0 ml-4" />
-                </summary>
-                <div className="px-5 pb-5 pt-0 sm:px-6 sm:pb-6">
-                  <p className="text-sm text-slate-500 leading-relaxed">{faq.answer}</p>
-                </div>
-              </details>
-            ))}
+      {app.faqs.length > 0 && (
+        <section className="section border-t border-border bg-surface-muted">
+          <div className="container-page max-w-3xl">
+            <SectionHeader eyebrow="FAQ" title="Common questions." />
+            <div className="space-y-3">
+              {app.faqs.map((faq) => (
+                <details key={faq.question} className="card group">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-[1.25rem] p-5 text-[15px] font-semibold text-text sm:p-6 [&::-webkit-details-marker]:hidden">
+                    {faq.question}
+                    <ChevronDown aria-hidden className="h-4 w-4 shrink-0 text-text-muted transition-transform group-open:rotate-180" />
+                  </summary>
+                  <div className="px-5 pb-5 sm:px-6 sm:pb-6">
+                    <p className="text-[15px] leading-relaxed text-text-secondary">{faq.answer}</p>
+                  </div>
+                </details>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* 9. FINAL CTA */}
-      <section id="waitlist" className="py-16 px-4 sm:px-6 lg:px-8 sm:py-24">
-        <div className="mx-auto max-w-4xl">
+      <section id="waitlist" className="section scroll-mt-24">
+        <div className="container-page max-w-5xl">
           {isComingSoon ? (
-            <div className="text-center mb-10">
-              <SectionHeader eyebrow="Coming Soon" title={`Be first to try ${app.name}.`} description="Join the waitlist and get notified the moment we launch." centered />
-              <div className="max-w-xl mx-auto">
+            <div>
+              <SectionHeader eyebrow="Coming soon" title={`Be first to try ${app.name}.`} description="Join the waitlist and get notified the moment we launch." centered />
+              <div className="mx-auto max-w-xl">
                 <WaitlistForm appName={app.name} appSlug={app.slug} />
               </div>
             </div>
           ) : (
-            <div className="relative overflow-hidden rounded-2xl bg-flacron-navy p-7 sm:p-12 text-center">
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(254, 71, 5,0.12)_0%,transparent_70%)]" />
-              <div className="relative z-10">
-                <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#FE4705]">{isBeta ? "Join the Beta" : "Get Started"}</p>
-                <h2 className="text-2xl font-black text-white sm:text-4xl" style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}>
-                  Ready to get started with {app.name}?
-                </h2>
-                <p className="mt-4 text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
-                  {isBeta
-                    ? "Join our beta programme and help shape the product while getting early access."
-                    : `Talk to our team to see if ${app.name} fits your workflow.`}
-                </p>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
-                  <Link href={app.primaryCTA.href}
-                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#FE4705] px-8 py-4 text-base font-semibold text-white hover:bg-[#D83C04] transition-colors shadow-[0_4px_20px_rgba(254, 71, 5,0.3)]">
-                    {app.primaryCTA.label} <ArrowRight className="h-4 w-4" />
+            <div className="band overflow-hidden rounded-3xl px-6 py-12 text-center sm:px-12 sm:py-16">
+              <div aria-hidden className="grid-lines pointer-events-none absolute inset-0 -z-10" />
+              <p className="mb-3 text-sm font-semibold text-[#ff8a55]">{isBeta ? "Join the beta" : "Get started"}</p>
+              <h2 className="font-display text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl">
+                Ready to get started with {app.name}?
+              </h2>
+              <p className="mx-auto mt-4 max-w-xl text-base text-band-muted sm:text-lg">
+                {isBeta
+                  ? "Join our beta programme and help shape the product while getting early access."
+                  : `Talk to our team to see if ${app.name} fits your workflow.`}
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
+                <Link href={app.primaryCTA.href} className="btn btn-primary btn-lg">
+                  {app.primaryCTA.label} <ArrowRight aria-hidden className="h-4 w-4" />
+                </Link>
+                {app.secondaryCTA && (
+                  <Link href={app.secondaryCTA.href} className="btn btn-on-band btn-lg">
+                    {app.secondaryCTA.label}
                   </Link>
-                  {app.secondaryCTA && (
-                    <Link href={app.secondaryCTA.href}
-                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-8 py-4 text-base font-semibold text-white hover:bg-white/10 transition-colors">
-                      {app.secondaryCTA.label}
-                    </Link>
-                  )}
-                </div>
+                )}
+                {website && (
+                  <a href={website} target="_blank" rel="noopener noreferrer" className="btn btn-on-band btn-lg">
+                    Visit site <ArrowUpRight aria-hidden className="h-4 w-4" />
+                  </a>
+                )}
               </div>
             </div>
           )}
         </div>
       </section>
+
+      {/* 10. RELATED PRODUCTS */}
+      {related.length > 0 && (
+        <section className="section border-t border-border bg-surface-muted">
+          <div className="container-page">
+            <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <h2 className="font-display text-3xl font-semibold tracking-[-0.03em] text-text sm:text-4xl">More from Flacron</h2>
+              <Link href="/ecosystem" className="link-accent inline-flex items-center gap-1.5 text-sm">
+                View the ecosystem <ArrowRight aria-hidden className="h-4 w-4" />
+              </Link>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {related.map((r) => (
+                <ProductCard key={r.slug} app={r} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }

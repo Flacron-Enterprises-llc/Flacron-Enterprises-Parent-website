@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Brain, Zap, Shield, BarChart3, Network, Cpu, Eye, MessageSquare, RefreshCw, Lock, Code2, Layers, Check } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
-import GlassCard from "@/components/GlassCard";
-import WaveDivider from "@/components/WaveDivider";
+import AppLogo from "@/components/AppLogo";
+import { getApps } from "@/lib/apps-data";
 import { SITE_NAME, OG_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -30,20 +30,21 @@ const capabilities = [
 ];
 
 const pillars = [
-  { icon: Zap,    title: "Speed",    value: "<200ms",       desc: "Average inference latency across all endpoints." },
-  { icon: Shield, title: "Accuracy", value: "97.4%",        desc: "Task-specific accuracy across live deployments." },
+  { icon: Zap,    title: "Speed",    value: "Low latency",  desc: "Fast inference across all endpoints." },
+  { icon: Shield, title: "Accuracy", value: "Task-tuned",   desc: "Models tuned to each product's specific tasks." },
   { icon: Lock,   title: "Privacy",  value: "SOC 2 Ready",  desc: "Zero data retention. Your data never trains shared models." },
-  { icon: Cpu,    title: "Scale",    value: "10M+/day",     desc: "Enterprise-grade volume with auto-scaling infra." },
+  { icon: Cpu,    title: "Scale",    value: "Auto-scaling", desc: "Enterprise-grade volume with auto-scaling infra." },
 ];
 
-const products = [
-  { name: "FlacronBuild",       ai: "Cost estimation AI, damage CV, compliance NLP",          slug: "flacronbuild" },
-  { name: "FlacronConnect AI",  ai: "Lead scoring, conversation intelligence, outreach gen",   slug: "flacronconnect-ai" },
-  { name: "RapidClaimPro",      ai: "Fraud detection, document OCR, claims triage",            slug: "rapidclaimpro" },
-  { name: "FlacronSecure AI",   ai: "Threat classification, anomaly detection, dark web NLP",  slug: "flacronsecure-ai" },
-  { name: "FlacronSport",       ai: "Fan sentiment, AI content generation, performance stats", slug: "flacronsport" },
-  { name: "Being Tchitaka OS",    ai: "Behavioural patterns, personalised coaching, habit AI",   slug: "beingtchitaka" },
-];
+/**
+ * Which engine capabilities each product uses — optional copy keyed by catalog slug. Every product the catalog
+ * returns is listed; products without an entry here are summarised from their own feature list.
+ */
+const aiByProduct: Record<string, string> = {
+  flacronbuild: "Cost estimation AI, damage CV, compliance NLP",
+  flacronsport: "Fan sentiment, AI content generation, performance stats",
+  beingtchitaka: "Behavioural patterns, personalised coaching, habit AI",
+};
 
 const architecture = [
   { step: "01", title: "Data Ingestion",      desc: "Structured and unstructured data enters via secure APIs, SDKs, or native integrations." },
@@ -53,200 +54,193 @@ const architecture = [
   { step: "05", title: "Output Delivery",     desc: "Results are delivered via real-time streams or webhooks directly into the product experience." },
 ];
 
-export default function AIEnginePage() {
+export default async function AIEnginePage() {
+  const apps = await getApps();
+  const products = apps.map((a) => ({
+    name: a.name,
+    slug: a.slug,
+    logoUrl: a.logoUrl,
+    ai: aiByProduct[a.slug] ?? (a.features?.length ? a.features.slice(0, 3).map((f) => f.title).join(", ") : a.tagline),
+  }));
+
   return (
     <div className="min-h-screen">
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-flacron-navy px-4 pt-20 pb-14 sm:px-6 sm:pt-28 sm:pb-20 lg:px-8">
-        <div className="pointer-events-none absolute inset-0 particle-grid opacity-10" />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_80%,rgba(254, 71, 5,0.12)_0%,transparent_70%)]" />
-
-        <div className="relative z-10 mx-auto max-w-5xl text-center">
-          <div className="mb-5 inline-flex items-center gap-2">
-            <span className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 text-xs font-semibold text-[#FE4705] sm:text-sm">
-              <Brain className="h-3.5 w-3.5" />
+      <section className="band mt-4 overflow-hidden">
+        <div aria-hidden className="grid-lines pointer-events-none absolute inset-0 -z-10" />
+        <div className="container-page pb-16 pt-12 sm:pb-24 sm:pt-16">
+          <div className="max-w-4xl">
+            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3.5 py-1.5 text-sm font-medium text-[#ffb08a]">
+              <Brain aria-hidden className="h-4 w-4" />
               Proprietary AI Infrastructure
-            </span>
+            </p>
+
+            <h1 className="font-display text-[2.5rem] font-semibold leading-[1.02] tracking-[-0.035em] text-white sm:text-6xl lg:text-7xl">
+              The Intelligence Behind Everything.
+            </h1>
+
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-band-muted">
+              Flacron AI Engine is the proprietary platform powering every product in our ecosystem —
+              built for industry-specific reasoning, real-time inference, and enterprise-grade reliability.
+            </p>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Link href="/book-demo" className="btn btn-primary btn-lg">
+                Request AI Demo <ArrowRight aria-hidden className="h-4 w-4" />
+              </Link>
+              <Link href="/ecosystem" className="btn btn-on-band btn-lg">
+                See Products Using It
+              </Link>
+            </div>
+
+            <p className="mt-6 text-sm text-band-muted">
+              Already have API access?{" "}
+              <Link href="/ai-engine/login" className="font-semibold text-[#ff8a55] underline-offset-4 hover:underline">Sign in with your API key</Link>
+            </p>
           </div>
-
-          <h1
-            className="text-3xl font-black leading-tight tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
-            style={{ fontFamily: "var(--font-space-grotesk)" }}
-          >
-            The Intelligence<br />
-            <span className="text-[#FE4705]">Behind Everything.</span>
-          </h1>
-
-          <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-300 leading-relaxed sm:mt-6 sm:text-base lg:text-lg">
-            Flacron AI Engine is the proprietary platform powering every product in our ecosystem —
-            built for industry-specific reasoning, real-time inference, and enterprise-grade reliability.
-          </p>
-
-          <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:justify-center sm:gap-4">
-            <Link href="/book-demo"
-              className="ripple-btn inline-flex items-center justify-center gap-2 rounded-xl bg-[#FE4705] px-6 py-3 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors shadow-[0_4px_20px_rgba(254, 71, 5,0.35)] sm:px-8 sm:py-4">
-              Request AI Demo <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link href="/ecosystem"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white hover:border-white/40 hover:bg-white/10 transition-colors sm:px-8 sm:py-4">
-              See Products Using It
-            </Link>
-          </div>
-
-          <p className="mt-5 text-xs text-slate-400 sm:text-sm">
-            Already have API access?{" "}
-            <Link href="/ai-engine/login" className="font-semibold text-[#FE4705] hover:underline">Sign in with your API key</Link>
-          </p>
 
           {/* Pillar stats */}
-          <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-12 sm:grid-cols-4 sm:gap-4">
+          <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:mt-16 lg:grid-cols-4">
             {pillars.map(({ icon: Icon, title, value, desc }) => (
-              <div key={title} className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center backdrop-blur-sm sm:p-5">
-                <Icon className="mx-auto mb-2 h-4 w-4 text-[#FE4705] sm:h-5 sm:w-5 sm:mb-3" />
-                <p className="text-lg font-black text-white sm:text-2xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>{value}</p>
-                <p className="text-[10px] font-semibold text-[#FE4705] uppercase tracking-wider mt-0.5 sm:text-xs">{title}</p>
-                <p className="mt-1 hidden text-xs text-slate-400 leading-snug sm:block">{desc}</p>
+              <div key={title} className="bg-[#04122b] p-5 sm:p-6">
+                <dt className="flex items-center gap-2 text-sm font-medium text-[#ffb08a]">
+                  <Icon aria-hidden className="h-4 w-4" />
+                  {title}
+                </dt>
+                <dd className="mt-3 font-display text-2xl font-semibold tracking-[-0.02em] text-white sm:text-3xl">{value}</dd>
+                <dd className="mt-1.5 hidden text-sm leading-snug text-band-muted sm:block">{desc}</dd>
               </div>
             ))}
-          </div>
+          </dl>
         </div>
       </section>
 
-      <WaveDivider fill="#ffffff" />
-
       {/* ── Core Capabilities ── */}
-      <section className="py-10 px-4 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
-        <div className="mx-auto max-w-7xl">
+      <section className="section">
+        <div className="container-page">
           <SectionHeader
-            eyebrow="Core Capabilities"
+            eyebrow="Core capabilities"
             title="AI built for real-world complexity."
             description="Six foundational AI capabilities that power every Flacron product across every industry."
-            centered
           />
-          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {capabilities.map(({ icon: Icon, title, desc }) => (
-              <GlassCard key={title} className="p-5 sm:p-6">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#FE4705]/10 sm:mb-4 sm:h-11 sm:w-11">
-                  <Icon className="h-5 w-5 text-[#FE4705]" />
+              <div key={title} className="card p-6">
+                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-accent-soft">
+                  <Icon aria-hidden className="h-5 w-5 text-accent-text" />
                 </div>
-                <h3 className="text-sm font-bold text-flacron-navy mb-1.5 sm:text-base sm:mb-2">{title}</h3>
-                <p className="text-xs text-slate-500 leading-relaxed sm:text-sm">{desc}</p>
-              </GlassCard>
+                <h3 className="font-display text-base font-semibold text-text">{title}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-text-secondary">{desc}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── Architecture ── */}
-      <section className="bg-slate-50 py-10 px-4 sm:px-6 sm:py-16 lg:px-8 lg:py-24 border-y border-slate-100">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeader
-            eyebrow="How It Works"
-            title="From data to decision in milliseconds."
-            description="A five-layer pipeline that transforms raw business data into actionable AI-driven intelligence."
-            centered
-          />
-          <div className="relative">
-            <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-[#FE4705]/30 via-[#FE4705]/60 to-transparent hidden sm:block sm:left-8" />
-            <div className="space-y-3 sm:space-y-4">
+      <section className="section border-y border-border bg-surface-muted">
+        <div className="container-page">
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:gap-16">
+            <SectionHeader
+              eyebrow="How it works"
+              title="From data to decision, fast."
+              description="A five-layer pipeline that transforms raw business data into actionable AI-driven intelligence."
+              className="lg:sticky lg:top-28 lg:self-start"
+            />
+            <ol className="relative space-y-3">
               {architecture.map(({ step, title, desc }) => (
-                <div key={step} className="relative flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm hover:border-[#FE4705]/30 hover:shadow-md transition-all sm:gap-6 sm:p-6">
-                  <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[#FE4705]/30 bg-orange-50 sm:h-12 sm:w-12">
-                    <span className="text-xs font-black text-[#FE4705]">{step}</span>
+                <li key={step} className="card relative flex items-start gap-4 p-4 sm:gap-5 sm:p-5">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-accent-border bg-accent-soft font-display text-sm font-semibold text-accent-text sm:h-11 sm:w-11">
+                    {step}
+                  </span>
+                  <div className="min-w-0 pt-1.5">
+                    <h3 className="font-display text-base font-semibold text-text">{title}</h3>
+                    <p className="mt-1 text-[15px] leading-relaxed text-text-secondary">{desc}</p>
                   </div>
-                  <div className="pt-1 sm:pt-0">
-                    <h3 className="text-sm font-bold text-flacron-navy sm:text-base">{title}</h3>
-                    <p className="mt-1 text-xs text-slate-500 leading-relaxed sm:text-sm">{desc}</p>
-                  </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </div>
       </section>
 
       {/* ── AI Per Product ── */}
-      <section className="py-10 px-4 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeader
-            eyebrow="AI Across the Ecosystem"
-            title="Every product. Powered by the engine."
-            description="See exactly which AI capabilities are deployed inside each Flacron product."
-            centered
-          />
-          <div className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
-            {products.map(({ name, ai, slug }) => (
-              <Link key={slug} href={`/apps/${slug}`}
-                className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:border-[#FE4705]/40 hover:shadow-md transition-all sm:p-6">
-                <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-[#FE4705]/10 sm:h-10 sm:w-10">
-                  <Brain className="h-4 w-4 text-[#FE4705] sm:h-5 sm:w-5" />
-                </div>
-                <h3 className="text-sm font-bold text-flacron-navy mb-1.5 group-hover:text-[#FE4705] transition-colors">{name}</h3>
-                <p className="text-xs text-slate-500 leading-relaxed">{ai}</p>
-                <div className="mt-3 flex items-center gap-1 text-xs font-semibold text-[#FE4705]">
-                  View product <ArrowRight className="h-3 w-3" />
-                </div>
-              </Link>
-            ))}
+      {products.length > 0 && (
+        <section className="section">
+          <div className="container-page">
+            <SectionHeader
+              eyebrow="AI across the ecosystem"
+              title="Every product. Powered by the engine."
+              description="See exactly which AI capabilities are deployed inside each Flacron product."
+            />
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {products.map(({ name, ai, slug, logoUrl }) => (
+                <Link key={slug} href={`/apps/${slug}`} className="card card-interactive group flex flex-col p-6">
+                  <AppLogo name={name} logoUrl={logoUrl} size={40} />
+                  <h3 className="mt-4 font-display text-base font-semibold text-text group-hover:text-accent-text">{name}</h3>
+                  <p className="mt-1.5 flex-1 text-sm leading-relaxed text-text-secondary">{ai}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-accent-text">
+                    View product <ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ── Two Ways to Access ── */}
-      <section className="bg-orange-50 border-y border-orange-100 py-10 px-4 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
-        <div className="mx-auto max-w-7xl">
+      <section className="section border-y border-border bg-surface-muted">
+        <div className="container-page">
           <SectionHeader
-            eyebrow="Get Access"
+            eyebrow="Get access"
             title="Two ways to use the Flacron AI Engine."
             description="Whether you want to call our API directly or deploy a fully branded version — we have a path for you."
-            centered
           />
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-5 md:grid-cols-2">
 
             {/* Option 2 — API */}
-            <div className="flex flex-col rounded-2xl border border-orange-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-[#FE4705]/50 transition-all sm:p-7">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#FE4705]/10 mb-4 sm:h-12 sm:w-12 sm:mb-5">
-                <Code2 className="h-5 w-5 text-[#FE4705] sm:h-6 sm:w-6" />
+            <div className="card flex flex-col border-accent-border p-6 sm:p-8">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft">
+                <Code2 aria-hidden className="h-6 w-6 text-accent-text" />
               </div>
-              <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-[#FE4705]">Option 2</p>
-              <h3 className="text-lg font-black text-flacron-navy mb-2 sm:text-xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>API Platform Access</h3>
-              <p className="text-sm text-slate-500 leading-relaxed mb-4 sm:mb-5">
+              <p className="mb-1 text-sm font-semibold text-accent-text">Option 2</p>
+              <h3 className="font-display text-xl font-semibold text-text sm:text-2xl">API Platform Access</h3>
+              <p className="mb-5 mt-2 text-[15px] leading-relaxed text-text-secondary">
                 Call our AI endpoints directly from your own product. Industry-trained models for language, vision, scoring, and prediction — on a simple REST API. Plans from $299/month.
               </p>
-              <ul className="space-y-2 mb-5 flex-1 sm:mb-6">
-                {["50K–unlimited API calls/month", "12 AI model endpoints", "Sub-200ms inference", "Zero data retention"].map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-slate-600">
-                    <Check className="h-4 w-4 text-[#FE4705] shrink-0" /> {f}
+              <ul className="mb-7 flex-1 space-y-2.5">
+                {["50K–unlimited API calls/month", "12 AI model endpoints", "Fast inference", "Zero data retention"].map((f) => (
+                  <li key={f} className="flex items-center gap-2.5 text-[15px] text-text">
+                    <Check aria-hidden className="h-4 w-4 shrink-0 text-accent-text" /> {f}
                   </li>
                 ))}
               </ul>
-              <Link href="/ai-engine/api-access"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#FE4705] px-5 py-3 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors">
-                Apply for API Access <ArrowRight className="h-4 w-4" />
+              <Link href="/ai-engine/api-access" className="btn btn-primary">
+                Apply for API Access <ArrowRight aria-hidden className="h-4 w-4" />
               </Link>
             </div>
 
             {/* Option 3 — White-Label */}
-            <div className="flex flex-col rounded-2xl border border-orange-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-[#FE4705]/50 transition-all sm:p-7">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-flacron-navy/5 mb-4 sm:h-12 sm:w-12 sm:mb-5">
-                <Layers className="h-5 w-5 text-flacron-navy sm:h-6 sm:w-6" />
+            <div className="card flex flex-col p-6 sm:p-8">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-info-soft">
+                <Layers aria-hidden className="h-6 w-6 text-info" />
               </div>
-              <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-flacron-navy">Option 3</p>
-              <h3 className="text-lg font-black text-flacron-navy mb-2 sm:text-xl" style={{ fontFamily: "var(--font-space-grotesk)" }}>White-Label Deployment</h3>
-              <p className="text-sm text-slate-500 leading-relaxed mb-4 sm:mb-5">
+              <p className="mb-1 text-sm font-semibold text-info">Option 3</p>
+              <h3 className="font-display text-xl font-semibold text-text sm:text-2xl">White-Label Deployment</h3>
+              <p className="mb-5 mt-2 text-[15px] leading-relaxed text-text-secondary">
                 License the full Flacron AI stack under your brand. Deployed on your infrastructure, customised to your workflows, with a dedicated team. Starts at $25,000.
               </p>
-              <ul className="space-y-2 mb-5 flex-1 sm:mb-6">
+              <ul className="mb-7 flex-1 space-y-2.5">
                 {["Your brand, your domain", "Dedicated AI infrastructure", "Custom model training", "Revenue-share available"].map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-slate-600">
-                    <Check className="h-4 w-4 text-flacron-navy shrink-0" /> {f}
+                  <li key={f} className="flex items-center gap-2.5 text-[15px] text-text">
+                    <Check aria-hidden className="h-4 w-4 shrink-0 text-info" /> {f}
                   </li>
                 ))}
               </ul>
-              <Link href="/ai-engine/white-label"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-flacron-navy bg-white px-5 py-3 text-sm font-semibold text-flacron-navy hover:bg-flacron-navy hover:text-white transition-colors">
-                Start White-Label Enquiry <ArrowRight className="h-4 w-4" />
+              <Link href="/ai-engine/white-label" className="btn btn-secondary">
+                Start White-Label Enquiry <ArrowRight aria-hidden className="h-4 w-4" />
               </Link>
             </div>
 
@@ -255,30 +249,28 @@ export default function AIEnginePage() {
       </section>
 
       {/* ── Trust & Security ── */}
-      <section className="bg-flacron-navy py-12 px-4 sm:px-6 sm:py-20 lg:px-8 relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 particle-grid opacity-10" />
-        <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#FE4705] mb-3 sm:text-sm sm:mb-4">Enterprise Trust</p>
-          <h2 className="text-2xl font-black text-white sm:text-3xl sm:mb-4 mb-3" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+      <section className="section band overflow-hidden">
+        <div aria-hidden className="grid-lines pointer-events-none absolute inset-0 -z-10" />
+        <div className="container-page max-w-4xl text-center">
+          <p className="mb-3 text-sm font-semibold text-[#ff8a55]">Enterprise trust</p>
+          <h2 className="font-display text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl">
             AI you can trust at scale.
           </h2>
-          <p className="text-sm text-slate-300 leading-relaxed mb-6 max-w-2xl mx-auto sm:text-base sm:mb-8 lg:text-lg">
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-band-muted sm:text-lg">
             Built on Microsoft and IBM infrastructure with ISO 27001-aligned practices, SOC 2-ready architecture, and zero-data-retention by default.
           </p>
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+          <ul className="mt-8 flex flex-wrap justify-center gap-2 sm:gap-3">
             {["Microsoft Azure AI", "IBM watsonx", "ISO 27001 Aligned", "SOC 2 Ready", "GDPR Compliant", "Zero Data Retention"].map((b) => (
-              <span key={b} className="rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-xs font-medium text-slate-300 sm:px-4 sm:py-2 sm:text-sm">
+              <li key={b} className="rounded-full border border-white/15 bg-white/[0.05] px-3.5 py-1.5 text-sm font-medium text-white/90">
                 {b}
-              </span>
+              </li>
             ))}
-          </div>
-          <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
-            <Link href="/book-demo"
-              className="ripple-btn rounded-xl bg-[#FE4705] px-6 py-3 text-sm font-semibold text-white hover:bg-[#D83C04] transition-colors text-center sm:px-8 sm:py-4">
+          </ul>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
+            <Link href="/book-demo" className="btn btn-primary btn-lg">
               Request AI Demo
             </Link>
-            <Link href="/contact"
-              className="rounded-xl border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors text-center sm:px-8 sm:py-4">
+            <Link href="/contact" className="btn btn-on-band btn-lg">
               Talk to Our AI Team
             </Link>
           </div>

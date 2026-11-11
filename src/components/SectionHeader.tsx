@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface SectionHeaderProps {
@@ -8,41 +5,34 @@ interface SectionHeaderProps {
   title: string;
   description?: string;
   centered?: boolean;
+  /** For use on the navy band. */
   light?: boolean;
+  className?: string;
+  /** Heading level; defaults to h2. */
+  as?: "h1" | "h2";
 }
 
-export default function SectionHeader({ eyebrow, title, description, centered = false, light = false }: SectionHeaderProps) {
+/** Section title block. Left-aligned by default; the eyebrow is a short sentence-case kicker in the accent colour. */
+export default function SectionHeader({ eyebrow, title, description, centered = false, light = false, className, as = "h2" }: SectionHeaderProps) {
+  const Heading = as;
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.45, ease: "easeOut" as const }}
-      className={cn("mb-8 sm:mb-12", centered && "text-center")}
-    >
+    <div className={cn("mb-12 max-w-2xl sm:mb-14", centered && "mx-auto text-center", className)}>
       {eyebrow && (
-        <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#FE4705] sm:mb-3 sm:text-sm">
-          {eyebrow}
-        </p>
+        <p className={cn("mb-4 text-sm font-medium", light ? "text-[#ff8a55]" : "text-accent-text")}>{eyebrow}</p>
       )}
-      <h2
+      <Heading
         className={cn(
-          "text-3xl font-black leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl",
-          light ? "text-white" : "text-flacron-navy"
+          "font-display text-[1.9rem] font-semibold leading-tight tracking-[-0.025em] sm:text-[2.3rem]",
+          light ? "text-white" : "text-text"
         )}
-        style={{ fontFamily: "var(--font-space-grotesk, sans-serif)" }}
       >
         {title}
-      </h2>
+      </Heading>
       {description && (
-        <p className={cn(
-          "mt-3 text-sm leading-relaxed sm:mt-4 sm:text-base lg:text-lg",
-          centered && "mx-auto max-w-2xl",
-          light ? "text-slate-300" : "text-slate-500"
-        )}>
+        <p className={cn("mt-4 text-[16.5px] leading-7", centered && "mx-auto max-w-2xl", light ? "text-white/75" : "text-text-secondary")}>
           {description}
         </p>
       )}
-    </motion.div>
+    </div>
   );
 }

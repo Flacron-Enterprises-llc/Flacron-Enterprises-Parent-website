@@ -9,14 +9,20 @@ const legacyRedirects: Array<[string, string]> = [
   ["/terms-conditions", "/terms"],
   ["/privacy-policy-2", "/privacy"],
   ["/flacronbuild", "/apps/flacronbuild"],
-  ["/flacronconnect-ai", "/apps/flacronconnect-ai"],
-  ["/rapidclaimpro", "/apps/rapidclaimpro"],
+  ["/flacronconnect-ai", "/ecosystem"],
+  ["/rapidclaimpro", "/ecosystem"],
   ["/flacronsport", "/apps/flacronsport"],
   ["/flacronsport-daily", "/apps/flacronsport"],
   ["/tchitaka-growth", "/apps/beingtchitaka"],
   ["/cryptopilot-ai", "/apps/cryptopilotai"],
   ["/flacroncv", "/apps/flacroncv"],
   ["/apps", "/ecosystem"],
+  // Products withdrawn from the catalog until they have a live site; their old pages are indexed.
+  ["/apps/flacrongamezone", "/ecosystem"],
+  ["/apps/flacronconnect-ai", "/ecosystem"],
+  ["/apps/flacronsecure-ai", "/ecosystem"],
+  ["/apps/flacronpay", "/ecosystem"],
+  ["/apps/rapidclaimpro", "/ecosystem"],
 ];
 
 const nextConfig: NextConfig = {

@@ -6,7 +6,6 @@
 export const productWebsites: Record<string, string> = {
   beingtchitaka: "https://beingtchitakaos.com",
   flacronapi: "https://flacronapi.com",
-  flacrongamezone: "https://flacrongamezone.com",
   flacronai: "https://flacronai.com",
   flacroncv: "https://flacroncv.com/en",
 };

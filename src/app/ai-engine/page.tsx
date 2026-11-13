@@ -257,10 +257,10 @@ export default async function AIEnginePage() {
             AI you can trust at scale.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-band-muted sm:text-lg">
-            Built on Microsoft and IBM infrastructure with ISO 27001-aligned practices, SOC 2-ready architecture, and zero-data-retention by default.
+            Built on Microsoft, IBM and AWS infrastructure with ISO 27001-aligned practices, SOC 2-ready architecture, and zero-data-retention by default.
           </p>
           <ul className="mt-8 flex flex-wrap justify-center gap-2 sm:gap-3">
-            {["Microsoft Azure AI", "IBM watsonx", "ISO 27001 Aligned", "SOC 2 Ready", "GDPR Compliant", "Zero Data Retention"].map((b) => (
+            {["Microsoft Azure AI", "IBM watsonx", "AWS Cloud", "ISO 27001 Aligned", "SOC 2 Ready", "GDPR Compliant", "Zero Data Retention"].map((b) => (
               <li key={b} className="rounded-full border border-white/15 bg-white/[0.05] px-3.5 py-1.5 text-sm font-medium text-white/90">
                 {b}
               </li>

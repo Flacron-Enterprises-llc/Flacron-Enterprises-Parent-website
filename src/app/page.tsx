@@ -49,7 +49,7 @@ const differentiators = [
   { title: "AI-First Architecture",   desc: "Every product is built with AI at the core, not bolted on as an afterthought." },
   { title: "Scalable Solutions",      desc: "From solo founders to enterprise teams — our platforms grow as you grow." },
   { title: "Industry-Focused",        desc: "Each product is purpose-built for its industry's specific workflows and regulations." },
-  { title: "Partner-Backed",          desc: "Built on Microsoft and IBM technology with enterprise-grade security and reliability." },
+  { title: "Partner-Backed",          desc: "Built on Microsoft, IBM and AWS technology with enterprise-grade security and reliability." },
   { title: "Future-Ready Platform",   desc: "New products are constantly being added. One relationship, expanding capability." },
 ];
 
@@ -68,7 +68,7 @@ const quickActions = [
 const faqs = [
   { q: "What is Flacron Enterprises?", a: "Flacron is an ecosystem of AI-powered products, each purpose-built for a specific industry — from construction and insurance to cybersecurity and personal growth — sharing one infrastructure, support team, and account." },
   { q: "How fast can I deploy a Flacron AI product?", a: "Most teams are live within days, not months. Our guided onboarding and prebuilt integrations mean you skip the long implementation cycles typical of enterprise software." },
-  { q: "Do Flacron products integrate with my existing tools?", a: "Yes. Every product is built on a shared, Microsoft and IBM-backed infrastructure with standard integrations into common CRMs, calendars, and business tools." },
+  { q: "Do Flacron products integrate with my existing tools?", a: "Yes. Every product is built on a shared, Microsoft-, IBM- and AWS-backed infrastructure with standard integrations into common CRMs, calendars, and business tools." },
   { q: "Is my data secure?", a: "Security is core to our architecture, not an add-on. We align with ISO 27001 practices and enterprise-grade encryption across every product in the ecosystem." },
   { q: "Can I use more than one Flacron product?", a: "Absolutely — that's the point of the ecosystem. Add products as you grow, and they work together under one relationship instead of stitching together separate vendors." },
 ];

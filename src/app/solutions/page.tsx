@@ -101,7 +101,7 @@ export default async function SolutionsPage() {
                   Our team works with businesses to design custom AI solutions beyond our standard product catalogue. Tell us your challenge and we&apos;ll find a way.
                 </p>
                 <p className="mt-6 text-sm text-band-muted">
-                  Microsoft Partner · IBM Certified · Responds within 1 business day
+                  Microsoft Partner · IBM Certified · AWS Partner · Responds within 1 business day
                 </p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">

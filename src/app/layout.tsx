@@ -197,7 +197,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
                 <div className="mt-14 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-8 text-sm text-band-muted sm:flex-row sm:items-center">
                   <p>© 2026 Flacron Enterprises LLC. All rights reserved.</p>
-                  <p>Microsoft Partner · IBM Certified · ISO 27001 Aligned</p>
+                  <p>Microsoft Partner · IBM Certified · AWS Partner · ISO 27001 Aligned</p>
                 </div>
               </div>
             </footer>

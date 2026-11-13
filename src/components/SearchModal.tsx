@@ -11,7 +11,7 @@ const staticLinks = [
   { label: "Ecosystem", href: "/ecosystem", icon: Layers, desc: "Browse all products" },
   { label: "Solutions", href: "/solutions", icon: Lightbulb, desc: "Solutions by business need" },
   { label: "Industries", href: "/industries", icon: Building2, desc: "Industry-specific tools" },
-  { label: "Partners", href: "/partners", icon: Handshake, desc: "Microsoft, IBM & certifications" },
+  { label: "Partners", href: "/partners", icon: Handshake, desc: "Microsoft, IBM, AWS & certifications" },
   { label: "About", href: "/about", icon: Info, desc: "Our mission and values" },
   { label: "Contact", href: "/contact", icon: Mail, desc: "Talk to our team" },
   { label: "AI Engine", href: "/ai-engine", icon: Bot, desc: "The AI powering Flacron" },

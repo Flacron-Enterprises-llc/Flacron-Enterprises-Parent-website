@@ -68,7 +68,7 @@ export default function HeroSection({ apps }: HeroSectionProps) {
           </dl>
 
           <ul style={{ ["--i" as string]: 5 }} className="rise mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/70">
-            {["Microsoft Partner", "IBM Certified", "ISO 27001 Aligned", "Enterprise Ready"].map((badge) => (
+            {["Microsoft Partner", "IBM Certified", "AWS Partner", "ISO 27001 Aligned"].map((badge) => (
               <li key={badge} className="flex items-center gap-2">
                 <span aria-hidden className="h-1 w-1 rounded-full bg-[#fe4705]" />
                 {badge}

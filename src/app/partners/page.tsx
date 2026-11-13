@@ -7,7 +7,7 @@ import { SITE_NAME, OG_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Partners",
-  description: "Flacron Enterprises partners with Microsoft and IBM to deliver enterprise-grade AI solutions backed by world-class technology.",
+  description: "Flacron Enterprises partners with Microsoft, IBM and AWS to deliver enterprise-grade AI solutions backed by world-class technology.",
   alternates: { canonical: "/partners" },
   openGraph: {
     type: "website",
@@ -36,6 +36,14 @@ const partners = [
     description: "Through our IBM partnership, Flacron Enterprises accesses industry-leading AI research, enterprise consulting frameworks, and IBM's global network of technology innovation. Our platforms benefit from IBM Watson AI capabilities and enterprise integration tools.",
     benefits: ["IBM Watson AI integration", "Enterprise consulting frameworks", "Global technology network", "Industry-specific AI models", "Hybrid cloud deployment"],
   },
+  {
+    name: "Amazon Web Services",
+    logoInitial: "AWS",
+    logoBg: "bg-[#232F3E]",
+    type: "Cloud Partner",
+    description: "Flacron Enterprises is an AWS Partner. Our products run on Amazon Web Services — secure, scalable cloud infrastructure for hosting, data, storage and email delivery, so every Flacron app is fast and reliable wherever your team works.",
+    benefits: ["AWS cloud hosting (Amplify & ECS)", "Managed databases & caching", "Amazon S3 secure storage", "Amazon SES email delivery", "Scalable, high-availability infrastructure"],
+  },
 ];
 
 const certifications = [
@@ -56,11 +64,11 @@ export default function PartnersPage() {
 
       {/* Partners */}
       <section className="section border-t border-border bg-surface-muted">
-        <div className="container-page grid gap-6 lg:grid-cols-2">
+        <div className="container-page grid gap-6 lg:grid-cols-3">
           {partners.map((p) => (
             <article key={p.name} className="card flex flex-col p-6 sm:p-9">
               <div className="mb-6 flex items-center gap-4">
-                <span className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl ${p.logoBg}`}>
+                <span className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl ring-1 ring-inset ring-white/15 ${p.logoBg}`}>
                   <span aria-hidden className="text-sm font-black tracking-tight text-white">{p.logoInitial}</span>
                 </span>
                 <div>
@@ -71,7 +79,7 @@ export default function PartnersPage() {
               <p className="text-base leading-relaxed text-text-secondary">{p.description}</p>
               <div className="mt-7 border-t border-border pt-6">
                 <h3 className="mb-3 text-sm font-semibold text-text">What this means for you</h3>
-                <ul className="grid gap-2.5 sm:grid-cols-2">
+                <ul className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-1">
                   {p.benefits.map((b) => (
                     <li key={b} className="flex items-start gap-2 text-[15px] text-text-secondary">
                       <CheckCircle aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-accent-text" />

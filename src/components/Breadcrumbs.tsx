@@ -18,10 +18,11 @@ const labels: Record<string, string> = {
   "refund-policy": "Cancellation & refunds",
   "api-access": "API access",
   "white-label": "White label",
+  blog: "Blog",
 };
 
 const TOP_LEVEL_ROUTES = new Set([
-  "about", "ai-engine", "apps", "book-demo", "contact", "cookies", "custom-order", "disclaimer", "ecosystem",
+  "about", "ai-engine", "apps", "blog", "book-demo", "contact", "cookies", "custom-order", "disclaimer", "ecosystem",
   "industries", "partners", "privacy", "refund-policy", "solutions", "terms", "verify",
 ]);
 
@@ -31,7 +32,8 @@ const TOP_LEVEL_ROUTES = new Set([
  */
 export default function Breadcrumbs({ lastLabel }: { lastLabel?: string } = {}) {
   const pathname = usePathname();
-  if (!lastLabel && pathname.startsWith("/apps/")) return null;
+  // App pages and blog articles render their own trail with the real title (lastLabel).
+  if (!lastLabel && (pathname.startsWith("/apps/") || pathname.startsWith("/blog/"))) return null;
   if (pathname === "/" || pathname.startsWith("/admin") || pathname.startsWith("/dashboard")) return null;
 
   const segments = pathname.split("/").filter(Boolean);

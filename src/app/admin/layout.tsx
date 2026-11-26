@@ -17,11 +17,13 @@ import {
   Layers,
   FileText,
   Zap,
+  Newspaper,
 } from "lucide-react";
 
 const navItems = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { label: "Apps", href: "/admin/apps", icon: AppWindow },
+  { label: "Blog", href: "/admin/blog", icon: Newspaper },
   { label: "Leads", href: "/admin/leads", icon: Inbox },
   { label: "AI Engine Customers", href: "/admin/customers", icon: Building2 },
   { label: "Custom Orders", href: "/admin/custom-orders", icon: Layers },

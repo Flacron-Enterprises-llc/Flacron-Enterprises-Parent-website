@@ -72,12 +72,16 @@ export const metadata: Metadata = {
     },
   },
   manifest: "/manifest.json",
+  alternates: {
+    types: { "application/rss+xml": [{ url: "/rss.xml", title: "Flacron Enterprises — News & Insights" }] },
+  },
 };
 
 const footerLinks = {
   Company: [
     { label: "About", href: "/about" },
     { label: "Partners", href: "/partners" },
+    { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
     { label: "Book a Demo", href: "/book-demo" },
   ],

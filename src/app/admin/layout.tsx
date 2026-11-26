@@ -46,7 +46,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     router.push("/admin/login");
   }
 
-  const SidebarContent = () => (
+  // Plain JSX (not a component defined during render), so the sidebar keeps its state between renders.
+  const sidebarContent = (
     <>
       {/* Logo */}
       <div className="px-5 py-4 border-b border-white/5 flex items-center justify-between">
@@ -127,7 +128,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}
       >
-        <SidebarContent />
+        {sidebarContent}
       </aside>
 
       {/* Content */}

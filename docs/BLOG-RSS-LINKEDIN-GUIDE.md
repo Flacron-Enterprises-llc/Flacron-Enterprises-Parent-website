@@ -27,12 +27,12 @@ Admin panel (/admin/blog)  →  Firestore (blog_posts)  →  /blog page
 |---|------|-------------|--------|
 | 1 | Blog pages, RSS feed, admin panel ka code | Developer | ✅ Ho gaya |
 | 2 | Code test (typecheck, lint, security tests, screenshots) | Developer | ✅ Ho gaya |
-| 3 | Code ko GitHub par merge karna aur deploy karna | Aap / developer | ⬜ Step 2 |
-| 4 | Hosting par env variables check karna | Aap | ⬜ Step 3 |
-| 5 | Admin panel se Firestore ke saath test post | Aap | ⬜ Step 4 |
-| 6 | Feed validator se feed check karna | Aap | ⬜ Step 5 |
-| 7 | LinkedIn page par admin access confirm karna | Aap | ⬜ Step 6.1 |
-| 8 | Zapier se RSS → LinkedIn automation lagana | Aap | ⬜ Step 6 |
+| 3 | Code ko GitHub par merge karna aur deploy karna | Developer | ✅ Ho gaya (PR #12, Amplify job #37) |
+| 4 | Hosting par env variables check karna | Developer | ✅ Ho gaya (sab pehle se set the) |
+| 5 | Firestore ke saath test (save, publish, schedule, delete) | Developer | ✅ Ho gaya (production par) |
+| 6 | Feed validator + LinkedIn Post Inspector | Developer | ✅ Ho gaya (valid feed, preview sahi) |
+| 7 | Zapier account + LinkedIn page admin se connect | Rodrigue | ⬜ Step 6.1–6.2 |
+| 8 | Zapier se RSS → LinkedIn automation lagana | Developer | ⬜ Step 6.3 |
 | 9 | Pehli asli post publish kar ke LinkedIn par check karna | Aap | ⬜ Step 7 |
 
 ---
@@ -289,6 +289,9 @@ Zapier mein Feed URL ki jagah inhein mein se koi bhi daal sakte hain.
 - Desktop, tablet (1024px) aur mobile par screenshots. Naya header "More" dropdown ke saath.
 - TypeScript typecheck aur lint clean.
 
-**Baaqi (aap ki taraf se, kyun ke is ke liye live credentials chahiye):**
-- Asli Firestore ke saath save/publish/delete (Step 4). Developer ke computer par Firebase ki keys nahi thi, is liye yeh live site par hi test hoga.
-- Zapier → LinkedIn connection (Step 6 aur 7).
+- Production par Firestore ka poora test: admin login, save, draft chhupna, publish, sitemap, schedule, validation, delete (sab pass). Test post delete kar di gayi.
+- W3C validator: feed valid. LinkedIn Post Inspector: title, description, image aur "Article" type sahi.
+
+**Baaqi:**
+- Zapier account aur LinkedIn connection (Step 6). Yeh Rodrigue ke LinkedIn admin account se hoga.
+- Pehli asli post se end-to-end check (Step 7).

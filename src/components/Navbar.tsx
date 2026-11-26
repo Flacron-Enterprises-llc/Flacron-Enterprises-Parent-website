@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { Menu, X, ChevronDown, ArrowRight, Search, Bot } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowRight, Search, Bot, Factory, Handshake, Building2, Mail } from "lucide-react";
 import type { AppDefinition } from "@/data/apps";
 import AppLogo from "./AppLogo";
 import StatusBadge from "./StatusBadge";
@@ -14,14 +14,19 @@ import ThemeToggle from "./ThemeToggle";
 import BrandLogo from "./BrandLogo";
 import { cn } from "@/lib/utils";
 
+// Shown inline in the desktop header. The rest sit under "More" so the bar stays uncluttered.
 const navLinks = [
   { label: "Ecosystem", href: "/ecosystem" },
   { label: "Solutions", href: "/solutions" },
-  { label: "Industries", href: "/industries" },
   { label: "AI Engine", href: "/ai-engine" },
-  { label: "Partners", href: "/partners" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Blog", href: "/blog" },
+];
+
+const moreLinks = [
+  { label: "Industries", href: "/industries", desc: "AI built for your sector", icon: Factory },
+  { label: "Partners", href: "/partners", desc: "Microsoft, IBM, AWS and our network", icon: Handshake },
+  { label: "About", href: "/about", desc: "Our mission and story", icon: Building2 },
+  { label: "Contact", href: "/contact", desc: "Talk to sales or support", icon: Mail },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -32,9 +37,12 @@ export default function Navbar({ apps }: { apps: AppDefinition[] }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const pathname = usePathname() ?? "/";
   const megaRef = useRef<HTMLDivElement>(null);
+  const moreRef = useRef<HTMLLIElement>(null);
+  const moreActive = moreLinks.some((l) => isActive(pathname, l.href));
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -50,6 +58,7 @@ export default function Navbar({ apps }: { apps: AppDefinition[] }) {
     setLastPath(pathname);
     setMobileOpen(false);
     setMegaOpen(false);
+    setMoreOpen(false);
   }
 
   // Lock page scroll behind the mobile menu.
@@ -63,11 +72,12 @@ export default function Navbar({ apps }: { apps: AppDefinition[] }) {
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (megaRef.current && !megaRef.current.contains(e.target as Node)) setMegaOpen(false);
+      if (moreRef.current && !moreRef.current.contains(e.target as Node)) setMoreOpen(false);
     }
     function handleKey(e: KeyboardEvent) {
-      if (e.key === "Escape") { setMegaOpen(false); setMobileOpen(false); }
+      if (e.key === "Escape") { setMegaOpen(false); setMoreOpen(false); setMobileOpen(false); }
     }
-    if (megaOpen || mobileOpen) {
+    if (megaOpen || moreOpen || mobileOpen) {
       document.addEventListener("mousedown", handleClick);
       document.addEventListener("keydown", handleKey);
     }
@@ -75,7 +85,7 @@ export default function Navbar({ apps }: { apps: AppDefinition[] }) {
       document.removeEventListener("mousedown", handleClick);
       document.removeEventListener("keydown", handleKey);
     };
-  }, [megaOpen, mobileOpen]);
+  }, [megaOpen, moreOpen, mobileOpen]);
 
   const openSearch = useCallback(() => setSearchOpen(true), []);
 
@@ -129,12 +139,63 @@ export default function Navbar({ apps }: { apps: AppDefinition[] }) {
                 </li>
               );
             })}
+
+            {/* More dropdown */}
+            <li className="relative" ref={moreRef}>
+              <button
+                type="button"
+                onClick={() => { setMoreOpen((v) => !v); setMegaOpen(false); }}
+                aria-expanded={moreOpen}
+                aria-controls="more-menu"
+                className={cn(
+                  "relative flex items-center gap-1 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                  moreOpen ? "bg-surface-muted text-text" : moreActive ? "text-text" : "text-text-secondary hover:bg-surface-muted hover:text-text"
+                )}
+              >
+                More
+                <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", moreOpen && "rotate-180")} />
+                {moreActive && !moreOpen && <span aria-hidden className="absolute inset-x-3 -bottom-[13px] h-0.5 rounded-full bg-accent" />}
+              </button>
+              <AnimatePresence>
+                {moreOpen && (
+                  <motion.div
+                    id="more-menu"
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={fade}
+                    className="absolute left-0 top-full mt-3 w-80 rounded-2xl border border-border bg-surface-raised p-2 shadow-lg"
+                  >
+                    {moreLinks.map(({ label, href, desc, icon: Icon }) => {
+                      const active = isActive(pathname, href);
+                      return (
+                        <Link
+                          key={href}
+                          href={href}
+                          aria-current={active ? "page" : undefined}
+                          onClick={() => setMoreOpen(false)}
+                          className={cn("group flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-surface-muted", active && "bg-surface-muted")}
+                        >
+                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent-soft">
+                            <Icon aria-hidden className="h-4 w-4 text-accent-text" />
+                          </span>
+                          <span>
+                            <span className="block text-sm font-semibold text-text group-hover:text-accent-text">{label}</span>
+                            <span className="mt-0.5 block text-[13px] text-text-muted">{desc}</span>
+                          </span>
+                        </Link>
+                      );
+                    })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </li>
           </ul>
 
           <div className="hidden items-center gap-1 xl:flex" ref={megaRef}>
             <button
               type="button"
-              onClick={() => setMegaOpen((v) => !v)}
+              onClick={() => { setMegaOpen((v) => !v); setMoreOpen(false); }}
               aria-expanded={megaOpen}
               aria-controls="products-menu"
               className={cn(
@@ -265,7 +326,7 @@ export default function Navbar({ apps }: { apps: AppDefinition[] }) {
             className="fixed inset-x-0 bottom-0 top-16 z-50 flex flex-col overflow-y-auto border-t border-border bg-bg xl:hidden"
           >
             <div className="container-page space-y-1 py-5">
-              {[{ label: "Home", href: "/" }, ...navLinks].map(({ label, href }) => {
+              {[{ label: "Home", href: "/" }, ...navLinks, ...moreLinks].map(({ label, href }) => {
                 const active = href === "/" ? pathname === "/" : isActive(pathname, href);
                 return (
                   <Link key={href} href={href}

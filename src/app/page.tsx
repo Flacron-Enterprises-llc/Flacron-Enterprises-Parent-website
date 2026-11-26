@@ -17,6 +17,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   alternates: {
     canonical: "/",
+    types: { "application/rss+xml": [{ url: "/rss.xml", title: "Flacron Enterprises — News & Insights" }] },
   },
   openGraph: {
     type: "website",
